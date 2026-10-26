@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chetan | Principal UX Designer</title>
+<meta name="description" content="[Replace: one-sentence description for search results]">
+<style>
+:root{
+  --bg:#ffffff; --ink:#1b1f23; --muted:#58616c; --line:#d9dee3; --accent:#0f5c5c;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#14181c; --ink:#eceff2; --muted:#9aa4af; --line:#2c343c; --accent:#6fc3c0;}
+}
+*{box-sizing:border-box}
+html{font-size:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.0625rem/1.6 var(--sans)}
+a{color:var(--accent);text-underline-offset:.2em}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+header.site{display:flex;justify-content:space-between;align-items:baseline;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+header.site a{color:var(--ink);text-decoration:none}
+header.site nav{display:flex;gap:1.25rem}
+header.site nav a{color:var(--muted)}
+header.site nav a:hover{color:var(--ink)}
+.hero{padding:5rem 0 3.5rem}
+.hero h1{font:600 clamp(2.25rem,6vw,3.5rem)/1.1 var(--serif);letter-spacing:-.01em;margin:0 0 1.25rem;max-width:18ch}
+.hero p{max-width:60ch;color:var(--muted);margin:0 0 .75rem}
+section{padding:2.5rem 0;border-top:1px solid var(--line)}
+section>h2{font:600 1.5rem/1.2 var(--serif);margin:0 0 1.25rem}
+.work{list-style:none;margin:0;padding:0}
+.work li{padding:1.25rem 0;border-top:1px solid var(--line)}
+.work li:first-child{border-top:0;padding-top:0}
+.work a.title{font:600 1.25rem/1.3 var(--serif);color:var(--ink);text-decoration:none}
+.work a.title:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+.work p{margin:.25rem 0 0;color:var(--muted);max-width:60ch}
+.work .meta{font-size:.9375rem;color:var(--muted);margin-top:.5rem}
+footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9375rem}
+@media (max-width:30rem){.hero{padding:3rem 0 2.5rem}header.site{flex-direction:column;gap:.5rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a href="index.html"><strong>Chetan</strong></a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>[Replace: a headline that says what you do and for whom]</h1>
+      <p>Principal UX Designer with about 20 years of experience. [Replace: two sentences on the kind of problems you take on and how you work.]</p>
+    </div>
+
+    <section id="work" aria-labelledby="work-h">
+      <h2 id="work-h">Selected work</h2>
+      <ul class="work">
+        <li>
+          <a class="title" href="case-studies/_template.html">[Replace: Case study 1 title]</a>
+          <p>[Replace: one sentence on the problem and the outcome.]</p>
+          <div class="meta">[Replace: company, your role, year]</div>
+        </li>
+        <li>
+          <a class="title" href="case-studies/_template.html">[Replace: Case study 2 title]</a>
+          <p>[Replace: one sentence on the problem and the outcome.]</p>
+          <div class="meta">[Replace: company, your role, year]</div>
+        </li>
+        <li>
+          <a class="title" href="case-studies/_template.html">[Replace: Case study 3 title]</a>
+          <p>[Replace: one sentence on the problem and the outcome.]</p>
+          <div class="meta">[Replace: company, your role, year]</div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <p>Currently Principal UX Designer at LIQUiDITY. Previously at Akamai Technologies, HARMAN International and Skyhigh Security.</p>
+      <p>[Replace: how you work, what you believe about design, what you are looking for.]</p>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p>[Replace: email address] &middot; <a href="[Replace: LinkedIn URL]">LinkedIn</a></p>
+    </section>
+  </main>
+
+  <footer>&copy; 2026 Chetan</footer>
+</div>
+</body>
+</html>
