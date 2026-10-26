@@ -2,96 +2,178 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chetan | Principal UX Designer</title>
-<meta name="description" content="[Replace: one-sentence description for search results]">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chetan Shridhar | Principal UX Designer</title>
+<meta name="description" content="Principal UX Designer with about 20 years in enterprise software: cloud security, fintech and generative AI. I design tools for expert users.">
 <style>
 :root{
-  --bg:#ffffff; --ink:#1b1f23; --muted:#58616c; --line:#d9dee3; --accent:#0f5c5c;
+  --bg:#ffffff; --ink:#1b1f23; --muted:#58616c; --line:#d9dee3; --accent:#0f5c5c; --tint:#e8f1f0;
   --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){
-  :root{--bg:#14181c; --ink:#eceff2; --muted:#9aa4af; --line:#2c343c; --accent:#6fc3c0;}
+  :root:not([data-theme="light"]){--bg:#14181c; --ink:#eceff2; --muted:#9aa4af; --line:#2c343c; --accent:#6fc3c0; --tint:#1c2a2b;}
 }
+:root[data-theme="dark"]{--bg:#14181c; --ink:#eceff2; --muted:#9aa4af; --line:#2c343c; --accent:#6fc3c0; --tint:#1c2a2b;}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-html{font-size:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:1.0625rem/1.6 var(--sans)}
 a{color:var(--accent);text-underline-offset:.2em}
 a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--bg);padding:.5rem}
+.wrap{max-width:52rem;margin:0 auto;padding:0 1.25rem}
 header.site{display:flex;justify-content:space-between;align-items:baseline;padding:1.5rem 0;border-bottom:1px solid var(--line)}
-header.site a{color:var(--ink);text-decoration:none}
+header.site a{text-decoration:none;color:var(--ink)}
 header.site nav{display:flex;gap:1.25rem}
 header.site nav a{color:var(--muted)}
 header.site nav a:hover{color:var(--ink)}
-.hero{padding:5rem 0 3.5rem}
-.hero h1{font:600 clamp(2.25rem,6vw,3.5rem)/1.1 var(--serif);letter-spacing:-.01em;margin:0 0 1.25rem;max-width:18ch}
-.hero p{max-width:60ch;color:var(--muted);margin:0 0 .75rem}
-section{padding:2.5rem 0;border-top:1px solid var(--line)}
-section>h2{font:600 1.5rem/1.2 var(--serif);margin:0 0 1.25rem}
+.hero{padding:4.5rem 0 3rem}
+.hero h1{font:600 clamp(2.25rem,6vw,3.5rem)/1.1 var(--serif);letter-spacing:-.015em;margin:0 0 1.25rem;max-width:20ch}
+.hero .sub{max-width:58ch;color:var(--muted);font-size:1.1875rem;margin:0 0 2rem}
+.scope{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 2rem;background:var(--tint);border:1px solid var(--line);border-radius:.5rem}
+.scope div{padding:1rem 1.125rem;border-left:1px solid var(--line)}
+.scope div:first-child{border-left:0}
+.scope dt{font-size:.9375rem;color:var(--muted);margin:0 0 .25rem}
+.scope dd{margin:0}
+.cta{display:flex;gap:1.5rem;flex-wrap:wrap}
+.cta a{font-weight:600}
+section{padding:2.75rem 0;border-top:1px solid var(--line)}
+section>h2{font:600 1.5rem/1.2 var(--serif);margin:0 0 .5rem}
+.intro{color:var(--muted);margin:0 0 1.75rem;max-width:58ch}
 .work{list-style:none;margin:0;padding:0}
-.work li{padding:1.25rem 0;border-top:1px solid var(--line)}
-.work li:first-child{border-top:0;padding-top:0}
-.work a.title{font:600 1.25rem/1.3 var(--serif);color:var(--ink);text-decoration:none}
-.work a.title:hover{text-decoration:underline;text-decoration-color:var(--accent)}
-.work p{margin:.25rem 0 0;color:var(--muted);max-width:60ch}
-.work .meta{font-size:.9375rem;color:var(--muted);margin-top:.5rem}
-footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9375rem}
-@media (max-width:30rem){.hero{padding:3rem 0 2.5rem}header.site{flex-direction:column;gap:.5rem}}
+.work li{padding:1.5rem 0;border-top:1px solid var(--line)}
+.work li:first-child{border-top:0;padding-top:.5rem}
+.work h3{font:600 1.375rem/1.25 var(--serif);margin:0 0 .5rem}
+.work h3 a{color:var(--ink);text-decoration:none}
+.work h3 a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+.work p{margin:0 0 .5rem;max-width:62ch}
+.work .meta{color:var(--muted);font-size:.9375rem}
+.work .draft{border:1px dashed var(--line);border-radius:.5rem;padding:1.25rem;margin-top:.5rem;color:var(--muted)}
+.xp{width:100%;border-collapse:collapse}
+.xp th,.xp td{text-align:left;padding:.75rem 1rem .75rem 0;border-top:1px solid var(--line);vertical-align:top}
+.xp thead th{border-top:0;color:var(--muted);font-weight:400;font-size:.9375rem}
+.xp tbody th{font-weight:600}
+.tablewrap{overflow-x:auto}
+.skills{columns:2;column-gap:2rem;margin:0;padding-left:1.1rem}
+.skills li{margin:0 0 .35rem;break-inside:avoid}
+blockquote{margin:0 0 1.5rem;padding:0 0 0 1.25rem;border-left:3px solid var(--accent);max-width:60ch}
+blockquote p{margin:0 0 .35rem;font:1.1875rem/1.5 var(--serif)}
+blockquote footer{color:var(--muted);font-size:.9375rem}
+.contact p{margin:0 0 .5rem}
+footer.site{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9375rem}
+@media (max-width:40rem){
+  .hero{padding:3rem 0 2.25rem}
+  header.site{flex-direction:column;gap:.5rem}
+  .scope{grid-template-columns:1fr}
+  .scope div{border-left:0;border-top:1px solid var(--line)}
+  .scope div:first-child{border-top:0}
+  .skills{columns:1}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
   <header class="site">
-    <a href="index.html"><strong>Chetan</strong></a>
+    <a href="#top"><strong>Chetan Shridhar</strong></a>
     <nav aria-label="Primary">
       <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <main>
-    <div class="hero">
-      <h1>[Replace: a headline that says what you do and for whom]</h1>
-      <p>Principal UX Designer with about 20 years of experience. [Replace: two sentences on the kind of problems you take on and how you work.]</p>
+  <main id="main">
+    <div class="hero" id="top">
+      <h1>I design the tools experts use when the work is too complex for a switch.</h1>
+      <p class="sub">Principal UX Designer with about 20 years in enterprise software across cloud security, fintech and generative AI. I lead UX from research and information design through to prototypes that engineers build from.</p>
+      <dl class="scope">
+        <div><dt>Users I design for</dt><dd>Security administrators and solutions engineers</dd></div>
+        <div><dt>Domains</dt><dd>Cloud security, fintech, workflow automation, generative AI</dd></div>
+        <div><dt>What I deliver</dt><dd>Research, information design, workflows, validated prototypes</dd></div>
+      </dl>
+      <div class="cta">
+        <a href="#work">See selected work</a>
+        <a href="https://chetanshridhar.in/portfolio_images/ChetanShridhar_2024.pdf">Read my résumé</a>
+      </div>
     </div>
 
     <section id="work" aria-labelledby="work-h">
       <h2 id="work-h">Selected work</h2>
+      <p class="intro">Two complex enterprise tools, from first research session to engineering handoff. More work is available as a walkthrough on request.</p>
       <ul class="work">
         <li>
-          <a class="title" href="case-studies/_template.html">[Replace: Case study 1 title]</a>
-          <p>[Replace: one sentence on the problem and the outcome.]</p>
-          <div class="meta">[Replace: company, your role, year]</div>
+          <h3><a href="https://chetanshridhar.in/project/swg_rulebuilder">Web Security Rule Builder</a></h3>
+          <p>Security administrators were limited to on/off switches, or had to learn a proprietary rule language. I led UX for a tabular rule builder that lets them write complex web-gateway rules in the interface.</p>
+          <p>Researched with 7 customers and about 23 participants, then designed over 7 to 8 months with product management and engineering.</p>
+          <p class="meta">Cloud security web app. My role: UX lead. Outcome: [Replace: adoption or support result]</p>
         </li>
         <li>
-          <a class="title" href="case-studies/_template.html">[Replace: Case study 2 title]</a>
-          <p>[Replace: one sentence on the problem and the outcome.]</p>
-          <div class="meta">[Replace: company, your role, year]</div>
+          <h3><a href="https://chetanshridhar.in/project/regression-testing-app">Regression Web Testing</a></h3>
+          <p>An internal tool where solutions engineers test a metadata change on the staging network before it reaches production. Engineers already had habits, so the design added capability without a steep learning curve.</p>
+          <p>Surveyed 37 prospective users to rank features, and rebuilt test case, variable and report handling around how engineers work.</p>
+          <p class="meta">Internal web app for superusers. My role: [Replace: your role]. Outcome: [Replace: result]</p>
         </li>
         <li>
-          <a class="title" href="case-studies/_template.html">[Replace: Case study 3 title]</a>
-          <p>[Replace: one sentence on the problem and the outcome.]</p>
-          <div class="meta">[Replace: company, your role, year]</div>
+          <div class="draft">
+            <strong>[Replace: your most recent generative AI or fintech project]</strong>
+            <p>[Replace: one sentence on the problem, one on what you did.] Mark it “walkthrough on request” if it is confidential.</p>
+          </div>
         </li>
       </ul>
     </section>
 
-    <section id="about" aria-labelledby="about-h">
-      <h2 id="about-h">About</h2>
-      <p>Currently Principal UX Designer at LIQUiDITY. Previously at Akamai Technologies, HARMAN International and Skyhigh Security.</p>
-      <p>[Replace: how you work, what you believe about design, what you are looking for.]</p>
+    <section id="experience" aria-labelledby="xp-h">
+      <h2 id="xp-h">Experience</h2>
+      <div class="tablewrap">
+        <table class="xp">
+          <thead><tr><th scope="col">Company</th><th scope="col">Role</th><th scope="col">Years</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">LIQUiDITY</th><td>Principal UX Designer</td><td>[Replace: year] to present</td></tr>
+            <tr><th scope="row">Akamai Technologies</th><td>[Replace: role]</td><td>[Replace: years]</td></tr>
+            <tr><th scope="row">HARMAN International</th><td>[Replace: role]</td><td>[Replace: years]</td></tr>
+            <tr><th scope="row">Skyhigh Security</th><td>[Replace: role]</td><td>[Replace: years]</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
-    <section id="contact" aria-labelledby="contact-h">
-      <h2 id="contact-h">Contact</h2>
-      <p>[Replace: email address] &middot; <a href="[Replace: LinkedIn URL]">LinkedIn</a></p>
+    <section id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <p class="intro">I start by learning how experts already work, then design around their mental models instead of replacing them. I work in a trio with product management and engineering, and bring in researchers and the design system team early.</p>
+      <ul class="skills">
+        <li>Interaction design</li>
+        <li>Ground-up design planning</li>
+        <li>Defining UX vision</li>
+        <li>Information architecture</li>
+        <li>User research</li>
+        <li>UX team management</li>
+        <li>Cross-team collaboration</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="words-h">
+      <h2 id="words-h">What colleagues say</h2>
+      <blockquote>
+        <p>“You are an expert in UX and have the ability to listen and transform technical details into high fidelity UX screens and guidance for your engineering counterparts.”</p>
+        <footer>Senior Director, Product Management</footer>
+      </blockquote>
+      <blockquote>
+        <p>“You are now a pillar of the team.”</p>
+        <footer>Director, User Experience</footer>
+      </blockquote>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Let’s talk</h2>
+      <p>If you are building a complex product and need a senior UX designer on it, write to me.</p>
+      <p><a href="mailto:chetanshridhar@gmail.com">chetanshridhar@gmail.com</a></p>
+      <p><a href="[Replace: LinkedIn URL]">LinkedIn</a></p>
     </section>
   </main>
 
-  <footer>&copy; 2026 Chetan</footer>
+  <footer class="site">&copy; 2026 Chetan Shridhar</footer>
 </div>
 </body>
 </html>
