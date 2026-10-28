@@ -2,8 +2,8 @@
 
 Personal portfolio for Chetan Shridhar, Principal UX Designer. The live
 chetanshridhar.in is still the old WordPress site; this repo is its static
-replacement. The 2016–2018 hand-built site (white, Roboto light, teal accent)
-is the visual reference.
+replacement. The current `index.html` is the approved design; new pages
+follow it.
 
 ## Stack
 
@@ -11,12 +11,13 @@ is the visual reference.
 - Each page is self-contained: inline `<style>`, no external CSS, fonts or
   scripts. Pages must render the same from `file://` or any host.
 - Roboto (weights 100, 300, 400, 500, latin) is self-hosted in `assets/fonts/`
-  from @fontsource/roboto 5.0.13; Apache licence beside it.
+  from @fontsource/roboto 5.0.13; Apache licence beside it. Pages load only
+  300 and 400.
 - Ask before adding any library, other web font, script or framework.
 
 ## Files
 
-    index.html                  Home: intro + drawing sheet, now, work, earlier work, experience, quotes, contact
+    index.html                  Home: intro, selected work, building with AI, how I work, earlier work, experience, quotes, contact
     case-studies/_template.html Copy for each new case study (not yet restyled to match the home page)
     assets/img/                 Screenshots; JPEG, ~1200px wide, under ~300 KB each
 
@@ -31,28 +32,34 @@ terminal:
 
 ## Design rules
 
-- **Plain and white.** White background, grey text, one teal accent
-  (`#2d9695`). No dark mode, gradients, glows, shadows, rounded cards, badges,
-  pills, counters, marquees or scroll-triggered animations.
+- **Light, calm and classy.** Warm off-white page, near-black headings, warm
+  grey text, hairline rules. Light mode only. No dark mode, gradients, glows,
+  shadows, rounded cards, badges, pills, counters, marquees or
+  scroll-triggered animations.
+- **Accent `#FF7722`, very sparingly.** Small marks only: the dot after the
+  current role, link and nav hover underlines, the text selection tint. Never
+  as a text colour (about 2.7:1 on the page) and never as a fill or block.
 - **Must not look AI-generated.** Avoid mono uppercase eyebrow labels, stat
   strips, "Let's talk"-style headlines, arrow-decorated links and buzzword copy.
 - **References are inspiration, not templates.** Never reuse another site's
   layout, sentence pattern or signature technique (for example
   philipsamarets.com's intro line, accordion list or ASCII portrait).
-- **Visual language: Chetan's own interfaces as line art.** Drawings are
-  inline SVG redrawn from his real screens (Vi3000 strips, ViSi EQ curve and
-  fader, Confer Control seats, Akamai test list, Rule Builder rows, Figma ↔
-  Storybook). Grey `--draw` strokes, one teal element per fragment, captions
-  naming the source. The intro has a chronological drawing sheet that draws
-  in once on load (CSS only, off under reduced motion); each section header
-  has a small fragment on the right; Experience is drawn as a fader scale.
-- **Type**: Roboto, thin. Name, section titles and lead text weight 100; body
-  300; item titles, nav and captions 400.
-- **Tokens** live in `:root` of each page's `<style>` (`--bg`, `--ink`,
-  `--text`, `--muted`, `--line`, `--tile`, `--accent`, `--draw`, `--sans`).
-  Change a token in every page: `grep -rn -- "--accent" .`
-- **CSS style**: compact one-line rules, short class names (`.wrap`, `.work`,
-  `.scale`), `rem` units, mobile breakpoint at `max-width:48rem`.
+- **No illustrations.** Typography, the grid, white space and Chetan's real
+  screenshots carry the design. Each screenshot sits on a soft `--tile` mat
+  (`.mat`) with no border or shadow. Do not draw or invent interface art,
+  icons or decorative SVG.
+- **Layout**: `.wrap` (max 80rem) holds a 12-column `.row`. Each section has
+  a hairline on top, its title (`.lab`) in columns 1–3, sticky on desktop,
+  and content (`.body`) in columns 4–12. Below 48rem everything stacks.
+- **Type**: Roboto. Weight 300 for the headline, section titles, lead text,
+  quotes and body; 400 for the name, nav, item titles and roles. Headline
+  tracking −0.03em. Sentence case everywhere; hang opening quote marks.
+- **Tokens** live in `:root` of each page's `<style>` (`--bg` #faf9f7,
+  `--ink` #1c1b19, `--text` #4a4741, `--muted` #736e66, `--line` #e3dfd8,
+  `--tile` #f0ede8, `--accent` #ff7722, `--sans`). Change a token in every
+  page: `grep -rn -- "--accent" .`
+- **CSS style**: compact one-line rules, short class names (`.wrap`, `.row`,
+  `.lab`, `.mat`, `.xp`), `rem` units, mobile breakpoint at `max-width:48rem`.
 
 ## Content rules
 
