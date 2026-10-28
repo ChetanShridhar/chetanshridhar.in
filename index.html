@@ -42,8 +42,15 @@ p{margin:0;text-wrap:pretty}
 .top nav a{padding-bottom:.2rem;border-bottom:1px solid transparent}
 .top nav a:hover{color:var(--ink);border-color:var(--accent)}
 
-/* Intro */
-.hero{padding-top:clamp(4rem,10vw,8rem);padding-bottom:clamp(4rem,8vw,6.5rem)}
+/* First fold: header sits over it; intro and scroll hint fill the viewport */
+.top{position:absolute;top:0;left:0;right:0}
+.fold{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding-top:5.5rem}
+.fold>.wrap{width:100%}
+.hero{flex:1;display:grid;align-content:center;padding-top:2rem;padding-bottom:3rem}
+.hint{padding-bottom:2rem;font-size:.9375rem;font-weight:400}
+.hint a{display:inline-block;color:var(--muted)}
+.hint a::before{content:"";display:block;width:1px;height:3.5rem;background:var(--muted);margin-bottom:.875rem}
+.hint a:hover{color:var(--ink)}
 .hero h1{grid-column:1/11;font-weight:300;font-size:clamp(2.25rem,5.2vw,4.5rem);line-height:1.08;letter-spacing:-.03em}
 .hero .who{grid-column:1/4;margin-top:3rem;font-size:.9375rem;line-height:1.6}
 .hero .who b{display:block;font-weight:400;color:var(--ink)}
@@ -108,6 +115,7 @@ blockquote footer{margin-top:.75rem}
 @media (max-width:48rem){
   body{font-size:1rem}
   .top{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .fold{padding-top:7.5rem}
   .row,.cap,.list div,.xp li{display:block}
   .hero .who,.hero .sum{margin-top:2rem}
   .hero .who{margin-top:2.5rem}
@@ -135,12 +143,15 @@ blockquote footer{margin-top:.75rem}
 </header>
 
 <main id="main">
-  <div class="wrap hero">
-    <div class="row">
-      <h1>I design complex enterprise products, and increasingly, I&nbsp;build them with&nbsp;AI.</h1>
-      <p class="who"><b>Principal UX Designer</b>LIQUiDITY, Abu Dhabi</p>
-      <p class="sum">Twenty years of making expert tools usable, from mixing consoles and CDN configuration to cloud security policy. Today I work on private credit, where analysts and investment managers make lending decisions with AI.</p>
+  <div class="fold">
+    <div class="wrap hero">
+      <div class="row">
+        <h1>I design complex enterprise products, and increasingly, I&nbsp;build them with&nbsp;AI.</h1>
+        <p class="who"><b>Principal UX Designer</b>LIQUiDITY, Abu Dhabi</p>
+        <p class="sum">Twenty years of making expert tools usable, from mixing consoles and CDN configuration to cloud security policy. Today I work on private credit, where analysts and investment managers make lending decisions with AI.</p>
+      </div>
     </div>
+    <p class="wrap hint"><a href="#work">Selected work</a></p>
   </div>
 
   <section id="work" aria-labelledby="work-h">
