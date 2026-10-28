@@ -81,7 +81,7 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 
 /* Work: small cards with a detail crop, not the whole screen */
 .mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
-.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem 2rem}
+.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem 2rem}
 .card{display:block}
 .thumb{position:relative;aspect-ratio:4/3;background:var(--tile);overflow:hidden;margin-bottom:1rem}
 .thumb img{position:absolute;inset:-5% 0;width:100%;height:110%;max-width:none;object-fit:cover;object-position:left top;transition:scale .7s cubic-bezier(.2,.7,.2,1)}
@@ -118,8 +118,11 @@ blockquote p{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(
 blockquote footer{margin-top:.75rem}
 
 /* Contact */
-.mail{font-size:clamp(1.5rem,3.6vw,2.75rem);font-weight:300;letter-spacing:-.02em;color:var(--ink)}
-.links{display:flex;flex-wrap:wrap;gap:.5rem 2rem;margin-top:1.5rem;font-weight:400}
+.reach{list-style:none;margin:0;padding:0}
+.reach li{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;border-top:1px solid var(--line);padding:.875rem 0}
+.reach li:last-child{border-bottom:1px solid var(--line)}
+.reach .k{grid-column:1/3;color:var(--muted)}
+.reach .v{grid-column:3/10;color:var(--ink)}
 
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;margin-top:clamp(5rem,10vw,8rem);padding-bottom:3rem}
 .foot::before{content:"";flex-basis:100%;border-top:1px solid var(--line);margin-bottom:1rem}
@@ -147,7 +150,6 @@ html.lenis,html.lenis body{height:auto}
 @keyframes pan-sm{from{transform:translateY(3%)}to{transform:translateY(-3%)}}
 @media (prefers-reduced-motion:reduce){.top,.thumb img{transition:none}}
 
-@media (max-width:64rem){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:48rem){
   body{font-size:1rem}
   .bar{flex-direction:column;align-items:flex-start;gap:.5rem}
@@ -155,7 +157,8 @@ html.lenis,html.lenis body{height:auto}
   .is-stuck .name span{display:none}
   .is-stuck nav{gap:.25rem 1.5rem}
   .fold{padding-top:7.5rem}
-  .row,.grp,.xp li{display:block}
+  .row,.grp,.xp li,.reach li{display:block}
+  .reach .k{display:block;font-size:.875rem}
   .hero .who,.hero .sum{margin-top:2rem}
   .hero .who{margin-top:2.5rem}
   .lab{position:static;padding-left:0;margin-bottom:1.75rem}
@@ -327,12 +330,15 @@ html.lenis,html.lenis body{height:auto}
     <div class="wrap"><div class="row">
       <h2 class="lab" id="contact-h">Contact</h2>
       <div class="body">
-        <a class="mail u" href="mailto:chetanshridhar@gmail.com">chetanshridhar@gmail.com</a>
-        <p class="links">
-          <a class="u" href="https://www.linkedin.com/in/chetanshridhar">LinkedIn</a>
-          <a class="u" href="https://chetanshridhar.in/portfolio_images/ChetanShridhar_2024.pdf">Résumé</a>
-          <span class="meta">Abu Dhabi, UAE</span>
-        </p>
+        <p class="lead">If you’re building something complex, especially with AI, I’d like to hear about it.</p>
+        <ul class="reach">
+          <li><span class="k">Email</span><a class="v u" href="mailto:chetanshridhar@gmail.com">chetanshridhar@gmail.com</a></li>
+          <li><span class="k">LinkedIn</span><a class="v u" href="https://www.linkedin.com/in/chetanshridhar">linkedin.com/in/chetanshridhar</a></li>
+          <li><span class="k">Dribbble</span><a class="v u" href="https://dribbble.com/chetanshridhar">dribbble.com/chetanshridhar</a></li>
+          <li><span class="k">Medium</span><a class="v u" href="https://medium.com/@chetanshridhar">medium.com/@chetanshridhar</a></li>
+          <li><span class="k">Résumé</span><a class="v u" href="https://chetanshridhar.in/portfolio_images/ChetanShridhar_2024.pdf">Download PDF</a></li>
+          <li><span class="k">Based in</span><span class="v">Abu Dhabi, UAE</span></li>
+        </ul>
       </div>
     </div></div>
   </section>

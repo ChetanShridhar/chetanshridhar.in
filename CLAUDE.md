@@ -68,8 +68,7 @@ terminal:
   screenshots carry the design. Each screenshot sits on a soft `--tile` mat
   (`.mat`) with no border or shadow. Do not draw or invent interface art,
   icons or decorative SVG.
-- **Selected work** is small cards (three per row, two below 64rem, one on
-  phones). A thumbnail is a tight 4:3 crop of one telling detail of the real
+- **Selected work** is cards, two per row (one on phones). A thumbnail is a tight 4:3 crop of one telling detail of the real
   screen (`assets/img/*-detail.jpg`), never the whole mock-up; it zooms
   slightly on hover. Confidential work gets a text-only card on the tile.
 - **AI comes first** after the intro: one lead line about skill and
@@ -77,6 +76,9 @@ terminal:
   its subhead on the left and items in an aligned two-column grid. No
   headline numbers (not the 12 MCP apps), no loan sizes, and no company name
   in this section: talk about skill, scale and high-stakes decisions.
+- **Contact**: one inviting lead line, then text rows (label left, link
+  right) for email, LinkedIn, Dribbble, Medium, résumé and location. No phone
+  number, no icon row, no oversized email address.
 - **Layout**: `.wrap` (max 80rem) holds a 12-column `.row`. Each section has
   a hairline on top, its title (`.lab`) in columns 1–3, sticky on desktop,
   and content (`.body`) in columns 4–12. Below 48rem everything stacks.
