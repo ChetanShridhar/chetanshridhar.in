@@ -27,15 +27,22 @@ img{display:block;max-width:100%;height:auto}
 h1,h2,h3{color:var(--ink);margin:0;text-wrap:balance}
 p{margin:0;text-wrap:pretty}
 main:focus{outline:none}
-.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--bg);padding:.5rem;z-index:1}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--bg);padding:.5rem;z-index:20}
 .wrap{max-width:80rem;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
 .row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:2rem}
 .u{text-decoration:underline;text-decoration-color:#cdc7bd;text-decoration-thickness:1px;text-underline-offset:.3em}
 .u:hover{text-decoration-color:var(--accent)}
 .meta{color:var(--muted);font-size:.875rem}
 
-/* Header */
-.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
+/* Header: scrolls away with the intro; past it, comes back as a solid bar
+   when scrolling up and hides again when scrolling down */
+.top{position:absolute;top:0;left:0;right:0;z-index:10;border-bottom:1px solid transparent;transition:transform .45s cubic-bezier(.2,.7,.2,1),background-color .3s,border-color .3s}
+.top.is-stuck{position:fixed;background:var(--bg);border-color:var(--line)}
+.top.is-hidden{transform:translateY(-101%)}
+.top.no-anim{transition:none}
+.top:focus-within{transform:none}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
+.is-stuck .bar{padding-top:1rem;padding-bottom:1rem}
 .top .name{display:inline-flex;align-items:center;gap:.625rem;font-weight:400;color:var(--ink)}
 .mark{width:2rem;height:auto;flex:none}
 .mark path{fill:var(--accent);stroke:var(--accent)}
@@ -44,7 +51,6 @@ main:focus{outline:none}
 .top nav a:hover{color:var(--ink);border-color:var(--accent)}
 
 /* First fold: header sits over it; intro and scroll hint fill the viewport */
-.top{position:absolute;top:0;left:0;right:0}
 .fold{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding-top:5.5rem}
 .fold>.wrap{width:100%}
 .hero{flex:1;display:grid;align-content:center;padding-top:2rem;padding-bottom:3rem}
@@ -60,7 +66,7 @@ main:focus{outline:none}
 /* Sections: title on the left, content on the right */
 section{padding-top:clamp(4rem,8vw,7rem)}
 section .row{border-top:1px solid var(--line);padding-top:1.5rem}
-.lab{grid-column:1/4;align-self:start;position:sticky;top:2rem;font-size:1.375rem;font-weight:300;line-height:1.3;letter-spacing:-.01em}
+.lab{grid-column:1/4;align-self:start;position:sticky;top:5.5rem;font-size:1.375rem;font-weight:300;line-height:1.3;letter-spacing:-.01em}
 .body{grid-column:4/13}
 .lead{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:34ch;margin-bottom:2.5rem}
 h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
@@ -133,10 +139,14 @@ html.lenis,html.lenis body{height:auto}
 @keyframes drift{to{transform:translateY(25vh);opacity:.15}}
 @keyframes pan{from{transform:translateY(4%)}to{transform:translateY(-4%)}}
 @keyframes pan-sm{from{transform:translateY(3%)}to{transform:translateY(-3%)}}
+@media (prefers-reduced-motion:reduce){.top{transition:none}}
 
 @media (max-width:48rem){
   body{font-size:1rem}
-  .top{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .bar{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .is-stuck .bar{flex-direction:row;align-items:center}
+  .is-stuck .name span{display:none}
+  .is-stuck nav{gap:.25rem 1.5rem}
   .fold{padding-top:7.5rem}
   .row,.cap,.list div,.xp li{display:block}
   .hero .who,.hero .sum{margin-top:2rem}
@@ -154,15 +164,15 @@ html.lenis,html.lenis body{height:auto}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="wrap top">
-  <a class="name" href="./"><svg class="mark" viewBox="0 0 38 33" width="28" height="24" aria-hidden="true" focusable="false"><path stroke-width=".5" stroke-linecap="round" d="M19.7984 0.944883C17.4227 0.370471 14.6253 1.04308 12.6835 3.27116C12.4842 3.49978 12.2951 3.74348 12.117 4.0024C9.47406 2.93708 6.74912 3.24919 4.6137 4.96925C2.42131 6.73518 0.990217 9.86878 0.766364 14.1221C0.53495 18.5192 2.78032 23.4814 6.01759 27.049C9.23608 30.5959 13.711 33.0455 18.0568 31.8333C20.1434 31.2513 21.8311 30.0782 23.1684 28.6021C25.7495 29.1923 28.9007 28.9605 31.5933 27.0908C35.0905 24.6626 37.5496 19.6653 37.2205 10.9047C37.2019 10.4101 36.7859 10.0242 36.2913 10.0427C35.7967 10.0613 35.4108 10.4773 35.4294 10.9719C35.7464 19.4124 33.3668 23.6774 30.5711 25.6185C28.6458 26.9553 26.3988 27.2814 24.4088 27.0092C24.6337 26.674 24.845 26.3302 25.0429 25.9802C26.5406 23.3327 27.3157 20.2727 27.54 17.6932C27.763 15.1293 27.5995 11.4415 26.5365 8.16305C25.4779 4.89804 23.447 1.82705 19.7984 0.944883ZM12.4519 14.0127C11.8721 10.7448 12.125 8.30078 12.8029 6.53901C14.2071 7.74579 14.6584 9.28949 14.5524 10.8787C14.5195 11.3725 14.8931 11.7996 15.387 11.8325C15.8809 11.8654 16.3079 11.4918 16.3408 10.9979C16.488 8.7905 15.7718 6.5591 13.6593 4.92516C13.7798 4.75599 13.9052 4.59731 14.0347 4.44878C15.5112 2.75459 17.6119 2.26025 19.3772 2.68706C22.1422 3.35559 23.8562 5.70781 24.8315 8.71586C25.8026 11.711 25.9622 15.1477 25.7544 17.5379C25.5479 19.9126 24.8312 22.7143 23.4829 25.0977C23.1943 25.6078 22.8785 26.096 22.5345 26.5554C22.2974 26.471 22.0691 26.3782 21.8511 26.2783C20.6169 25.7126 18.5422 24.2857 16.6275 22.1493C14.7195 20.0203 13.0261 17.2487 12.4519 14.0127ZM5.73805 6.36511C7.26703 5.13354 9.21913 4.83427 11.2527 5.58949C10.333 7.76261 10.0367 10.6599 10.6871 14.3258C11.3359 17.9825 13.2338 21.0481 15.2927 23.3455C17.3449 25.6354 19.6128 27.2241 21.1043 27.9077C21.1591 27.9328 21.2144 27.9575 21.2703 27.9819C20.2338 28.9619 19.0085 29.7071 17.5752 30.1069C14.1984 31.0488 10.3805 29.1898 7.34495 25.8446C4.3278 22.5196 2.35689 18.0044 2.55626 14.2163C2.76317 10.2848 4.06794 7.71036 5.73805 6.36511Z"/></svg>Chetan Shridhar</a>
+<header class="top"><div class="wrap bar">
+  <a class="name" href="./" aria-label="Chetan Shridhar"><svg class="mark" viewBox="0 0 38 33" width="28" height="24" aria-hidden="true" focusable="false"><path stroke-width=".5" stroke-linecap="round" d="M19.7984 0.944883C17.4227 0.370471 14.6253 1.04308 12.6835 3.27116C12.4842 3.49978 12.2951 3.74348 12.117 4.0024C9.47406 2.93708 6.74912 3.24919 4.6137 4.96925C2.42131 6.73518 0.990217 9.86878 0.766364 14.1221C0.53495 18.5192 2.78032 23.4814 6.01759 27.049C9.23608 30.5959 13.711 33.0455 18.0568 31.8333C20.1434 31.2513 21.8311 30.0782 23.1684 28.6021C25.7495 29.1923 28.9007 28.9605 31.5933 27.0908C35.0905 24.6626 37.5496 19.6653 37.2205 10.9047C37.2019 10.4101 36.7859 10.0242 36.2913 10.0427C35.7967 10.0613 35.4108 10.4773 35.4294 10.9719C35.7464 19.4124 33.3668 23.6774 30.5711 25.6185C28.6458 26.9553 26.3988 27.2814 24.4088 27.0092C24.6337 26.674 24.845 26.3302 25.0429 25.9802C26.5406 23.3327 27.3157 20.2727 27.54 17.6932C27.763 15.1293 27.5995 11.4415 26.5365 8.16305C25.4779 4.89804 23.447 1.82705 19.7984 0.944883ZM12.4519 14.0127C11.8721 10.7448 12.125 8.30078 12.8029 6.53901C14.2071 7.74579 14.6584 9.28949 14.5524 10.8787C14.5195 11.3725 14.8931 11.7996 15.387 11.8325C15.8809 11.8654 16.3079 11.4918 16.3408 10.9979C16.488 8.7905 15.7718 6.5591 13.6593 4.92516C13.7798 4.75599 13.9052 4.59731 14.0347 4.44878C15.5112 2.75459 17.6119 2.26025 19.3772 2.68706C22.1422 3.35559 23.8562 5.70781 24.8315 8.71586C25.8026 11.711 25.9622 15.1477 25.7544 17.5379C25.5479 19.9126 24.8312 22.7143 23.4829 25.0977C23.1943 25.6078 22.8785 26.096 22.5345 26.5554C22.2974 26.471 22.0691 26.3782 21.8511 26.2783C20.6169 25.7126 18.5422 24.2857 16.6275 22.1493C14.7195 20.0203 13.0261 17.2487 12.4519 14.0127ZM5.73805 6.36511C7.26703 5.13354 9.21913 4.83427 11.2527 5.58949C10.333 7.76261 10.0367 10.6599 10.6871 14.3258C11.3359 17.9825 13.2338 21.0481 15.2927 23.3455C17.3449 25.6354 19.6128 27.2241 21.1043 27.9077C21.1591 27.9328 21.2144 27.9575 21.2703 27.9819C20.2338 28.9619 19.0085 29.7071 17.5752 30.1069C14.1984 31.0488 10.3805 29.1898 7.34495 25.8446C4.3278 22.5196 2.35689 18.0044 2.55626 14.2163C2.76317 10.2848 4.06794 7.71036 5.73805 6.36511Z"/></svg><span>Chetan Shridhar</span></a>
   <nav aria-label="Primary">
     <a href="#work">Work</a>
     <a href="#ai">AI</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-</header>
+</div></header>
 
 <main id="main" tabindex="-1">
   <div class="fold">
@@ -191,7 +201,7 @@ html.lenis,html.lenis body{height:auto}
           </div>
         </a>
         <a class="proj" href="https://chetanshridhar.in/project/regression-testing-app">
-          <div class="mat"><img src="assets/img/regression-testing.jpg" width="1200" height="750" alt="Regression testing home screen with search, news and recent test suites" loading="lazy"></div>
+          <div class="mat"><img src="assets/img/regression-testing.jpg" width="1200" height="750" alt="Regression testing home screen with search, news and recent test suites"></div>
           <div class="cap">
             <h3><span>Regression Web Testing</span></h3>
             <div>
@@ -315,15 +325,43 @@ html.lenis,html.lenis body{height:auto}
 // Smooth, inertia scrolling for mouse wheels and trackpads. Touch and
 // keyboard scrolling stay native; skipped when motion is reduced.
 if (window.Lenis && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const lenis = new Lenis({ autoRaf: true, lerp: 0.09 });
-  // Glide to sections from the menu and the scroll hint. The skip link keeps
-  // its native jump so keyboard focus moves into the page.
+  const lenis = new Lenis({ autoRaf: true, lerp: 0.104 });
+  // Glide to sections from the menu and the scroll hint, and back to the top
+  // from the name. The skip link keeps its native jump so keyboard focus
+  // moves into the page.
   document.querySelectorAll(".top nav a, .hint a").forEach(a => a.addEventListener("click", e => {
     e.preventDefault();
-    lenis.scrollTo(a.hash);
+    lenis.scrollTo(a.hash, { offset: -24 });
     history.pushState(null, "", a.hash);
   }));
+  document.querySelector(".top .name").addEventListener("click", e => {
+    e.preventDefault();
+    lenis.scrollTo(0);
+    history.pushState(null, "", location.pathname);
+  });
 }
+
+// Header: once past it, it becomes a solid bar that hides while scrolling
+// down and returns when scrolling up. Works with or without Lenis.
+(() => {
+  const top = document.querySelector(".top");
+  let last = scrollY, stuck = false;
+  const update = () => {
+    const y = scrollY;
+    if (!stuck && y > top.offsetHeight + 40) {
+      stuck = true;
+      top.classList.add("is-stuck", "is-hidden", "no-anim");
+      requestAnimationFrame(() => requestAnimationFrame(() => top.classList.remove("no-anim")));
+    } else if (stuck && y <= 0) {
+      stuck = false;
+      top.classList.remove("is-stuck", "is-hidden");
+    }
+    if (stuck && Math.abs(y - last) > 4) top.classList.toggle("is-hidden", y > last);
+    if (Math.abs(y - last) > 4 || y <= 0) last = y;
+  };
+  addEventListener("scroll", update, { passive: true });
+  update();
+})();
 </script>
 </body>
 </html>

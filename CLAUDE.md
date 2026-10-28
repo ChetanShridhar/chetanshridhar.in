@@ -10,12 +10,18 @@ follow it.
 - Plain static HTML and CSS. No build step, no package manager.
 - Each page is self-contained: inline `<style>`, no external CSS. External
   requests are the font and one script.
-- The only JavaScript is Lenis 1.3.23 (smooth inertia scrolling), loaded from
-  jsDelivr with a pinned version and an SRI `integrity` hash, plus a few
-  inline lines that start it. It is off under reduced motion; touch and
-  keyboard scrolling stay native; the menu and scroll hint glide via
-  `lenis.scrollTo`; the skip link keeps its native jump. The page must work
-  fully if the script fails to load.
+- JavaScript is limited to Lenis 1.3.23 (smooth inertia scrolling, `lerp`
+  0.104), loaded from jsDelivr with a pinned version and an SRI `integrity`
+  hash, plus a short inline script. Lenis is off under reduced motion; touch
+  and keyboard scrolling stay native; the menu and scroll hint glide via
+  `lenis.scrollTo`, the name glides to the top; the skip link keeps its
+  native jump. The inline script also runs the header (below) with plain
+  scroll events. The page must work fully if Lenis fails to load.
+- **Header**: scrolls away with the intro. Past it, the header becomes a
+  solid `--bg` bar with a hairline (`.is-stuck`) that hides while scrolling
+  down and slides back when scrolling up (`.is-hidden`), and returns to
+  transparent at the very top. On phones the stuck bar is the logo mark and
+  the menu on one line. Sticky section titles sit below it (`top:5.5rem`).
 - Albert Sans (weights 200, 300, 400) loads from the Google Fonts CDN, with
   `display=swap` and a system sans-serif fallback.
 - Ask before adding any library, other web font, script or framework.
