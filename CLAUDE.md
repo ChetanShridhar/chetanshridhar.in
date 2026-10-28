@@ -10,9 +10,8 @@ follow it.
 - Plain static HTML and CSS. No build step, no package manager, no JavaScript.
 - Each page is self-contained: inline `<style>`, no external CSS, fonts or
   scripts. Pages must render the same from `file://` or any host.
-- Roboto (weights 100, 300, 400, 500, latin) is self-hosted in `assets/fonts/`
-  from @fontsource/roboto 5.0.13; Apache licence beside it. Pages load only
-  300 and 400.
+- Albert Sans (weights 300 and 400, latin) is self-hosted in `assets/fonts/`
+  from @fontsource/albert-sans 5.0.13; OFL licence beside it.
 - Ask before adding any library, other web font, script or framework.
 
 ## Files
@@ -36,9 +35,13 @@ terminal:
   grey text, hairline rules. Light mode only. No dark mode, gradients, glows,
   shadows, rounded cards, badges, pills, counters, marquees or
   scroll-triggered animations.
-- **Accent `#FF7722`, very sparingly.** Small marks only: the dot after the
-  current role, link and nav hover underlines, the text selection tint. Never
-  as a text colour (about 2.7:1 on the page) and never as a fill or block.
+- **Accent `#FF7722`, very sparingly.** Small marks only: Chetan's logo mark
+  before his name in the header, the dot after the current role, link and nav
+  hover underlines, the text selection tint. Never as a text colour (about
+  2.7:1 on the page) and never as a fill or block.
+- **Logo mark**: the petal shape from his logo SVG (the wordmark is not
+  used), inline as `.mark`, 2rem wide, filled with `--accent`,
+  `aria-hidden` because the name beside it is the link text.
 - **Must not look AI-generated.** Avoid mono uppercase eyebrow labels, stat
   strips, "Let's talk"-style headlines, arrow-decorated links and buzzword copy.
 - **References are inspiration, not templates.** Never reuse another site's
@@ -51,7 +54,7 @@ terminal:
 - **Layout**: `.wrap` (max 80rem) holds a 12-column `.row`. Each section has
   a hairline on top, its title (`.lab`) in columns 1–3, sticky on desktop,
   and content (`.body`) in columns 4–12. Below 48rem everything stacks.
-- **Type**: Roboto. Weight 300 for the headline, section titles, lead text,
+- **Type**: Albert Sans. Weight 300 for the headline, section titles, lead text,
   quotes and body; 400 for the name, nav, item titles and roles. Headline
   tracking −0.03em. Sentence case everywhere; hang opening quote marks.
 - **Tokens** live in `:root` of each page's `<style>` (`--bg` #faf9f7,

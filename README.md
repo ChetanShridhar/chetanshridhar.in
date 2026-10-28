@@ -1,20 +1,21 @@
 # Portfolio site
 
 Static site. No build step, no dependencies. Every page is self-contained
-(inline CSS, system fonts), so it renders the same from `file://` or any host.
+(inline CSS, self-hosted Albert Sans), so it renders the same from `file://`
+or any host.
 
 ## Run locally
 
     ruby -run -e httpd . -p 8000
     # open http://localhost:8000
 
-`python3 -m http.server 8000` also works once Xcode command line tools are
-installed. Or just double-click `index.html`.
+Or just double-click `index.html`.
 
 ## Structure
 
     index.html                  Home
     case-studies/_template.html Copy this for each new case study
+    assets/fonts/               Albert Sans 300 and 400, OFL licence
     assets/img/                 Screenshots (keep each under ~300 KB)
 
 ## Add a case study

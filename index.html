@@ -9,13 +9,13 @@
 <meta property="og:title" content="Chetan Shridhar | Principal UX Designer">
 <meta property="og:description" content="I design complex enterprise products, and increasingly, I build them with AI.">
 <meta property="og:type" content="website">
-<link rel="preload" href="assets/fonts/roboto-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/albert-sans-300.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:Roboto;src:url(assets/fonts/roboto-300.woff2) format("woff2");font-weight:300;font-display:swap}
-@font-face{font-family:Roboto;src:url(assets/fonts/roboto-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Albert Sans";src:url(assets/fonts/albert-sans-300.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Albert Sans";src:url(assets/fonts/albert-sans-400.woff2) format("woff2");font-weight:400;font-display:swap}
 :root{
   --bg:#faf9f7; --ink:#1c1b19; --text:#4a4741; --muted:#736e66; --line:#e3dfd8; --tile:#f0ede8; --accent:#ff7722;
-  --sans:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --sans:"Albert Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -34,8 +34,10 @@ p{margin:0;text-wrap:pretty}
 .meta{color:var(--muted);font-size:.875rem}
 
 /* Header */
-.top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
-.top .name{font-weight:400;color:var(--ink)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
+.top .name{display:inline-flex;align-items:center;gap:.625rem;font-weight:400;color:var(--ink)}
+.mark{width:2rem;height:auto;flex:none}
+.mark path{fill:var(--accent);stroke:var(--accent)}
 .top nav{display:flex;flex-wrap:wrap;gap:.25rem 2rem;font-size:.9375rem;font-weight:400}
 .top nav a{padding-bottom:.2rem;border-bottom:1px solid transparent}
 .top nav a:hover{color:var(--ink);border-color:var(--accent)}
@@ -105,7 +107,7 @@ blockquote footer{margin-top:.75rem}
 
 @media (max-width:48rem){
   body{font-size:1rem}
-  .top{flex-direction:column;gap:.5rem}
+  .top{flex-direction:column;align-items:flex-start;gap:.5rem}
   .row,.cap,.list div,.xp li{display:block}
   .hero .who,.hero .sum{margin-top:2rem}
   .hero .who{margin-top:2.5rem}
@@ -123,7 +125,7 @@ blockquote footer{margin-top:.75rem}
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="wrap top">
-  <a class="name" href="./">Chetan Shridhar</a>
+  <a class="name" href="./"><svg class="mark" viewBox="0 0 38 33" width="28" height="24" aria-hidden="true" focusable="false"><path stroke-width=".5" stroke-linecap="round" d="M19.7984 0.944883C17.4227 0.370471 14.6253 1.04308 12.6835 3.27116C12.4842 3.49978 12.2951 3.74348 12.117 4.0024C9.47406 2.93708 6.74912 3.24919 4.6137 4.96925C2.42131 6.73518 0.990217 9.86878 0.766364 14.1221C0.53495 18.5192 2.78032 23.4814 6.01759 27.049C9.23608 30.5959 13.711 33.0455 18.0568 31.8333C20.1434 31.2513 21.8311 30.0782 23.1684 28.6021C25.7495 29.1923 28.9007 28.9605 31.5933 27.0908C35.0905 24.6626 37.5496 19.6653 37.2205 10.9047C37.2019 10.4101 36.7859 10.0242 36.2913 10.0427C35.7967 10.0613 35.4108 10.4773 35.4294 10.9719C35.7464 19.4124 33.3668 23.6774 30.5711 25.6185C28.6458 26.9553 26.3988 27.2814 24.4088 27.0092C24.6337 26.674 24.845 26.3302 25.0429 25.9802C26.5406 23.3327 27.3157 20.2727 27.54 17.6932C27.763 15.1293 27.5995 11.4415 26.5365 8.16305C25.4779 4.89804 23.447 1.82705 19.7984 0.944883ZM12.4519 14.0127C11.8721 10.7448 12.125 8.30078 12.8029 6.53901C14.2071 7.74579 14.6584 9.28949 14.5524 10.8787C14.5195 11.3725 14.8931 11.7996 15.387 11.8325C15.8809 11.8654 16.3079 11.4918 16.3408 10.9979C16.488 8.7905 15.7718 6.5591 13.6593 4.92516C13.7798 4.75599 13.9052 4.59731 14.0347 4.44878C15.5112 2.75459 17.6119 2.26025 19.3772 2.68706C22.1422 3.35559 23.8562 5.70781 24.8315 8.71586C25.8026 11.711 25.9622 15.1477 25.7544 17.5379C25.5479 19.9126 24.8312 22.7143 23.4829 25.0977C23.1943 25.6078 22.8785 26.096 22.5345 26.5554C22.2974 26.471 22.0691 26.3782 21.8511 26.2783C20.6169 25.7126 18.5422 24.2857 16.6275 22.1493C14.7195 20.0203 13.0261 17.2487 12.4519 14.0127ZM5.73805 6.36511C7.26703 5.13354 9.21913 4.83427 11.2527 5.58949C10.333 7.76261 10.0367 10.6599 10.6871 14.3258C11.3359 17.9825 13.2338 21.0481 15.2927 23.3455C17.3449 25.6354 19.6128 27.2241 21.1043 27.9077C21.1591 27.9328 21.2144 27.9575 21.2703 27.9819C20.2338 28.9619 19.0085 29.7071 17.5752 30.1069C14.1984 31.0488 10.3805 29.1898 7.34495 25.8446C4.3278 22.5196 2.35689 18.0044 2.55626 14.2163C2.76317 10.2848 4.06794 7.71036 5.73805 6.36511Z"/></svg>Chetan Shridhar</a>
   <nav aria-label="Primary">
     <a href="#work">Work</a>
     <a href="#ai">AI</a>
@@ -174,7 +176,7 @@ blockquote footer{margin-top:.75rem}
     <div class="wrap"><div class="row">
       <h2 class="lab" id="ai-h">Building with AI</h2>
       <div class="body">
-        <p class="lead">At LIQUiDITY a single loan is worth USD&nbsp;10–50&nbsp;million. I design the AI that helps decide it, and use AI to build faster myself.</p>
+        <p class="lead">At LIQUiDITY a single loan is worth <span style="white-space:nowrap">USD 10–50 million</span>. I design the AI that helps decide it, and use AI to build faster myself.</p>
         <dl class="list">
           <div><dt>AI chat tool</dt><dd>An AI workspace for analysts and investment managers, with skills, projects and a home screen for each role.</dd></div>
           <div><dt>MCP apps</dt><dd>Twelve working interfaces built directly with Claude, reading and writing real data. Designing by hand in Figma, two or three was my realistic limit.</dd></div>
