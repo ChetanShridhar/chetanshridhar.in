@@ -90,10 +90,9 @@ terminal:
   they weigh the same. HARMAN's "A Samsung Company" line is removed (Samsung
   bought it after Chetan left). Five logos (LIQUiDITY, Skyhigh Security,
   Akamai, HARMAN, Tesco) sit small at the bottom of the first screen, with no
-  captions. In Experience a small logo sits in a fixed slot (`.mk`) before
-  each company name (`alt=""`, since the name is there); companies without a
-  logo keep an empty slot so names line up.
-- **Experience**: one row per tenure with the company on the right. Titles
+  captions. Logos appear only there, not in Experience.
+- **Experience**: one row per tenure with the company name on the right, in
+  regular body weight (300) on desktop and phones. Titles
   held within the same tenure are nested in that row (current title first,
   earlier ones lighter); a return to a company later is its own row.
 - **Contact**: one inviting lead line, then text rows (label left, link
