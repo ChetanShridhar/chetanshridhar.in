@@ -72,22 +72,32 @@ section .row{border-top:1px solid var(--line);padding-top:1.5rem}
 .lead{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:34ch;margin-bottom:2.5rem}
 h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 
-/* Work */
-.proj{display:block;margin-bottom:4.5rem}
-.mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
-.cap{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;margin-top:1.25rem}
-.cap h3{grid-column:1/4}
-.cap div{grid-column:4/10}
-.cap .meta{margin-top:.5rem}
-.proj h3 span{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.3em}
-.proj:hover h3 span{text-decoration-color:var(--accent)}
-.note{color:var(--muted);border-top:1px solid var(--line);padding-top:1.25rem}
+/* AI: one figure, then what I design and how I build */
+.big{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:2rem 0;margin-bottom:3rem}
+.big .num{grid-column:1/3;font-size:clamp(4rem,8vw,6.5rem);font-weight:200;line-height:1;letter-spacing:-.04em;color:var(--ink)}
+.big .num+p{grid-column:3/9;font-size:1.1875rem;line-height:1.55}
+.halves{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.halves h3{font-size:1.25rem;font-weight:300;margin-bottom:.75rem}
+.pts{margin:0}
+.pts div{border-top:1px solid var(--line);padding:1rem 0}
+.pts dt{font-weight:400;color:var(--ink)}
+.pts dd{margin:.25rem 0 0}
+.trust{margin-top:2.5rem;max-width:40rem}
+.trust b{font-weight:400;color:var(--ink)}
 
-/* Lists of short rows */
-.list{margin:0}
-.list div{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;border-top:1px solid var(--line);padding:1.25rem 0}
-.list dt{grid-column:1/4;font-weight:400;color:var(--ink)}
-.list dd{grid-column:4/10;margin:0}
+/* Work: small cards with a detail crop, not the whole screen */
+.mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
+.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem 2rem}
+.card{display:block}
+.thumb{position:relative;aspect-ratio:4/3;background:var(--tile);overflow:hidden;margin-bottom:1rem}
+.thumb img{position:absolute;inset:-5% 0;width:100%;height:110%;max-width:none;object-fit:cover;object-position:left top;transition:scale .7s cubic-bezier(.2,.7,.2,1)}
+.card:hover .thumb img{scale:1.04}
+.thumb.words{display:flex;flex-direction:column;justify-content:space-between;padding:1.25rem 1.25rem 1rem}
+.thumb.words .q{font-size:clamp(1.25rem,1.9vw,1.5rem);line-height:1.3;color:var(--ink);text-indent:-.35em}
+.card h3 span{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.3em}
+.card:hover h3 span{text-decoration-color:var(--accent)}
+.card h3+p{margin-top:.375rem}
+.card .meta{margin-top:.5rem}
 
 /* About */
 .about p+p{margin-top:1.25rem}
@@ -129,6 +139,7 @@ blockquote footer{margin-top:.75rem}
     .mat{overflow:hidden}
     .mat img{animation:pan linear both;animation-timeline:view();animation-range:cover}
     .older .mat img{animation-name:pan-sm}
+    .thumb img{animation:pan-sm linear both;animation-timeline:view();animation-range:cover}
   }
 }
 /* Lenis smooth scrolling (from lenis/dist/lenis.css) */
@@ -140,8 +151,9 @@ html.lenis,html.lenis body{height:auto}
 @keyframes drift{to{transform:translateY(25vh);opacity:.15}}
 @keyframes pan{from{transform:translateY(4%)}to{transform:translateY(-4%)}}
 @keyframes pan-sm{from{transform:translateY(3%)}to{transform:translateY(-3%)}}
-@media (prefers-reduced-motion:reduce){.top{transition:none}}
+@media (prefers-reduced-motion:reduce){.top,.thumb img{transition:none}}
 
+@media (max-width:64rem){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:48rem){
   body{font-size:1rem}
   .bar{flex-direction:column;align-items:flex-start;gap:.5rem}
@@ -149,13 +161,13 @@ html.lenis,html.lenis body{height:auto}
   .is-stuck .name span{display:none}
   .is-stuck nav{gap:.25rem 1.5rem}
   .fold{padding-top:7.5rem}
-  .row,.cap,.list div,.xp li{display:block}
+  .row,.big,.xp li{display:block}
   .hero .who,.hero .sum{margin-top:2rem}
   .hero .who{margin-top:2.5rem}
   .lab{position:static;padding-left:0;margin-bottom:1.75rem}
-  .cap h3{margin-bottom:.375rem}
-  .list dt{margin-bottom:.25rem}
-  .proj{margin-bottom:3.5rem}
+  .big .num{margin-bottom:.75rem}
+  .halves{grid-template-columns:1fr;gap:2.5rem}
+  .cards{grid-template-columns:1fr;gap:2.5rem}
   .older{grid-template-columns:1fr 1fr;gap:1.5rem 1rem}
   .xp span{display:block}
   .xp .yrs{font-size:.875rem}
@@ -168,8 +180,8 @@ html.lenis,html.lenis body{height:auto}
 <header class="top"><div class="wrap bar">
   <a class="name" href="./" aria-label="Chetan Shridhar"><svg class="mark" viewBox="0 0 38 33" width="28" height="24" aria-hidden="true" focusable="false"><path stroke-width=".5" stroke-linecap="round" d="M19.7984 0.944883C17.4227 0.370471 14.6253 1.04308 12.6835 3.27116C12.4842 3.49978 12.2951 3.74348 12.117 4.0024C9.47406 2.93708 6.74912 3.24919 4.6137 4.96925C2.42131 6.73518 0.990217 9.86878 0.766364 14.1221C0.53495 18.5192 2.78032 23.4814 6.01759 27.049C9.23608 30.5959 13.711 33.0455 18.0568 31.8333C20.1434 31.2513 21.8311 30.0782 23.1684 28.6021C25.7495 29.1923 28.9007 28.9605 31.5933 27.0908C35.0905 24.6626 37.5496 19.6653 37.2205 10.9047C37.2019 10.4101 36.7859 10.0242 36.2913 10.0427C35.7967 10.0613 35.4108 10.4773 35.4294 10.9719C35.7464 19.4124 33.3668 23.6774 30.5711 25.6185C28.6458 26.9553 26.3988 27.2814 24.4088 27.0092C24.6337 26.674 24.845 26.3302 25.0429 25.9802C26.5406 23.3327 27.3157 20.2727 27.54 17.6932C27.763 15.1293 27.5995 11.4415 26.5365 8.16305C25.4779 4.89804 23.447 1.82705 19.7984 0.944883ZM12.4519 14.0127C11.8721 10.7448 12.125 8.30078 12.8029 6.53901C14.2071 7.74579 14.6584 9.28949 14.5524 10.8787C14.5195 11.3725 14.8931 11.7996 15.387 11.8325C15.8809 11.8654 16.3079 11.4918 16.3408 10.9979C16.488 8.7905 15.7718 6.5591 13.6593 4.92516C13.7798 4.75599 13.9052 4.59731 14.0347 4.44878C15.5112 2.75459 17.6119 2.26025 19.3772 2.68706C22.1422 3.35559 23.8562 5.70781 24.8315 8.71586C25.8026 11.711 25.9622 15.1477 25.7544 17.5379C25.5479 19.9126 24.8312 22.7143 23.4829 25.0977C23.1943 25.6078 22.8785 26.096 22.5345 26.5554C22.2974 26.471 22.0691 26.3782 21.8511 26.2783C20.6169 25.7126 18.5422 24.2857 16.6275 22.1493C14.7195 20.0203 13.0261 17.2487 12.4519 14.0127ZM5.73805 6.36511C7.26703 5.13354 9.21913 4.83427 11.2527 5.58949C10.333 7.76261 10.0367 10.6599 10.6871 14.3258C11.3359 17.9825 13.2338 21.0481 15.2927 23.3455C17.3449 25.6354 19.6128 27.2241 21.1043 27.9077C21.1591 27.9328 21.2144 27.9575 21.2703 27.9819C20.2338 28.9619 19.0085 29.7071 17.5752 30.1069C14.1984 31.0488 10.3805 29.1898 7.34495 25.8446C4.3278 22.5196 2.35689 18.0044 2.55626 14.2163C2.76317 10.2848 4.06794 7.71036 5.73805 6.36511Z"/></svg><span>Chetan Shridhar</span></a>
   <nav aria-label="Primary">
-    <a href="#work">Work</a>
     <a href="#ai">AI</a>
+    <a href="#work">Work</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -184,49 +196,72 @@ html.lenis,html.lenis body{height:auto}
         <p class="sum">Twenty years of making expert tools usable, from mixing consoles and CDN configuration to cloud security policy. Today I work on private credit, where analysts and investment managers make lending decisions with AI.</p>
       </div>
     </div>
-    <p class="wrap hint"><a href="#work">Selected work</a></p>
+    <p class="wrap hint"><a href="#ai">Designing AI, building with AI</a></p>
   </div>
+
+  <section id="ai" aria-labelledby="ai-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="ai-h">Designing AI, building with AI</h2>
+      <div class="body">
+        <p class="lead">At LIQUiDITY a single loan is worth <span style="white-space:nowrap">USD 10–50 million</span>. I design the AI that helps people decide it, and I build much of it with AI myself.</p>
+        <div class="big">
+          <p class="num">12</p>
+          <p>working MCP apps, built directly with Claude, reading and writing real data. Designing by hand in Figma, two or three was my realistic limit.</p>
+        </div>
+        <div class="halves">
+          <div>
+            <h3>AI I design and build</h3>
+            <dl class="pts">
+              <div><dt>AI chat tool</dt><dd>A workspace for analysts and investment managers, with skills, projects and a home screen for each role that shows what needs attention.</dd></div>
+              <div><dt>AI assistant</dt><dd>Contextual help inside the platform that runs origination, underwriting and monitoring of loans.</dd></div>
+              <div><dt>Generative UI</dt><dd>AI-generated screens that use our own components when the data comes from the system of record.</dd></div>
+              <div><dt>Checks against complacency</dt><dd>With data science, the AI asks investment managers check questions about a company’s financials, so people stay in the decision.</dd></div>
+            </dl>
+          </div>
+          <div>
+            <h3>How I build with AI</h3>
+            <dl class="pts">
+              <div><dt>MCP apps</dt><dd>Each starts from the operations a task needs. Figma stays as the review step; Claude builds the working app.</dd></div>
+              <div><dt>Design system in sync</dt><dd>Storybook and the Figma library kept in step through Claude. Every component change still goes through front-end review.</dd></div>
+              <div><dt>Rules for the AI</dt><dd>On fast projects AI drifts: colours outside the foundations, components that don’t exist. I review for it and write rules into each project.</dd></div>
+            </dl>
+          </div>
+        </div>
+        <p class="trust"><b>Where I don’t trust it:</b> user flows. Even with PRDs and research notes as input, I check every flow against what we learned from users.</p>
+      </div>
+    </div></div>
+  </section>
 
   <section id="work" aria-labelledby="work-h">
     <div class="wrap"><div class="row">
       <h2 class="lab" id="work-h">Selected work</h2>
       <div class="body">
-        <a class="proj" href="https://chetanshridhar.in/project/swg_rulebuilder">
-          <div class="mat"><img src="assets/img/rule-builder.jpg" width="1200" height="776" alt="Rule builder table showing nested rulesets with criteria, operators, values and actions"></div>
-          <div class="cap">
-            <h3><span>Web Security Rule Builder</span></h3>
-            <div>
-              <p>Moving legacy on-premise policies to a cloud web gateway, so security administrators build complex rules in the interface instead of a proprietary language.</p>
+        <ul class="cards">
+          <li>
+            <a class="card" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request%3A%20AI%20chat%20tool%20and%20MCP%20apps">
+              <div class="thumb words"><p class="q">“What do I need to focus on today?”</p><p class="meta">Confidential. Walkthrough on request.</p></div>
+              <h3><span>AI chat tool and MCP apps</span></h3>
+              <p>An AI workspace for investment teams, and twelve working apps built with Claude.</p>
+              <p class="meta">LIQUiDITY. Ask for a walkthrough</p>
+            </a>
+          </li>
+          <li>
+            <a class="card" href="https://chetanshridhar.in/project/swg_rulebuilder">
+              <div class="thumb"><img src="assets/img/rule-builder-detail.jpg" width="640" height="480" alt="Detail of the rule builder: nested rulesets with IF and AND conditions"></div>
+              <h3><span>Web Security Rule Builder</span></h3>
+              <p>Legacy on-premise policies moved to a cloud gateway, built as rules in the interface instead of code.</p>
               <p class="meta">Skyhigh Security, 2021–22</p>
-            </div>
-          </div>
-        </a>
-        <a class="proj" href="https://chetanshridhar.in/project/regression-testing-app">
-          <div class="mat"><img src="assets/img/regression-testing.jpg" width="1200" height="750" alt="Regression testing home screen with search, news and recent test suites"></div>
-          <div class="cap">
-            <h3><span>Regression Web Testing</span></h3>
-            <div>
+            </a>
+          </li>
+          <li>
+            <a class="card" href="https://chetanshridhar.in/project/regression-testing-app">
+              <div class="thumb"><img src="assets/img/regression-testing-detail.jpg" width="560" height="420" alt="Detail of the regression testing tool: recent test suites marked running, passed and failed"></div>
+              <h3><span>Regression Web Testing</span></h3>
               <p>Engineers test configuration changes on staging before they reach production.</p>
               <p class="meta">Akamai Technologies</p>
-            </div>
-          </div>
-        </a>
-        <p class="note">My recent AI and fintech work at LIQUiDITY is confidential. <a class="u" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request">Ask for a walkthrough</a>.</p>
-      </div>
-    </div></div>
-  </section>
-
-  <section id="ai" aria-labelledby="ai-h">
-    <div class="wrap"><div class="row">
-      <h2 class="lab" id="ai-h">Building with AI</h2>
-      <div class="body">
-        <p class="lead">At LIQUiDITY a single loan is worth <span style="white-space:nowrap">USD 10–50 million</span>. I design the AI that helps decide it, and use AI to build faster myself.</p>
-        <dl class="list">
-          <div><dt>AI chat tool</dt><dd>An AI workspace for analysts and investment managers, with skills, projects and a home screen for each role.</dd></div>
-          <div><dt>MCP apps</dt><dd>Twelve working interfaces built directly with Claude, reading and writing real data. Designing by hand in Figma, two or three was my realistic limit.</dd></div>
-          <div><dt>Design system</dt><dd>Figma and Storybook kept in sync through Claude. Every component change still goes through front-end review.</dd></div>
-          <div><dt>Generative UI</dt><dd>AI-generated screens that use our own components when the data comes from the system of record.</dd></div>
-        </dl>
+            </a>
+          </li>
+        </ul>
       </div>
     </div></div>
   </section>

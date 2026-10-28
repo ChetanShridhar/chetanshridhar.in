@@ -29,7 +29,7 @@ follow it.
 
 ## Files
 
-    index.html                  Home: intro, selected work, building with AI, how I work, earlier work, experience, quotes, contact
+    index.html                  Home: intro, designing AI / building with AI, selected work, how I work, earlier work, experience, quotes, contact
     case-studies/_template.html Copy for each new case study (not yet restyled to match the home page)
     assets/img/                 Screenshots; JPEG, ~1200px wide, under ~300 KB each
 
@@ -68,6 +68,13 @@ terminal:
   screenshots carry the design. Each screenshot sits on a soft `--tile` mat
   (`.mat`) with no border or shadow. Do not draw or invent interface art,
   icons or decorative SVG.
+- **Selected work** is small cards (three per row, two below 64rem, one on
+  phones). A thumbnail is a tight 4:3 crop of one telling detail of the real
+  screen (`assets/img/*-detail.jpg`), never the whole mock-up; it zooms
+  slightly on hover. Confidential work gets a text-only card on the tile.
+- **AI comes first** after the intro: one large figure (the real 12 vs 2–3),
+  then "AI I design and build" and "How I build with AI" side by side, then
+  where Chetan does not trust AI.
 - **Layout**: `.wrap` (max 80rem) holds a 12-column `.row`. Each section has
   a hairline on top, its title (`.lab`) in columns 1–3, sticky on desktop,
   and content (`.body`) in columns 4–12. Below 48rem everything stacks.
