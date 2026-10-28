@@ -72,18 +72,12 @@ section .row{border-top:1px solid var(--line);padding-top:1.5rem}
 .lead{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:34ch;margin-bottom:2.5rem}
 h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 
-/* AI: one figure, then what I design and how I build */
-.big{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:2rem 0;margin-bottom:3rem}
-.big .num{grid-column:1/3;font-size:clamp(4rem,8vw,6.5rem);font-weight:200;line-height:1;letter-spacing:-.04em;color:var(--ink)}
-.big .num+p{grid-column:3/9;font-size:1.1875rem;line-height:1.55}
-.halves{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-.halves h3{font-size:1.25rem;font-weight:300;margin-bottom:.75rem}
-.pts{margin:0}
-.pts div{border-top:1px solid var(--line);padding:1rem 0}
-.pts dt{font-weight:400;color:var(--ink)}
-.pts dd{margin:.25rem 0 0}
-.trust{margin-top:2.5rem;max-width:40rem}
-.trust b{font-weight:400;color:var(--ink)}
+/* AI: two groups, subhead on the left, items in an aligned grid */
+.grp{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;border-top:1px solid var(--line);padding:1.75rem 0 2.5rem}
+.grp h3{grid-column:1/4;font-size:1.25rem;font-weight:300;line-height:1.3}
+.grp dl{grid-column:4/10;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.grp dt{font-weight:400;color:var(--ink)}
+.grp dd{margin:.375rem 0 0;font-size:.9375rem;line-height:1.6;color:var(--muted)}
 
 /* Work: small cards with a detail crop, not the whole screen */
 .mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
@@ -161,12 +155,12 @@ html.lenis,html.lenis body{height:auto}
   .is-stuck .name span{display:none}
   .is-stuck nav{gap:.25rem 1.5rem}
   .fold{padding-top:7.5rem}
-  .row,.big,.xp li{display:block}
+  .row,.grp,.xp li{display:block}
   .hero .who,.hero .sum{margin-top:2rem}
   .hero .who{margin-top:2.5rem}
   .lab{position:static;padding-left:0;margin-bottom:1.75rem}
-  .big .num{margin-bottom:.75rem}
-  .halves{grid-template-columns:1fr;gap:2.5rem}
+  .grp h3{margin-bottom:1.25rem}
+  .grp dl{grid-template-columns:1fr;gap:1.5rem}
   .cards{grid-template-columns:1fr;gap:2.5rem}
   .older{grid-template-columns:1fr 1fr;gap:1.5rem 1rem}
   .xp span{display:block}
@@ -203,31 +197,24 @@ html.lenis,html.lenis body{height:auto}
     <div class="wrap"><div class="row">
       <h2 class="lab" id="ai-h">Designing AI, building with AI</h2>
       <div class="body">
-        <p class="lead">At LIQUiDITY a single loan is worth <span style="white-space:nowrap">USD 10–50 million</span>. I design the AI that helps people decide it, and I build much of it with AI myself.</p>
-        <div class="big">
-          <p class="num">12</p>
-          <p>working MCP apps, built directly with Claude, reading and writing real data. Designing by hand in Figma, two or three was my realistic limit.</p>
+        <p class="lead">I design AI for experts making high-stakes decisions, and I build with AI every day, knowing where it shouldn’t have the final say.</p>
+        <div class="grp">
+          <h3>Designing AI</h3>
+          <dl>
+            <div><dt>AI chat tool</dt><dd>A workspace for analysts and investment managers, with skills, projects and a home screen for each role.</dd></div>
+            <div><dt>AI assistant</dt><dd>Contextual help across a lending platform, from origination to monitoring.</dd></div>
+            <div><dt>Generative UI</dt><dd>AI-generated screens built from our own components, so they look and behave like the product.</dd></div>
+            <div><dt>Keeping people in the decision</dt><dd>Check questions the AI asks during reviews, designed with data science, so experts don’t simply accept its output.</dd></div>
+          </dl>
         </div>
-        <div class="halves">
-          <div>
-            <h3>AI I design and build</h3>
-            <dl class="pts">
-              <div><dt>AI chat tool</dt><dd>A workspace for analysts and investment managers, with skills, projects and a home screen for each role that shows what needs attention.</dd></div>
-              <div><dt>AI assistant</dt><dd>Contextual help inside the platform that runs origination, underwriting and monitoring of loans.</dd></div>
-              <div><dt>Generative UI</dt><dd>AI-generated screens that use our own components when the data comes from the system of record.</dd></div>
-              <div><dt>Checks against complacency</dt><dd>With data science, the AI asks investment managers check questions about a company’s financials, so people stay in the decision.</dd></div>
-            </dl>
-          </div>
-          <div>
-            <h3>How I build with AI</h3>
-            <dl class="pts">
-              <div><dt>MCP apps</dt><dd>Each starts from the operations a task needs. Figma stays as the review step; Claude builds the working app.</dd></div>
-              <div><dt>Design system in sync</dt><dd>Storybook and the Figma library kept in step through Claude. Every component change still goes through front-end review.</dd></div>
-              <div><dt>Rules for the AI</dt><dd>On fast projects AI drifts: colours outside the foundations, components that don’t exist. I review for it and write rules into each project.</dd></div>
-            </dl>
-          </div>
+        <div class="grp">
+          <h3>Building with AI</h3>
+          <dl>
+            <div><dt>MCP apps</dt><dd>Built directly with Claude, reading and writing real data, with Figma kept as the review step.</dd></div>
+            <div><dt>Design system in sync</dt><dd>Storybook and the Figma library kept in step through Claude. Every change still goes through engineering review.</dd></div>
+            <div><dt>Rules for the AI</dt><dd>Written into each project so it can’t drift from the foundations or invent components. User flows I still check against research myself.</dd></div>
+          </dl>
         </div>
-        <p class="trust"><b>Where I don’t trust it:</b> user flows. Even with PRDs and research notes as input, I check every flow against what we learned from users.</p>
       </div>
     </div></div>
   </section>
@@ -241,8 +228,8 @@ html.lenis,html.lenis body{height:auto}
             <a class="card" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request%3A%20AI%20chat%20tool%20and%20MCP%20apps">
               <div class="thumb words"><p class="q">“What do I need to focus on today?”</p><p class="meta">Confidential. Walkthrough on request.</p></div>
               <h3><span>AI chat tool and MCP apps</span></h3>
-              <p>An AI workspace for investment teams, and twelve working apps built with Claude.</p>
-              <p class="meta">LIQUiDITY. Ask for a walkthrough</p>
+              <p>An AI workspace for investment teams, and the apps that run inside it.</p>
+              <p class="meta">Fintech. Ask for a walkthrough</p>
             </a>
           </li>
           <li>

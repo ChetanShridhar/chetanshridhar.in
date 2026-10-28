@@ -72,9 +72,11 @@ terminal:
   phones). A thumbnail is a tight 4:3 crop of one telling detail of the real
   screen (`assets/img/*-detail.jpg`), never the whole mock-up; it zooms
   slightly on hover. Confidential work gets a text-only card on the tile.
-- **AI comes first** after the intro: one large figure (the real 12 vs 2–3),
-  then "AI I design and build" and "How I build with AI" side by side, then
-  where Chetan does not trust AI.
+- **AI comes first** after the intro: one lead line about skill and
+  judgement, then two groups ("Designing AI", "Building with AI"), each with
+  its subhead on the left and items in an aligned two-column grid. No
+  headline numbers (not the 12 MCP apps), no loan sizes, and no company name
+  in this section: talk about skill, scale and high-stakes decisions.
 - **Layout**: `.wrap` (max 80rem) holds a 12-column `.row`. Each section has
   a hairline on top, its title (`.lab`) in columns 1–3, sticky on desktop,
   and content (`.body`) in columns 4–12. Below 48rem everything stacks.
