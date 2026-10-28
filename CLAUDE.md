@@ -85,13 +85,14 @@ terminal:
   headline numbers (not the 12 MCP apps), no loan sizes, and no company name
   in this section: talk about skill, scale and high-stakes decisions.
 - **Company logos** (`assets/logos/*.svg|png`, clean copies; the original
-  downloads sit in subfolders and are not committed) are drawn in one grey
-  (`--logo`) through CSS `mask`, never in brand colours. Each is sized by eye
-  with `--h` so they weigh the same; `--r` is its aspect ratio. HARMAN's
-  "A Samsung Company" line is removed (Samsung bought it after Chetan left).
-  Five logos (LIQUiDITY, Skyhigh Security, Akamai, HARMAN, Tesco) sit small
-  at the bottom of the first screen, with no captions. Experience uses
-  company names as text, not logos.
+  downloads sit in subfolders and are not committed) are shown in their own
+  brand colours as plain `<img>`. Each gets an inline `height` set by eye so
+  they weigh the same. HARMAN's "A Samsung Company" line is removed (Samsung
+  bought it after Chetan left). Five logos (LIQUiDITY, Skyhigh Security,
+  Akamai, HARMAN, Tesco) sit small at the bottom of the first screen, with no
+  captions. In Experience a small logo sits in a fixed slot (`.mk`) before
+  each company name (`alt=""`, since the name is there); companies without a
+  logo keep an empty slot so names line up.
 - **Experience**: one row per tenure with the company on the right. Titles
   held within the same tenure are nested in that row (current title first,
   earlier ones lighter); a return to a company later is its own row.
@@ -106,7 +107,7 @@ terminal:
   tracking −0.03em. Sentence case everywhere; hang opening quote marks.
 - **Tokens** live in `:root` of each page's `<style>` (`--bg` #faf9f7,
   `--ink` #1c1b19, `--text` #4a4741, `--muted` #736e66, `--line` #e3dfd8,
-  `--tile` #f0ede8, `--accent` #ff7722, `--logo` #7d786f, `--sans`). Change a token in every
+  `--tile` #f0ede8, `--accent` #ff7722, `--sans`). Change a token in every
   page: `grep -rn -- "--accent" .`
 - **CSS style**: compact one-line rules, short class names (`.wrap`, `.row`,
   `.lab`, `.mat`, `.xp`), `rem` units, mobile breakpoint at `max-width:48rem`.

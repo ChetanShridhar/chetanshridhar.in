@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&display=swap">
 <style>
 :root{
-  --bg:#faf9f7; --ink:#1c1b19; --text:#4a4741; --muted:#736e66; --line:#e3dfd8; --tile:#f0ede8; --accent:#ff7722; --logo:#7d786f;
+  --bg:#faf9f7; --ink:#1c1b19; --text:#4a4741; --muted:#736e66; --line:#e3dfd8; --tile:#f0ede8; --accent:#ff7722;
   --sans:"Albert Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
@@ -59,9 +59,8 @@ main:focus{outline:none}
 .base .row{align-items:end}
 .hint{grid-column:1/4;grid-row:1;font-size:.9375rem;font-weight:400}
 .cos{grid-column:4/13;grid-row:1;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem 2rem}
-/* Company logos in one grey, drawn through each logo's own shape */
-.logo{display:block;height:var(--h);aspect-ratio:var(--r);max-width:100%;background:var(--logo);-webkit-mask:var(--src) no-repeat left center/contain;mask:var(--src) no-repeat left center/contain}
-.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Company logos in their own colours; height is set per logo so they weigh the same */
+.cos img{width:auto}
 .hint a{display:inline-block;color:var(--muted)}
 .hint a::before{content:"";display:block;width:1px;height:3.5rem;background:var(--muted);margin-bottom:.875rem}
 .hint a:hover{color:var(--ink)}
@@ -123,7 +122,9 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 .xp .yrs{grid-column:1/3;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .xp .role{grid-column:3/6;color:var(--ink);font-weight:400}
 .roles li+li .role{color:var(--text);font-weight:300}
-.xp .co{grid-column:6/10;grid-row:1}
+.xp .co{grid-column:6/10;grid-row:1;display:flex;align-items:center;gap:.875rem}
+.mk{flex:none;width:4.5rem;height:1.6rem;display:flex;align-items:center}
+.mk img{width:auto;max-width:100%}
 .xp .now .role::after{content:"";display:inline-block;width:.4375rem;height:.4375rem;border-radius:50%;background:var(--accent);margin-left:.625rem;vertical-align:.15em}
 .xp+.meta{border-top:1px solid var(--line);padding-top:1.25rem}
 
@@ -186,7 +187,7 @@ html.lenis,html.lenis body{height:auto}
   .older{grid-template-columns:1fr 1fr;gap:1.5rem 1rem}
   .cos{justify-content:flex-start;gap:1.5rem 2rem;margin-bottom:2.5rem}
   .xp>li,.roles li{display:block}
-  .xp .co{display:block;color:var(--ink);font-weight:400;margin-bottom:.5rem}
+  .xp .co{color:var(--ink);font-weight:400;margin-bottom:.5rem}
   .xp .yrs{display:block;font-size:.875rem}
   .roles li+li{margin-top:.5rem}
 }
@@ -216,11 +217,11 @@ html.lenis,html.lenis body{height:auto}
     </div>
     <div class="wrap base"><div class="row">
       <ul class="cos" aria-label="Where I’ve worked">
-        <li><span class="logo" role="img" aria-label="LIQUiDITY" style="--src:url(assets/logos/liquidity.svg);--r:182/32;--h:.95rem"></span></li>
-        <li><span class="logo" role="img" aria-label="Skyhigh Security" style="--src:url(assets/logos/skyhigh.png);--r:994/311;--h:1.75rem"></span></li>
-        <li><span class="logo" role="img" aria-label="Akamai" style="--src:url(assets/logos/akamai.svg);--r:410/167;--h:2rem"></span></li>
-        <li><span class="logo" role="img" aria-label="HARMAN" style="--src:url(assets/logos/harman.svg);--r:210/121;--h:2.5rem"></span></li>
-        <li><span class="logo" role="img" aria-label="Tesco" style="--src:url(assets/logos/tesco.svg);--r:101.35/27.49;--h:1.2rem"></span></li>
+        <li><img src="assets/logos/liquidity.svg" alt="LIQUiDITY" width="182" height="32" style="height:.95rem"></li>
+        <li><img src="assets/logos/skyhigh.png" alt="Skyhigh Security" width="994" height="311" style="height:1.75rem"></li>
+        <li><img src="assets/logos/akamai.svg" alt="Akamai" width="410" height="167" style="height:2rem"></li>
+        <li><img src="assets/logos/harman.svg" alt="HARMAN" width="210" height="121" style="height:2.5rem"></li>
+        <li><img src="assets/logos/tesco.svg" alt="Tesco" width="101" height="27" style="height:1.2rem"></li>
       </ul>
       <p class="hint"><a href="#ai">Designing AI, building with AI</a></p>
     </div></div>
@@ -332,21 +333,21 @@ html.lenis,html.lenis body{height:auto}
       <h2 class="lab" id="xp-h">Experience</h2>
       <div class="body">
         <ul class="xp">
-          <li><span class="co">LIQUiDITY</span><ul class="roles">
+          <li><span class="co"><span class="mk"><img src="assets/logos/liquidity.svg" alt="" width="182" height="32" style="height:.6rem"></span>LIQUiDITY</span><ul class="roles">
             <li class="now"><span class="yrs">2025 – now</span><span class="role">Principal UX Designer</span></li>
             <li><span class="yrs">2022 – 2025</span><span class="role">Senior UX Designer</span></li>
           </ul></li>
-          <li><span class="co">Skyhigh Security</span><ul class="roles">
+          <li><span class="co"><span class="mk"><img src="assets/logos/skyhigh.png" alt="" width="994" height="311" style="height:1.05rem"></span>Skyhigh Security</span><ul class="roles">
             <li><span class="yrs">2022</span><span class="role">UX Manager</span></li>
             <li><span class="yrs">2021 – 2022</span><span class="role">UX Architect</span></li>
           </ul></li>
-          <li><span class="co">Akamai Technologies</span><ul class="roles"><li><span class="yrs">2014 – 2021</span><span class="role">Senior UI Engineer</span></li></ul></li>
-          <li><span class="co">HARMAN</span><ul class="roles"><li><span class="yrs">2013 – 2014</span><span class="role">Senior Product Designer</span></li></ul></li>
-          <li><span class="co">Akamai Technologies</span><ul class="roles"><li><span class="yrs">2010 – 2013</span><span class="role">Graphic Designer</span></li></ul></li>
-          <li><span class="co">Tesco HSC</span><ul class="roles"><li><span class="yrs">2009 – 2010</span><span class="role">Graphic Designer</span></li></ul></li>
-          <li><span class="co">The New Indian Express</span><ul class="roles"><li><span class="yrs">2008 – 2009</span><span class="role">Visualizer</span></li></ul></li>
-          <li><span class="co">Image Infotainment</span><ul class="roles"><li><span class="yrs">2006 – 2008</span><span class="role">Trainer and Design Faculty</span></li></ul></li>
-          <li><span class="co">Virgin Comics</span><ul class="roles"><li><span class="yrs">2005 – 2006</span><span class="role">Digital Colouring Artist</span></li></ul></li>
+          <li><span class="co"><span class="mk"><img src="assets/logos/akamai.svg" alt="" width="410" height="167" style="height:1.2rem"></span>Akamai Technologies</span><ul class="roles"><li><span class="yrs">2014 – 2021</span><span class="role">Senior UI Engineer</span></li></ul></li>
+          <li><span class="co"><span class="mk"><img src="assets/logos/harman.svg" alt="" width="210" height="121" style="height:1.45rem"></span>HARMAN</span><ul class="roles"><li><span class="yrs">2013 – 2014</span><span class="role">Senior Product Designer</span></li></ul></li>
+          <li><span class="co"><span class="mk"><img src="assets/logos/akamai.svg" alt="" width="410" height="167" style="height:1.2rem"></span>Akamai Technologies</span><ul class="roles"><li><span class="yrs">2010 – 2013</span><span class="role">Graphic Designer</span></li></ul></li>
+          <li><span class="co"><span class="mk"><img src="assets/logos/tesco.svg" alt="" width="101" height="27" style="height:.75rem"></span>Tesco HSC</span><ul class="roles"><li><span class="yrs">2009 – 2010</span><span class="role">Graphic Designer</span></li></ul></li>
+          <li><span class="co"><span class="mk"><img src="assets/logos/indian-express.svg" alt="" width="4480" height="447" style="height:.42rem"></span>The New Indian Express</span><ul class="roles"><li><span class="yrs">2008 – 2009</span><span class="role">Visualizer</span></li></ul></li>
+          <li><span class="co"><span class="mk"></span>Image Infotainment</span><ul class="roles"><li><span class="yrs">2006 – 2008</span><span class="role">Trainer and Design Faculty</span></li></ul></li>
+          <li><span class="co"><span class="mk"></span>Virgin Comics</span><ul class="roles"><li><span class="yrs">2005 – 2006</span><span class="role">Digital Colouring Artist</span></li></ul></li>
         </ul>
         <p class="meta">Most Valuable Player, Akamai, Q1 2020, for the Premium and MSS apps.</p>
       </div>
