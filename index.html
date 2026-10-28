@@ -4,345 +4,272 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chetan Shridhar | Principal UX Designer</title>
-<meta name="description" content="Principal UX Designer building AI-native products for fintech: private debt underwriting, AI-maintained design systems, generative UI and MCP apps.">
-<link rel="preload" href="assets/fonts/roboto-100.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="description" content="Principal UX Designer in Abu Dhabi. I design complex enterprise products for fintech and cloud security, and increasingly build them with AI.">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="assets/fonts/roboto-300.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:Roboto;src:url(assets/fonts/roboto-100.woff2) format("woff2");font-weight:100;font-display:swap}
 @font-face{font-family:Roboto;src:url(assets/fonts/roboto-300.woff2) format("woff2");font-weight:300;font-display:swap}
 @font-face{font-family:Roboto;src:url(assets/fonts/roboto-400.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:Roboto;src:url(assets/fonts/roboto-500.woff2) format("woff2");font-weight:500;font-display:swap}
 :root{
-  --bg:#ffffff; --ink:#222222; --text:#4a4a4a; --muted:#8a8a8a; --line:#e6e6e6; --tile:#f8f8f8; --accent:#2d9695; --draw:#6b6b6b;
+  --bg:#faf9f7; --ink:#1c1b19; --text:#4a4741; --muted:#736e66; --line:#e3dfd8; --tile:#f0ede8; --accent:#ff7722;
   --sans:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:300 1rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:var(--ink);text-decoration:none}
-a:hover{color:var(--accent)}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:300 1.0625rem/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+::selection{background:#ffe2cf;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 img{display:block;max-width:100%;height:auto}
-.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--bg);padding:.5rem}
-.wrap{max-width:76rem;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
-.u{border-bottom:1px solid var(--line)}
-.u:hover{border-color:var(--accent)}
+h1,h2,h3{color:var(--ink);margin:0;text-wrap:balance}
+p{margin:0}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--bg);padding:.5rem;z-index:1}
+.wrap{max-width:80rem;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:2rem}
+.u{text-decoration:underline;text-decoration-color:#cdc7bd;text-decoration-thickness:1px;text-underline-offset:.3em}
+.u:hover{text-decoration-color:var(--accent)}
+.meta{color:var(--muted);font-size:.875rem}
 
-header.site .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:2rem;padding-bottom:2rem}
-header.site .name{font-weight:300}
-header nav{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem;font-size:.875rem;font-weight:400}
-header nav a{color:var(--text)}
+/* Header */
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
+.top .name{font-weight:400;color:var(--ink)}
+.top nav{display:flex;flex-wrap:wrap;gap:.25rem 2rem;font-size:.9375rem;font-weight:400}
+.top nav a{padding-bottom:.2rem;border-bottom:1px solid transparent}
+.top nav a:hover{color:var(--ink);border-color:var(--accent)}
 
-/* Intro and drawing sheet */
-.intro{padding:5rem 0 3rem}
-.intro h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:100;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin:0 0 1.5rem}
-.intro p{font-size:clamp(1.125rem,1.8vw,1.375rem);margin:0;max-width:44ch}
-.sheet{overflow-x:auto;padding-bottom:.5rem}
-.sheet svg{display:block;width:100%;min-width:56rem;height:auto}
-.sheet .d{fill:none;stroke:var(--draw);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round}
-.sheet .a{stroke:var(--accent)}
-.sheet .f{fill:var(--accent);stroke:none}
-.sheet .faint{stroke:var(--line)}
-.sheet text{font:400 12px var(--sans);fill:var(--muted)}
-.sheet text.t{fill:var(--ink)}
-.sheet-note{font-size:.8125rem;color:var(--muted);margin:1rem 0 0}
-.swipe{display:none}
-@media (max-width:56rem){.swipe{display:inline}}
+/* Intro */
+.hero{padding-top:clamp(4rem,10vw,8rem);padding-bottom:clamp(4rem,8vw,6.5rem)}
+.hero h1{grid-column:1/11;font-weight:300;font-size:clamp(2.25rem,5.2vw,4.5rem);line-height:1.08;letter-spacing:-.03em}
+.hero .who{grid-column:1/4;margin-top:3rem;font-size:.9375rem;line-height:1.6}
+.hero .who b{display:block;font-weight:400;color:var(--ink)}
+.hero .sum{grid-column:4/10;margin-top:3rem;font-size:1.1875rem;line-height:1.6}
 
-/* Sections */
-section{padding:7rem 0 0}
-.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:1rem;margin-bottom:2.5rem}
-.sh h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:100;line-height:1.1;color:var(--ink);margin:0}
-.sh svg{flex:none;width:5.5rem;height:3.5rem}
-.sh svg *{fill:none;stroke:var(--draw);stroke-width:1;vector-effect:non-scaling-stroke}
-.sh svg .a{stroke:var(--accent)}
-h3{font-size:1.125rem;font-weight:400;color:var(--ink);margin:0 0 .25rem}
+/* Sections: title on the left, content on the right */
+section{padding-top:clamp(4rem,8vw,7rem)}
+section .row{border-top:1px solid var(--line);padding-top:1.5rem}
+.lab{grid-column:1/4;font-size:1.375rem;font-weight:300;line-height:1.3;letter-spacing:-.01em}
+.body{grid-column:4/13}
+.lead{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:34ch;margin-bottom:2.5rem}
+h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 
-.lead{font-size:clamp(1.25rem,2.4vw,1.75rem);line-height:1.35;font-weight:100;color:var(--ink);margin:0 0 2.5rem;max-width:34ch}
-.now{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2rem}
-.now p{margin:0}
+/* Work */
+.proj{display:block;margin-bottom:4.5rem}
+.mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
+.cap{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;margin-top:1.25rem}
+.cap h3{grid-column:1/4}
+.cap div{grid-column:4/10}
+.cap .meta{margin-top:.5rem}
+.proj h3 span{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.3em}
+.proj:hover h3 span{text-decoration-color:var(--accent)}
+.note{color:var(--muted);border-top:1px solid var(--line);padding-top:1.25rem}
 
-.work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem 2rem}
-.work a{display:block;color:var(--text)}
-.shot{background:var(--tile);border:1px solid var(--line);aspect-ratio:16/10;overflow:hidden}
-.shot img{width:100%;height:100%;object-fit:cover;object-position:top left}
-.work h3{margin-top:1.25rem}
-.work a:hover h3{color:var(--accent)}
-.work p{margin:0}
-.meta{color:var(--muted);font-size:.875rem;margin-top:.25rem}
-.note{margin:2.5rem 0 0;color:var(--muted)}
-.note a{color:var(--text)}
+/* Lists of short rows */
+.list{margin:0}
+.list div{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;border-top:1px solid var(--line);padding:1.25rem 0}
+.list dt{grid-column:1/4;font-weight:400;color:var(--ink)}
+.list dd{grid-column:4/10;margin:0}
 
-.older{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
-.older .shot{aspect-ratio:4/3}
-.older h3{font-size:.9375rem;margin:.75rem 0 0}
-.older p{margin:0;color:var(--muted);font-size:.875rem}
+/* About */
+.about p+p{margin-top:1.25rem}
+.about .sub{max-width:38rem}
 
-/* Experience as a fader scale */
-.scale{list-style:none;margin:0;padding:0 0 0 3rem;position:relative}
-.scale::before{content:"";position:absolute;left:1rem;top:1.1rem;bottom:1.1rem;width:1px;background:var(--draw)}
-.scale li{position:relative;display:grid;grid-template-columns:7.5rem minmax(0,1fr) minmax(0,1fr);gap:1.5rem;padding:.55rem 0}
-.scale li::before{content:"";position:absolute;left:-2.5rem;top:1.15rem;width:1rem;height:1px;background:var(--draw)}
-.scale li:first-child::after{content:"";position:absolute;left:-2.875rem;top:.8rem;width:1.75rem;height:.75rem;border:1px solid var(--accent);background:var(--bg);box-shadow:inset 0 0 0 .3rem var(--bg),inset 0 0 0 .35rem var(--accent)}
-.scale .yrs{color:var(--muted);white-space:nowrap}
-.scale .role{color:var(--ink)}
+/* Earlier work */
+.older{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}
+.older .mat{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:1.25rem}
+.older img{max-height:100%;object-fit:contain}
+.older h3{margin-top:.875rem}
 
-blockquote{margin:0 0 2rem;max-width:42rem}
-blockquote p{font-size:1.375rem;line-height:1.45;font-weight:100;color:var(--ink);margin:0 0 .5rem}
-blockquote footer{color:var(--muted);font-size:.875rem}
+/* Experience */
+.xp{list-style:none;margin:0;padding:0}
+.xp li{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;border-top:1px solid var(--line);padding:.875rem 0}
+.xp .yrs{grid-column:1/3;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.xp .role{grid-column:3/6;color:var(--ink);font-weight:400}
+.xp .co{grid-column:6/10}
+.xp .now .role::after{content:"";display:inline-block;width:.4375rem;height:.4375rem;border-radius:50%;background:var(--accent);margin-left:.625rem;vertical-align:.15em}
+.xp+.meta{border-top:1px solid var(--line);padding-top:1.25rem}
 
-.contact{padding-bottom:6rem}
-.contact .mail{font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:100;color:var(--ink)}
-.contact .mail:hover{color:var(--accent)}
-.contact p{margin:0}
-.contact .more{display:flex;flex-wrap:wrap;gap:.5rem 2rem;margin:1.5rem 0 0;font-weight:400}
-footer.site p{margin:0;padding:1.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.8125rem}
+/* Quotes */
+blockquote{margin:0 0 3rem}
+blockquote p{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:36ch}
+blockquote footer{margin-top:.75rem}
 
-/* One-time draw-in of the sheet */
-@media (prefers-reduced-motion:no-preference){
-  .sheet .d{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.4s ease-out forwards}
-  .sheet .f,.sheet text{opacity:0;animation:fade .6s ease-out forwards}
-  .sheet g:nth-of-type(2) *{animation-delay:.15s}
-  .sheet g:nth-of-type(3) *{animation-delay:.3s}
-  .sheet g:nth-of-type(4) *{animation-delay:.45s}
-  .sheet g:nth-of-type(5) *{animation-delay:.6s}
-  .sheet g:nth-of-type(6) *{animation-delay:.75s}
-  .sheet g:nth-of-type(7) *{animation-delay:.9s}
-  .sheet .f,.sheet text{animation-delay:1.2s!important}
-}
-@keyframes draw{to{stroke-dashoffset:0}}
-@keyframes fade{to{opacity:1}}
+/* Contact */
+.mail{font-size:clamp(1.5rem,3.6vw,2.75rem);font-weight:300;letter-spacing:-.02em;color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:.5rem 2rem;margin-top:1.5rem;font-weight:400}
 
-@media (max-width:60rem){.now{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;margin-top:clamp(5rem,10vw,8rem);padding-bottom:3rem}
+.foot::before{content:"";flex-basis:100%;border-top:1px solid var(--line);margin-bottom:1rem}
+
 @media (max-width:48rem){
-  header.site .wrap{flex-direction:column;gap:.5rem}
-  .intro{padding:2.5rem 0 2rem}
-  section{padding-top:4.5rem}
-  .now,.work{grid-template-columns:1fr}
-  .older{grid-template-columns:1fr 1fr;gap:1.25rem 1rem}
-  .scale li{grid-template-columns:1fr;gap:0}
+  body{font-size:1rem}
+  .top{flex-direction:column;gap:.5rem}
+  .row,.cap,.list div,.xp li{display:block}
+  .hero .who,.hero .sum{margin-top:2rem}
+  .hero .who{margin-top:2.5rem}
+  .lab{margin-bottom:1.75rem}
+  .cap h3{margin-bottom:.375rem}
+  .list dt{margin-bottom:.25rem}
+  .proj{margin-bottom:3.5rem}
+  .older{grid-template-columns:1fr 1fr;gap:1.5rem 1rem}
+  .xp span{display:block}
+  .xp .yrs{font-size:.875rem}
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="site">
-  <div class="wrap">
-    <a class="name" href="./">Chetan Shridhar</a>
-    <nav aria-label="Primary">
-      <a href="#now">Now</a>
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
+<header class="wrap top">
+  <a class="name" href="./">Chetan Shridhar</a>
+  <nav aria-label="Primary">
+    <a href="#work">Work</a>
+    <a href="#ai">AI</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
 <main id="main">
-  <div class="intro">
-    <div class="wrap">
-      <h1>Chetan Shridhar</h1>
-      <p>Principal UX Designer. Twenty years of designing tools for experts, from mixing consoles to security rules. Now building AI-native products for fintech.</p>
+  <div class="wrap hero">
+    <div class="row">
+      <h1>I design complex enterprise products, and increasingly, I build them with AI.</h1>
+      <p class="who"><b>Principal UX Designer</b>LIQUiDITY, Abu Dhabi</p>
+      <p class="sum">Twenty years of making expert tools usable, from mixing consoles and CDN configuration to cloud security policy. Today I work on private credit, where analysts and investment managers make lending decisions with AI.</p>
     </div>
   </div>
 
-  <figure class="wrap" style="margin-top:0;margin-bottom:0">
-    <div class="sheet">
-      <svg viewBox="0 0 1200 330" role="img" aria-labelledby="sheet-t">
-        <title id="sheet-t">Six strengths, each shown with a line drawing of an interface Chetan designed: visual craft (Vi3000 console), interaction design (ViSi iPad app), workflow design (Confer Control), user research (Akamai regression testing), information architecture (Skyhigh Rule Builder), and AI-native design systems (Figma and Storybook).</title>
-        <g><line class="d faint" x1="20" y1="268" x2="1180" y2="268" pathLength="1"/></g>
-
-        <g>
-          <rect class="d" x="30" y="60" width="28" height="190" pathLength="1"/>
-          <rect class="d" x="66" y="60" width="28" height="190" pathLength="1"/>
-          <rect class="d" x="102" y="60" width="28" height="190" pathLength="1"/>
-          <rect class="d" x="138" y="60" width="28" height="190" pathLength="1"/>
-          <circle class="d" cx="44" cy="84" r="8" pathLength="1"/><circle class="d" cx="80" cy="84" r="8" pathLength="1"/><circle class="d a" cx="116" cy="84" r="8" pathLength="1"/><circle class="d" cx="152" cy="84" r="8" pathLength="1"/>
-          <path class="d" d="M44 110v120M80 140v90M116 120v110M152 160v70" pathLength="1"/>
-          <path class="d" d="M38 180h12M74 200h12M110 170h12M146 210h12" pathLength="1"/>
-          <text class="t" x="30" y="292">Visual craft</text><text x="30" y="308">Vi3000 console, 2012</text>
-        </g>
-
-        <g>
-          <rect class="d" x="220" y="80" width="170" height="130" pathLength="1"/>
-          <path class="d faint" d="M220 145h170M262 80v130M305 80v130M348 80v130" pathLength="1"/>
-          <path class="d a" d="M220 150c25-2 35-50 55-50s25 75 50 75 25-55 45-55 15 25 20 25" pathLength="1"/>
-          <circle class="d a" cx="275" cy="100" r="5" pathLength="1"/><circle class="d a" cx="325" cy="175" r="5" pathLength="1"/><circle class="d a" cx="370" cy="120" r="5" pathLength="1"/>
-          <path class="d" d="M406 80v170" pathLength="1"/>
-          <rect class="d" x="398" y="186" width="16" height="22" pathLength="1"/>
-          <path class="d" d="M401 193h10M401 197h10M401 201h10" pathLength="1"/>
-          <text class="t" x="220" y="292">Interaction design</text><text x="220" y="308">ViSi iPad app, 2012</text>
-        </g>
-
-        <g>
-          <rect class="d" x="456" y="96" width="34" height="26" pathLength="1"/><rect class="d" x="496" y="96" width="34" height="26" pathLength="1"/><rect class="d" x="536" y="96" width="34" height="26" pathLength="1"/><rect class="d" x="576" y="96" width="34" height="26" pathLength="1"/>
-          <rect class="d" x="456" y="128" width="34" height="26" pathLength="1"/><rect class="d a" x="496" y="128" width="34" height="26" pathLength="1"/><rect class="d" x="536" y="128" width="34" height="26" pathLength="1"/><rect class="d" x="576" y="128" width="34" height="26" pathLength="1"/>
-          <rect class="d" x="456" y="160" width="34" height="26" pathLength="1"/><rect class="d" x="496" y="160" width="34" height="26" pathLength="1"/><rect class="d" x="536" y="160" width="34" height="26" pathLength="1"/><rect class="d" x="576" y="160" width="34" height="26" pathLength="1"/>
-          <path class="d" d="M462 103h10M502 103h10M542 103h10M582 103h10M462 135h10M502 135h10M542 135h10M582 135h10M462 167h10M502 167h10M542 167h10M582 167h10" pathLength="1"/>
-          <rect class="d" x="456" y="206" width="154" height="30" pathLength="1"/>
-          <path class="d" d="M466 221h60" pathLength="1"/>
-          <text class="t" x="456" y="292">Workflow design</text><text x="456" y="308">Confer Control, 2012</text>
-        </g>
-
-        <g>
-          <rect class="d" x="660" y="80" width="150" height="170" pathLength="1"/>
-          <path class="d" d="M660 108h150" pathLength="1"/>
-          <circle class="d" cx="676" cy="128" r="4" pathLength="1"/><circle class="d" cx="676" cy="154" r="4" pathLength="1"/><circle class="d a" cx="676" cy="180" r="4" pathLength="1"/><circle class="d" cx="676" cy="206" r="4" pathLength="1"/><circle class="d" cx="676" cy="232" r="4" pathLength="1"/>
-          <path class="d" d="M690 128h80M690 154h96M690 180h70M690 206h90M690 232h60M672 94h50" pathLength="1"/>
-          <text class="t" x="660" y="292">User research</text><text x="660" y="308">Regression testing, Akamai</text>
-        </g>
-
-        <g>
-          <path class="d a" d="M860 86v150" pathLength="1"/>
-          <path class="d a" d="M884 132v70" pathLength="1"/>
-          <rect class="d" x="868" y="92" width="18" height="12" pathLength="1"/><path class="d" d="M894 98h40M950 98h44" pathLength="1"/>
-          <rect class="d" x="868" y="112" width="18" height="12" pathLength="1"/><path class="d" d="M894 118h34M950 118h50" pathLength="1"/>
-          <rect class="d" x="892" y="138" width="18" height="12" pathLength="1"/><path class="d" d="M918 144h40M972 144h36" pathLength="1"/>
-          <rect class="d" x="892" y="158" width="18" height="12" pathLength="1"/><path class="d" d="M918 164h30M972 164h40" pathLength="1"/>
-          <rect class="d" x="892" y="178" width="18" height="12" pathLength="1"/><path class="d" d="M918 184h44M972 184h30" pathLength="1"/>
-          <rect class="d" x="868" y="216" width="18" height="12" pathLength="1"/><path class="d" d="M894 222h40M950 222h40" pathLength="1"/>
-          <text class="t" x="860" y="292">Information architecture</text><text x="860" y="308">Rule Builder, Skyhigh</text>
-        </g>
-
-        <g>
-          <rect class="d" x="1046" y="90" width="58" height="80" pathLength="1"/>
-          <rect class="d" x="1122" y="150" width="58" height="80" pathLength="1"/>
-          <rect class="d" x="1054" y="140" width="42" height="14" rx="7" pathLength="1"/>
-          <rect class="d" x="1130" y="200" width="42" height="14" rx="7" pathLength="1"/>
-          <path class="d" d="M1054 104h30M1054 116h40M1130 164h30M1130 176h40" pathLength="1"/>
-          <path class="d a" d="M1104 120c22 0 40 10 40 26M1138 140l6 6 6-6M1122 200c-24 0-40-10-40-26M1088 180l-6-6-6 6" pathLength="1"/>
-          <text class="t" x="1030" y="292">AI-native design systems</text><text x="1030" y="308">Figma ↔ Storybook, now</text>
-        </g>
-      </svg>
-    </div>
-    <figcaption class="sheet-note">Six strengths, each redrawn from an interface I designed.<span class="swipe"> Swipe to see more.</span></figcaption>
-  </figure>
-
-  <section id="now" aria-labelledby="now-h">
-    <div class="wrap">
-      <div class="sh">
-        <h2 id="now-h">Now</h2>
-        <svg viewBox="0 0 64 40" aria-hidden="true"><rect x="2" y="6" width="20" height="28"/><rect x="42" y="6" width="20" height="28"/><path class="a" d="M24 16h16M36 12l4 4-4 4M40 26H24M28 22l-4 4 4 4"/></svg>
+  <section id="work" aria-labelledby="work-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="work-h">Selected work</h2>
+      <div class="body">
+        <a class="proj" href="https://chetanshridhar.in/project/swg_rulebuilder">
+          <div class="mat"><img src="assets/img/rule-builder.jpg" width="1200" height="776" alt="Rule builder table showing nested rulesets with criteria, operators, values and actions"></div>
+          <div class="cap">
+            <h3><span>Web Security Rule Builder</span></h3>
+            <div>
+              <p>Moving legacy on-premise policies to a cloud web gateway, so security administrators build complex rules in the interface instead of a proprietary language.</p>
+              <p class="meta">Skyhigh Security, 2021–22</p>
+            </div>
+          </div>
+        </a>
+        <a class="proj" href="https://chetanshridhar.in/project/regression-testing-app">
+          <div class="mat"><img src="assets/img/regression-testing.jpg" width="1200" height="750" alt="Regression testing home screen with search, news and recent test suites" loading="lazy"></div>
+          <div class="cap">
+            <h3><span>Regression Web Testing</span></h3>
+            <div>
+              <p>Engineers test configuration changes on staging before they reach production.</p>
+              <p class="meta">Akamai Technologies</p>
+            </div>
+          </div>
+        </a>
+        <p class="note">My recent AI and fintech work at LIQUiDITY is confidential. <a class="u" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request">Ask for a walkthrough</a>.</p>
       </div>
-      <p class="lead">AI-native products for fintech, from private debt underwriting to design systems kept in sync by AI.</p>
-      <ul class="now">
-        <li>
-          <h3>AI-native fintech</h3>
-          <p>Applications for fintech, including private debt underwriting.</p>
-        </li>
-        <li>
-          <h3>AI-maintained design system</h3>
-          <p>Figma and Storybook connected through AI, which orchestrates changes in both directions.</p>
-        </li>
-        <li>
-          <h3>Generative UI</h3>
-          <p>Building AI skills that support generating interfaces from the design system.</p>
-        </li>
-        <li>
-          <h3>MCP UI apps</h3>
-          <p>Designing and building interactive apps that run inside AI assistants.</p>
-        </li>
-      </ul>
-    </div>
+    </div></div>
   </section>
 
-  <section id="work" aria-labelledby="work-h">
-    <div class="wrap">
-      <div class="sh">
-        <h2 id="work-h">Work</h2>
-        <svg viewBox="0 0 64 40" aria-hidden="true"><path class="a" d="M3 4v32"/><rect x="8" y="6" width="9" height="6"/><path d="M21 9h20M45 9h16"/><rect x="14" y="17" width="9" height="6"/><path d="M27 20h18M49 20h12"/><rect x="8" y="28" width="9" height="6"/><path d="M21 31h22M47 31h14"/></svg>
+  <section id="ai" aria-labelledby="ai-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="ai-h">Building with AI</h2>
+      <div class="body">
+        <p class="lead">At LIQUiDITY a single loan is worth USD 10–50 million. I design the AI that helps decide it, and use AI to build faster myself.</p>
+        <dl class="list">
+          <div><dt>AI chat tool</dt><dd>An AI workspace for analysts and investment managers, with skills, projects and a home screen for each role.</dd></div>
+          <div><dt>MCP apps</dt><dd>Twelve working interfaces built directly with Claude, reading and writing real data. Designing by hand in Figma, two or three was my realistic limit.</dd></div>
+          <div><dt>Design system</dt><dd>Figma and Storybook kept in sync through Claude. Every component change still goes through front-end review.</dd></div>
+          <div><dt>Generative UI</dt><dd>AI-generated screens that use our own components when the data comes from the system of record.</dd></div>
+        </dl>
       </div>
-      <div class="work">
-        <a href="https://chetanshridhar.in/project/swg_rulebuilder">
-          <div class="shot"><img src="assets/img/rule-builder.jpg" width="1200" height="776" alt="Rule builder table showing nested rulesets with criteria, operators, values and actions" loading="lazy"></div>
-          <h3>Web Security Rule Builder</h3>
-          <p>Complex gateway rules, written in the interface instead of a proprietary language.</p>
-          <p class="meta">Skyhigh Security</p>
-        </a>
-        <a href="https://chetanshridhar.in/project/regression-testing-app">
-          <div class="shot"><img src="assets/img/regression-testing.jpg" width="1200" height="750" alt="Regression testing home screen with search, news and recent test suites" loading="lazy"></div>
-          <h3>Regression Web Testing</h3>
-          <p>Engineers test configuration changes on staging before they reach production.</p>
-          <p class="meta">Akamai Technologies</p>
-        </a>
+    </div></div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="about-h">How I work</h2>
+      <div class="body about">
+        <p class="lead">Users first, balanced against what the business needs and what engineering can build. When a deadline means setting a principle aside, I say so and note the cost.</p>
+        <p class="sub">I’m self-taught. I started out colouring comics and teaching design tools, and learned UX on the job, shipping enterprise products alongside the PMs and engineers I worked with. Learning that way taught me to pick up a new domain fast, from CDN and cloud security to private credit and AI.</p>
       </div>
-      <p class="note">Recent AI and fintech work at LIQUiDITY is confidential. <a class="u" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request">Ask for a walkthrough</a>.</p>
-    </div>
+    </div></div>
   </section>
 
   <section id="earlier" aria-labelledby="earlier-h">
-    <div class="wrap">
-      <div class="sh">
-        <h2 id="earlier-h">Earlier work, 2012</h2>
-        <svg viewBox="0 0 64 40" aria-hidden="true"><path d="M2 36h60M2 20h60"/><path class="a" d="M2 22c8 0 10-14 18-14s8 24 16 24 8-16 14-16 8 6 12 6"/></svg>
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="earlier-h">Earlier work</h2>
+      <div class="body">
+        <ul class="older">
+          <li>
+            <div class="mat"><img src="assets/img/vi3000.jpg" width="800" height="600" alt="Vi3000 mixing console equaliser screen with frequency, Q and gain controls" loading="lazy"></div>
+            <h3>Vi3000 console</h3>
+            <p class="meta">Soundcraft, HARMAN</p>
+          </li>
+          <li>
+            <div class="mat"><img src="assets/img/visi.jpg" width="800" height="600" alt="ViSi iPad app equaliser screen with a frequency curve and channel fader" loading="lazy"></div>
+            <h3>ViSi iPad app</h3>
+            <p class="meta">Soundcraft, HARMAN</p>
+          </li>
+          <li>
+            <div class="mat"><img src="assets/img/confer-control.jpg" width="800" height="449" alt="Confer Control seating layout with delegates assigned to numbered seats" loading="lazy"></div>
+            <h3>Confer Control</h3>
+            <p class="meta">AKG, HARMAN</p>
+          </li>
+        </ul>
       </div>
-      <ul class="older">
-        <li>
-          <div class="shot"><img src="assets/img/vi3000.jpg" width="800" height="600" alt="Vi3000 mixing console equaliser screen with frequency, Q and gain controls" loading="lazy"></div>
-          <h3>Vi3000 console</h3>
-          <p>Soundcraft by Harman</p>
-        </li>
-        <li>
-          <div class="shot"><img src="assets/img/visi.jpg" width="800" height="600" alt="ViSi iPad app equaliser screen with a frequency curve and channel fader" loading="lazy"></div>
-          <h3>ViSi iPad app</h3>
-          <p>Soundcraft by Harman</p>
-        </li>
-        <li>
-          <div class="shot"><img src="assets/img/confer-control.jpg" width="800" height="449" alt="Confer Control seating layout with delegates assigned to numbered seats" loading="lazy"></div>
-          <h3>Confer Control</h3>
-          <p>AKG by Harman</p>
-        </li>
-      </ul>
-    </div>
+    </div></div>
   </section>
 
   <section id="experience" aria-labelledby="xp-h">
-    <div class="wrap">
-      <div class="sh">
-        <h2 id="xp-h">Experience</h2>
-        <svg viewBox="0 0 64 40" aria-hidden="true"><path d="M32 2v36M24 8h6M24 16h6M24 24h6M24 32h6"/><rect class="a" x="26" y="5" width="12" height="7"/></svg>
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="xp-h">Experience</h2>
+      <div class="body">
+        <ul class="xp">
+          <li class="now"><span class="yrs">2025 – now</span><span class="role">Principal UX Designer</span><span class="co">LIQUiDITY</span></li>
+          <li><span class="yrs">2022 – 2025</span><span class="role">Senior UX Designer</span><span class="co">LIQUiDITY</span></li>
+          <li><span class="yrs">2022</span><span class="role">UX Manager</span><span class="co">Skyhigh Security</span></li>
+          <li><span class="yrs">2021 – 2022</span><span class="role">UX Architect</span><span class="co">Skyhigh Security</span></li>
+          <li><span class="yrs">2014 – 2021</span><span class="role">Senior UI Engineer</span><span class="co">Akamai Technologies</span></li>
+          <li><span class="yrs">2013 – 2014</span><span class="role">Senior Product Designer</span><span class="co">HARMAN</span></li>
+          <li><span class="yrs">2010 – 2013</span><span class="role">Graphic Designer</span><span class="co">Akamai Technologies</span></li>
+          <li><span class="yrs">2005 – 2010</span><span class="role">Design roles</span><span class="co">Tesco, The New Indian Express, Image Infotainment, Virgin Comics</span></li>
+        </ul>
+        <p class="meta">Most Valuable Player, Akamai, Q1 2020, for the Premium and MSS apps.</p>
       </div>
-      <ul class="scale">
-        <li><span class="yrs">2025 – now</span><span class="role">Principal UX Designer</span><span>LIQUiDITY</span></li>
-        <li><span class="yrs">2022 – 2025</span><span class="role">Senior UX Designer</span><span>LIQUiDITY</span></li>
-        <li><span class="yrs">2022</span><span class="role">UX Manager</span><span>Skyhigh Security</span></li>
-        <li><span class="yrs">2021 – 2022</span><span class="role">UX Architect</span><span>Skyhigh Security</span></li>
-        <li><span class="yrs">2014 – 2021</span><span class="role">Senior UI Engineer</span><span>Akamai Technologies</span></li>
-        <li><span class="yrs">2013 – 2014</span><span class="role">Senior Product Designer</span><span>HARMAN</span></li>
-        <li><span class="yrs">2010 – 2013</span><span class="role">Graphic Designer</span><span>Akamai Technologies</span></li>
-        <li><span class="yrs">2005 – 2010</span><span class="role">Design roles</span><span>Tesco, The New Indian Express, Image Infotainment, Virgin Comics</span></li>
-      </ul>
-    </div>
+    </div></div>
   </section>
 
   <section aria-labelledby="words-h">
-    <div class="wrap">
-      <div class="sh"><h2 id="words-h">From colleagues</h2></div>
-      <blockquote>
-        <p>“You are an expert in UX and have the ability to listen and transform technical details into high fidelity UX screens and guidance for your engineering counterparts.”</p>
-        <footer>Senior Director, Product Management</footer>
-      </blockquote>
-      <blockquote>
-        <p>“You are now a pillar of the team.”</p>
-        <footer>Director, User Experience</footer>
-      </blockquote>
-    </div>
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="words-h">From colleagues</h2>
+      <div class="body">
+        <blockquote>
+          <p>“You are an expert in UX and have the ability to listen and transform technical details into high fidelity UX screens and guidance for your engineering counterparts.”</p>
+          <footer class="meta">Senior Director, Product Management</footer>
+        </blockquote>
+        <blockquote>
+          <p>“You are now a pillar of the team.”</p>
+          <footer class="meta">Director, User Experience</footer>
+        </blockquote>
+      </div>
+    </div></div>
   </section>
 
-  <section id="contact" class="contact" aria-labelledby="contact-h">
-    <div class="wrap">
-      <div class="sh"><h2 id="contact-h">Contact</h2></div>
-      <p><a class="mail" href="mailto:chetanshridhar@gmail.com">chetanshridhar@gmail.com</a></p>
-      <p class="more">
-        <a class="u" href="https://chetanshridhar.in/portfolio_images/ChetanShridhar_2024.pdf">Résumé</a>
-        <a class="u" href="https://www.linkedin.com/in/chetanshridhar">LinkedIn</a>
-        <span class="meta" style="margin:0">Abu Dhabi, UAE</span>
-      </p>
-    </div>
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="contact-h">Contact</h2>
+      <div class="body">
+        <a class="mail u" href="mailto:chetanshridhar@gmail.com">chetanshridhar@gmail.com</a>
+        <p class="links">
+          <a class="u" href="https://www.linkedin.com/in/chetanshridhar">LinkedIn</a>
+          <a class="u" href="https://chetanshridhar.in/portfolio_images/ChetanShridhar_2024.pdf">Résumé</a>
+          <span class="meta">Abu Dhabi, UAE</span>
+        </p>
+      </div>
+    </div></div>
   </section>
 </main>
 
-<footer class="site">
-  <div class="wrap"><p>&copy; 2026 Chetan Shridhar</p></div>
+<footer class="wrap foot meta">
+  <p>&copy; 2026 Chetan Shridhar</p>
+  <p>Written by me. Structure and flow shaped with AI. Built with Claude Code.</p>
 </footer>
 </body>
 </html>
