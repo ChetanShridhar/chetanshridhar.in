@@ -9,10 +9,10 @@
 <meta property="og:title" content="Chetan Shridhar | Principal UX Designer">
 <meta property="og:description" content="I design complex enterprise products, and increasingly, I build them with AI.">
 <meta property="og:type" content="website">
-<link rel="preload" href="assets/fonts/albert-sans-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&display=swap">
 <style>
-@font-face{font-family:"Albert Sans";src:url(assets/fonts/albert-sans-300.woff2) format("woff2");font-weight:300;font-display:swap}
-@font-face{font-family:"Albert Sans";src:url(assets/fonts/albert-sans-400.woff2) format("woff2");font-weight:400;font-display:swap}
 :root{
   --bg:#faf9f7; --ink:#1c1b19; --text:#4a4741; --muted:#736e66; --line:#e3dfd8; --tile:#f0ede8; --accent:#ff7722;
   --sans:"Albert Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
@@ -51,7 +51,7 @@ p{margin:0;text-wrap:pretty}
 .hint a{display:inline-block;color:var(--muted)}
 .hint a::before{content:"";display:block;width:1px;height:3.5rem;background:var(--muted);margin-bottom:.875rem}
 .hint a:hover{color:var(--ink)}
-.hero h1{grid-column:1/11;font-weight:300;font-size:clamp(2.25rem,5.2vw,4.5rem);line-height:1.08;letter-spacing:-.03em}
+.hero h1{grid-column:1/11;font-weight:200;font-size:clamp(2.25rem,5.2vw,4.5rem);line-height:1.08;letter-spacing:-.03em}
 .hero .who{grid-column:1/4;margin-top:3rem;font-size:.9375rem;line-height:1.6}
 .hero .who b{display:block;font-weight:400;color:var(--ink)}
 .hero .sum{grid-column:4/10;margin-top:3rem;font-size:1.1875rem;line-height:1.6}
@@ -111,6 +111,22 @@ blockquote footer{margin-top:.75rem}
 
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;margin-top:clamp(5rem,10vw,8rem);padding-bottom:3rem}
 .foot::before{content:"";flex-basis:100%;border-top:1px solid var(--line);margin-bottom:1rem}
+
+/* Scroll effects: CSS scroll-driven animations only. Browsers without
+   support, and visitors who prefer reduced motion, get the still page. */
+@supports (animation-timeline:scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .hint{animation:fade linear both;animation-timeline:scroll(root);animation-range:0 25vh}
+    .hero .row{animation:drift linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+    .mat{overflow:hidden}
+    .mat img{animation:pan linear both;animation-timeline:view();animation-range:cover}
+    .older .mat img{animation-name:pan-sm}
+  }
+}
+@keyframes fade{to{opacity:0}}
+@keyframes drift{to{transform:translateY(25vh);opacity:.15}}
+@keyframes pan{from{transform:translateY(4%)}to{transform:translateY(-4%)}}
+@keyframes pan-sm{from{transform:translateY(3%)}to{transform:translateY(-3%)}}
 
 @media (max-width:48rem){
   body{font-size:1rem}

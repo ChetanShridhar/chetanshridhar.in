@@ -8,10 +8,10 @@ follow it.
 ## Stack
 
 - Plain static HTML and CSS. No build step, no package manager, no JavaScript.
-- Each page is self-contained: inline `<style>`, no external CSS, fonts or
-  scripts. Pages must render the same from `file://` or any host.
-- Albert Sans (weights 300 and 400, latin) is self-hosted in `assets/fonts/`
-  from @fontsource/albert-sans 5.0.13; OFL licence beside it.
+- Each page is self-contained: inline `<style>`, no external CSS or scripts.
+  The one external request is the font.
+- Albert Sans (weights 200, 300, 400) loads from the Google Fonts CDN, with
+  `display=swap` and a system sans-serif fallback.
 - Ask before adding any library, other web font, script or framework.
 
 ## Files
@@ -33,8 +33,12 @@ terminal:
 
 - **Light, calm and classy.** Warm off-white page, near-black headings, warm
   grey text, hairline rules. Light mode only. No dark mode, gradients, glows,
-  shadows, rounded cards, badges, pills, counters, marquees or
-  scroll-triggered animations.
+  shadows, rounded cards, badges, pills, counters or marquees.
+- **Motion on scroll, CSS only.** Scroll-driven animations
+  (`animation-timeline`) inside `@supports` and
+  `prefers-reduced-motion:no-preference`: the scroll hint fades out, the
+  intro drifts slower than the page and fades, and screenshots pan gently
+  inside their mats. Keep it slow and subtle; no reveal-on-scroll tropes.
 - **Accent `#FF7722`, very sparingly.** Small marks only: Chetan's logo mark
   before his name in the header, the dot after the current role, link and nav
   hover underlines, the text selection tint. Never as a text colour (about
@@ -54,8 +58,8 @@ terminal:
 - **Layout**: `.wrap` (max 80rem) holds a 12-column `.row`. Each section has
   a hairline on top, its title (`.lab`) in columns 1–3, sticky on desktop,
   and content (`.body`) in columns 4–12. Below 48rem everything stacks.
-- **Type**: Albert Sans. Weight 300 for the headline, section titles, lead text,
-  quotes and body; 400 for the name, nav, item titles and roles. Headline
+- **Type**: Albert Sans. Weight 200 for the headline; 300 for section titles,
+  lead text, quotes and body; 400 for the name, nav, item titles and roles. Headline
   tracking −0.03em. Sentence case everywhere; hang opening quote marks.
 - **Tokens** live in `:root` of each page's `<style>` (`--bg` #faf9f7,
   `--ink` #1c1b19, `--text` #4a4741, `--muted` #736e66, `--line` #e3dfd8,

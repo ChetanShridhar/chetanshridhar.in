@@ -1,8 +1,7 @@
 # Portfolio site
 
 Static site. No build step, no dependencies. Every page is self-contained
-(inline CSS, self-hosted Albert Sans), so it renders the same from `file://`
-or any host.
+(inline CSS); the only external request is Albert Sans from Google Fonts.
 
 ## Run locally
 
@@ -15,7 +14,6 @@ Or just double-click `index.html`.
 
     index.html                  Home
     case-studies/_template.html Copy this for each new case study
-    assets/fonts/               Albert Sans 300 and 400, OFL licence
     assets/img/                 Screenshots (keep each under ~300 KB)
 
 ## Add a case study
