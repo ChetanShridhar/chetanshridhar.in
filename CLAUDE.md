@@ -84,6 +84,14 @@ terminal:
   its subhead on the left and items in an aligned two-column grid. No
   headline numbers (not the 12 MCP apps), no loan sizes, and no company name
   in this section: talk about skill, scale and high-stakes decisions.
+- **Company logos** (`assets/logos/*.svg|png`, clean copies; the original
+  downloads sit in subfolders and are not committed) are drawn in one grey
+  (`--logo`) through CSS `mask`, never in brand colours. Each is sized by eye
+  with `--h` so they weigh the same; `--r` is its aspect ratio. HARMAN's
+  "A Samsung Company" line is removed (Samsung bought it after Chetan left).
+  The four main companies sit at the bottom of the first screen with a short
+  line each; Experience shows a logo on the first row of each company, text
+  where there is no logo.
 - **Contact**: one inviting lead line, then text rows (label left, link
   right) for email, LinkedIn, Dribbble, Medium, résumé and location. No phone
   number, no icon row, no oversized email address.
@@ -95,7 +103,7 @@ terminal:
   tracking −0.03em. Sentence case everywhere; hang opening quote marks.
 - **Tokens** live in `:root` of each page's `<style>` (`--bg` #faf9f7,
   `--ink` #1c1b19, `--text` #4a4741, `--muted` #736e66, `--line` #e3dfd8,
-  `--tile` #f0ede8, `--accent` #ff7722, `--sans`). Change a token in every
+  `--tile` #f0ede8, `--accent` #ff7722, `--logo` #7d786f, `--sans`). Change a token in every
   page: `grep -rn -- "--accent" .`
 - **CSS style**: compact one-line rules, short class names (`.wrap`, `.row`,
   `.lab`, `.mat`, `.xp`), `rem` units, mobile breakpoint at `max-width:48rem`.
