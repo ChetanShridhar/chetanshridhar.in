@@ -89,9 +89,12 @@ terminal:
   (`--logo`) through CSS `mask`, never in brand colours. Each is sized by eye
   with `--h` so they weigh the same; `--r` is its aspect ratio. HARMAN's
   "A Samsung Company" line is removed (Samsung bought it after Chetan left).
-  The four main companies sit at the bottom of the first screen with a short
-  line each; Experience shows a logo on the first row of each company, text
-  where there is no logo.
+  Five logos (LIQUiDITY, Skyhigh Security, Akamai, HARMAN, Tesco) sit small
+  at the bottom of the first screen, with no captions. Experience uses
+  company names as text, not logos.
+- **Experience**: one row per tenure with the company on the right. Titles
+  held within the same tenure are nested in that row (current title first,
+  earlier ones lighter); a return to a company later is its own row.
 - **Contact**: one inviting lead line, then text rows (label left, link
   right) for email, LinkedIn, Dribbble, Medium, résumé and location. No phone
   number, no icon row, no oversized email address.
