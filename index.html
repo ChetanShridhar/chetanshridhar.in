@@ -26,6 +26,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 img{display:block;max-width:100%;height:auto}
 h1,h2,h3{color:var(--ink);margin:0;text-wrap:balance}
 p{margin:0;text-wrap:pretty}
+main:focus{outline:none}
 .skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--bg);padding:.5rem;z-index:1}
 .wrap{max-width:80rem;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
 .row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:2rem}
@@ -123,6 +124,11 @@ blockquote footer{margin-top:.75rem}
     .older .mat img{animation-name:pan-sm}
   }
 }
+/* Lenis smooth scrolling (from lenis/dist/lenis.css) */
+html.lenis,html.lenis body{height:auto}
+.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}
+.lenis.lenis-smooth iframe{pointer-events:none}
+
 @keyframes fade{to{opacity:0}}
 @keyframes drift{to{transform:translateY(25vh);opacity:.15}}
 @keyframes pan{from{transform:translateY(4%)}to{transform:translateY(-4%)}}
@@ -158,7 +164,7 @@ blockquote footer{margin-top:.75rem}
   </nav>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
   <div class="fold">
     <div class="wrap hero">
       <div class="row">
@@ -303,5 +309,21 @@ blockquote footer{margin-top:.75rem}
   <p>&copy; 2026 Chetan Shridhar</p>
   <p>Written by me. Structure and flow shaped with AI. Built with Claude Code.</p>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js" integrity="sha384-iiCtod6ZId6zT42Bar9EFXNKZh8X4VliWYWFOuY3/t1AxCvLejXExXcbluoc57CJ" crossorigin="anonymous"></script>
+<script>
+// Smooth, inertia scrolling for mouse wheels and trackpads. Touch and
+// keyboard scrolling stay native; skipped when motion is reduced.
+if (window.Lenis && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const lenis = new Lenis({ autoRaf: true, lerp: 0.09 });
+  // Glide to sections from the menu and the scroll hint. The skip link keeps
+  // its native jump so keyboard focus moves into the page.
+  document.querySelectorAll(".top nav a, .hint a").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    lenis.scrollTo(a.hash);
+    history.pushState(null, "", a.hash);
+  }));
+}
+</script>
 </body>
 </html>

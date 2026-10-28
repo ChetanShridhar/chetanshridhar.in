@@ -7,9 +7,15 @@ follow it.
 
 ## Stack
 
-- Plain static HTML and CSS. No build step, no package manager, no JavaScript.
-- Each page is self-contained: inline `<style>`, no external CSS or scripts.
-  The one external request is the font.
+- Plain static HTML and CSS. No build step, no package manager.
+- Each page is self-contained: inline `<style>`, no external CSS. External
+  requests are the font and one script.
+- The only JavaScript is Lenis 1.3.23 (smooth inertia scrolling), loaded from
+  jsDelivr with a pinned version and an SRI `integrity` hash, plus a few
+  inline lines that start it. It is off under reduced motion; touch and
+  keyboard scrolling stay native; the menu and scroll hint glide via
+  `lenis.scrollTo`; the skip link keeps its native jump. The page must work
+  fully if the script fails to load.
 - Albert Sans (weights 200, 300, 400) loads from the Google Fonts CDN, with
   `display=swap` and a system sans-serif fallback.
 - Ask before adding any library, other web font, script or framework.

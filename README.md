@@ -1,7 +1,8 @@
 # Portfolio site
 
 Static site. No build step, no dependencies. Every page is self-contained
-(inline CSS); the only external request is Albert Sans from Google Fonts.
+(inline CSS). External requests: Albert Sans from Google Fonts and the Lenis
+smooth-scroll script from jsDelivr (pinned, with an integrity hash).
 
 ## Run locally
 
