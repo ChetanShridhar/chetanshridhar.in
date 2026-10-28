@@ -4,3 +4,6 @@ dist/
 *.log
 .vscode/
 .claude/settings.local.json
+
+# Original logo downloads; the site uses the clean copies in assets/logos/
+assets/logos/*/
