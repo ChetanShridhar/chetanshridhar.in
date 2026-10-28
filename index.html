@@ -36,13 +36,14 @@ main:focus{outline:none}
 
 /* Header: scrolls away with the intro; past it, comes back as a solid bar
    when scrolling up and hides again when scrolling down */
-.top{position:absolute;top:0;left:0;right:0;z-index:10;border-bottom:1px solid transparent;transition:transform .45s cubic-bezier(.2,.7,.2,1),background-color .3s,border-color .3s}
-.top.is-stuck{position:fixed;background:var(--bg);border-color:var(--line)}
+.top{position:absolute;top:0;left:0;right:0;z-index:10;pointer-events:none;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.top a{pointer-events:auto}
+.top.is-stuck{position:fixed;background:linear-gradient(var(--bg) 58%,rgba(250,249,247,.75) 78%,rgba(250,249,247,0))}
 .top.is-hidden{transform:translateY(-101%)}
 .top.no-anim{transition:none}
 .top:focus-within{transform:none}
 .bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
-.is-stuck .bar{padding-top:1rem;padding-bottom:1rem}
+.is-stuck .bar{padding-top:1rem;padding-bottom:2.5rem}
 .top .name{display:inline-flex;align-items:center;gap:.625rem;font-weight:400;color:var(--ink)}
 .mark{width:2rem;height:auto;flex:none}
 .mark path{fill:var(--accent);stroke:var(--accent)}

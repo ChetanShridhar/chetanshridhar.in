@@ -17,8 +17,9 @@ follow it.
   `lenis.scrollTo`, the name glides to the top; the skip link keeps its
   native jump. The inline script also runs the header (below) with plain
   scroll events. The page must work fully if Lenis fails to load.
-- **Header**: scrolls away with the intro. Past it, the header becomes a
-  solid `--bg` bar with a hairline (`.is-stuck`) that hides while scrolling
+- **Header**: scrolls away with the intro. Past it, the header gets a soft
+  fade, `--bg` behind the name and menu dissolving to transparent below, with
+  no border or hard edge (`.is-stuck`). It hides while scrolling
   down and slides back when scrolling up (`.is-hidden`), and returns to
   transparent at the very top. On phones the stuck bar is the logo mark and
   the menu on one line. Sticky section titles sit below it (`top:5.5rem`).
