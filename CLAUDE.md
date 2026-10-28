@@ -68,9 +68,13 @@ terminal:
   screenshots carry the design. Each screenshot sits on a soft `--tile` mat
   (`.mat`) with no border or shadow. Do not draw or invent interface art,
   icons or decorative SVG.
-- **Selected work** is cards, two per row (one on phones). A thumbnail is a tight 4:3 crop of one telling detail of the real
-  screen (`assets/img/*-detail.jpg`), never the whole mock-up; it zooms
-  slightly on hover. Confidential work gets a text-only card on the tile.
+- **Selected work** is cards, two per row (one on phones). A thumbnail is a 4:3 crop of one telling detail of the real
+  screen (`assets/img/*-detail.jpg`), never the whole mock-up. The crop
+  starts at a real corner of the interface; on the `--tile` panel it is inset
+  from that corner (`.thumb`, or `.thumb.tr` for top-right) and runs off the
+  other edges, so it reads as framed, never bled into the page. It zooms
+  slightly on hover. Confidential work gets a text-only card: label at the
+  top, a large thin quote at the bottom.
 - **AI comes first** after the intro: one lead line about skill and
   judgement, then two groups ("Designing AI", "Building with AI"), each with
   its subhead on the left and items in an aligned two-column grid. No
