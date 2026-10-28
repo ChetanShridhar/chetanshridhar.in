@@ -81,9 +81,11 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 
 /* Work: small cards with a detail crop, not the whole screen */
 .mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
-.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem 2rem}
-.card{display:block}
-.thumb{position:relative;aspect-ratio:4/3;background:var(--tile);overflow:hidden;margin-bottom:1rem}
+.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}
+.card{display:flex;flex-direction:column;height:100%;background:#fff;border-radius:6px;overflow:hidden;transition:box-shadow .3s}
+.card:hover{box-shadow:0 0 0 1px var(--line)}
+.txt{padding:1.25rem 8% 1.5rem}
+.thumb{position:relative;aspect-ratio:4/3;background:var(--tile);overflow:hidden}
 /* The screenshot is inset from one clean corner and runs off the other two
    edges, so it reads as a framed detail, not a slice */
 .thumb img{position:absolute;top:9%;left:8%;width:112%;max-width:none;height:auto;transform-origin:left top;transition:scale .7s cubic-bezier(.2,.7,.2,1)}
@@ -93,8 +95,8 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 .thumb.words .q{font-size:clamp(1.5rem,2.6vw,2.25rem);font-weight:200;line-height:1.2;letter-spacing:-.015em;color:var(--ink);text-indent:-.35em}
 .card h3 span{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.3em}
 .card:hover h3 span{text-decoration-color:var(--accent)}
-.card h3+p{margin-top:.375rem}
-.card .meta{margin-top:.5rem}
+.txt h3+p{margin-top:.375rem}
+.txt .meta{margin-top:.5rem}
 
 /* About */
 .about p+p{margin-top:1.25rem}
@@ -233,25 +235,31 @@ html.lenis,html.lenis body{height:auto}
           <li>
             <a class="card" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request%3A%20AI%20chat%20tool%20and%20MCP%20apps">
               <div class="thumb words"><p class="meta">Confidential. Walkthrough on request.</p><p class="q">“What do I need to focus on today?”</p></div>
-              <h3><span>AI chat tool and MCP apps</span></h3>
-              <p>An AI workspace for investment teams, and the apps that run inside it.</p>
-              <p class="meta">Fintech. Ask for a walkthrough</p>
+              <div class="txt">
+                <h3><span>AI chat tool and MCP apps</span></h3>
+                <p>An AI workspace for investment teams, and the apps that run inside it.</p>
+                <p class="meta">Fintech. Ask for a walkthrough</p>
+              </div>
             </a>
           </li>
           <li>
             <a class="card" href="https://chetanshridhar.in/project/swg_rulebuilder">
               <div class="thumb"><img src="assets/img/rule-builder-detail.jpg" width="640" height="480" alt="Detail of the rule builder: nested rulesets with IF and AND conditions"></div>
-              <h3><span>Web Security Rule Builder</span></h3>
-              <p>Legacy on-premise policies moved to a cloud gateway, built as rules in the interface instead of code.</p>
-              <p class="meta">Skyhigh Security, 2021–22</p>
+              <div class="txt">
+                <h3><span>Web Security Rule Builder</span></h3>
+                <p>Legacy on-premise policies moved to a cloud gateway, built as rules in the interface instead of code.</p>
+                <p class="meta">Skyhigh Security, 2021–22</p>
+              </div>
             </a>
           </li>
           <li>
             <a class="card" href="https://chetanshridhar.in/project/regression-testing-app">
               <div class="thumb tr"><img src="assets/img/regression-testing-detail.jpg" width="736" height="552" alt="Detail of the regression testing tool: recent test suites marked running, passed and failed"></div>
-              <h3><span>Regression Web Testing</span></h3>
-              <p>Engineers test configuration changes on staging before they reach production.</p>
-              <p class="meta">Akamai Technologies</p>
+              <div class="txt">
+                <h3><span>Regression Web Testing</span></h3>
+                <p>Engineers test configuration changes on staging before they reach production.</p>
+                <p class="meta">Akamai Technologies</p>
+              </div>
             </a>
           </li>
         </ul>

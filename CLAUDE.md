@@ -46,7 +46,8 @@ terminal:
 
 - **Light, calm and classy.** Warm off-white page, near-black headings, warm
   grey text, hairline rules. Light mode only. No dark mode, gradients, glows,
-  shadows, rounded cards, badges, pills, counters or marquees.
+  shadows, badges, pills, counters or marquees. The only rounded corners are
+  the work cards (6px).
 - **Motion on scroll, CSS only.** Scroll-driven animations
   (`animation-timeline`) inside `@supports` and
   `prefers-reduced-motion:no-preference`: the scroll hint fades out, the
@@ -68,7 +69,10 @@ terminal:
   screenshots carry the design. Each screenshot sits on a soft `--tile` mat
   (`.mat`) with no border or shadow. Do not draw or invent interface art,
   icons or decorative SVG.
-- **Selected work** is cards, two per row (one on phones). A thumbnail is a 4:3 crop of one telling detail of the real
+- **Selected work** is cards, two per row (one on phones). Each card is
+  white with 6px corners and no border: the stone image area runs to its
+  edges, the text sits inside below it (`.txt`), and a 1px `--line` outline
+  appears on hover. A thumbnail is a 4:3 crop of one telling detail of the real
   screen (`assets/img/*-detail.jpg`), never the whole mock-up. The crop
   starts at a real corner of the interface; on the `--tile` panel it is inset
   from that corner (`.thumb`, or `.thumb.tr` for top-right) and runs off the
