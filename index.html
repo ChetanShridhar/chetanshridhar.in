@@ -48,7 +48,7 @@ main:focus{outline:none}
 .mark{width:2rem;height:auto;flex:none}
 .mark path{fill:var(--accent);stroke:var(--accent)}
 .top nav{display:flex;flex-wrap:wrap;gap:.25rem 2rem;font-size:.9375rem;font-weight:400}
-.top nav a{padding-bottom:.2rem;border-bottom:1px solid transparent}
+.top nav a{padding:.2rem 0;border-bottom:1px solid transparent}
 .top nav a:hover{color:var(--ink);border-color:var(--accent)}
 
 /* First fold: header sits over it; intro and scroll hint fill the viewport */
@@ -57,8 +57,11 @@ main:focus{outline:none}
 .hero{flex:1;display:grid;align-content:center;padding-top:2rem;padding-bottom:3rem}
 .base{padding-bottom:2rem}
 .base .row{align-items:end}
-.hint{grid-column:1/4;grid-row:1;font-size:.9375rem;font-weight:400}
-.cos{grid-column:4/13;grid-row:1;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem 2rem}
+.hint{grid-column:1/4;font-size:.9375rem;font-weight:400}
+/* Logos sit well under the summary with their own small title, apart from
+   the scroll hint, so they don't read as a caption for it */
+.cos-h{grid-column:4/10;margin-top:6rem}
+.cos{grid-column:4/10;list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem 2rem}
 /* Company logos in their own colours; height is set per logo so they weigh the same */
 .cos img{width:auto}
 .hint a{display:inline-block;color:var(--muted)}
@@ -124,12 +127,21 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 .roles li+li .role{color:var(--text);font-weight:300}
 .xp .co{grid-column:6/10;grid-row:1}
 .xp .now .role::after{content:"";display:inline-block;width:.4375rem;height:.4375rem;border-radius:50%;background:var(--accent);margin-left:.625rem;vertical-align:.15em}
+/* The list opens the section, so its first row needs no rule of its own */
+.body>.xp:first-child>li:first-child{border-top:0;padding-top:0}
 .xp+.meta{border-top:1px solid var(--line);padding-top:1.25rem}
 
 /* Quotes */
-blockquote{margin:0 0 3rem}
-blockquote p{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:36ch;text-indent:-.35em}
-blockquote footer{margin-top:.75rem}
+/* Colleague quotes: white cards like the work cards, with who said it at
+   the bottom; photos are small, round and greyscale so they stay calm */
+.says{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}
+.say{display:flex;flex-direction:column;justify-content:space-between;gap:2rem;height:100%;margin:0;padding:1.75rem 1.75rem 1.5rem;background:#fff;border-radius:6px}
+.say blockquote{margin:0}
+.say p{font-size:1.125rem;line-height:1.55;color:var(--ink);text-indent:-.35em}
+.say figcaption{display:flex;align-items:center;gap:.875rem;line-height:1.4}
+.face{flex:none;width:3rem;height:3rem;border-radius:50%;background:var(--tile);object-fit:cover;filter:grayscale(1)}
+.say b{display:block;font-weight:400;color:var(--ink);font-size:.9375rem}
+@media (max-width:48rem){.says{grid-template-columns:1fr;gap:1.5rem}.say{padding:1.5rem}}
 
 /* Contact */
 .reach{list-style:none;margin:0;padding:0}
@@ -169,11 +181,13 @@ html.lenis,html.lenis body{height:auto}
 
 @media (max-width:48rem){
   body{font-size:1rem}
-  .bar{flex-direction:column;align-items:flex-start;gap:.5rem}
-  .is-stuck .bar{flex-direction:row;align-items:center}
-  .is-stuck .name span{display:none}
-  .is-stuck nav{gap:.25rem 1.5rem}
-  .fold{padding-top:7.5rem}
+  /* Phones: logo mark, name and menu on one line, a touch smaller */
+  .top .name{gap:.5rem;white-space:nowrap}
+  .mark{width:1.5rem}
+  .top .name span{font-size:.9375rem}
+  .top nav{flex-wrap:nowrap;gap:.875rem;font-size:.875rem}
+  @media (max-width:24rem){.top .name span{font-size:.875rem}.top nav{gap:.625rem}}
+  .fold{padding-top:5.5rem}
   .row,.grp,.xp li,.reach li{display:block}
   .reach .k{display:block;font-size:.875rem}
   .hero .who,.hero .sum{margin-top:2rem}
@@ -183,7 +197,8 @@ html.lenis,html.lenis body{height:auto}
   .grp dl{grid-template-columns:1fr;gap:1.5rem}
   .cards{grid-template-columns:1fr;gap:2.5rem}
   .older{grid-template-columns:1fr 1fr;gap:1.5rem 1rem}
-  .cos{justify-content:flex-start;gap:1.5rem 2rem;margin-bottom:2.5rem}
+  .cos-h{margin-top:3.5rem}
+  .cos{justify-content:flex-start;gap:1.5rem 2rem;margin-top:.875rem}
   .xp>li,.roles li{display:block}
   .xp .co{display:block;margin-bottom:.5rem}
   .xp .yrs{display:block;font-size:.875rem}
@@ -211,16 +226,17 @@ html.lenis,html.lenis body{height:auto}
         <h1>I design complex enterprise products, and increasingly, I&nbsp;build them with&nbsp;AI.</h1>
         <p class="who"><b>Principal UX Designer</b>LIQUiDITY, Abu Dhabi</p>
         <p class="sum">Twenty years of making expert tools usable, from mixing consoles and CDN configuration to cloud security policy. Today I work on private credit, where analysts and investment managers make lending decisions with AI.</p>
+        <p class="cos-h meta" id="cos-h">Worked for</p>
+        <ul class="cos" aria-labelledby="cos-h">
+        <li><img src="assets/logos/liquidity.svg" alt="LIQUiDITY" width="182" height="32" style="height:.76rem"></li>
+        <li><img src="assets/logos/skyhigh.png" alt="Skyhigh Security" width="994" height="311" style="height:1.4rem"></li>
+        <li><img src="assets/logos/akamai.svg" alt="Akamai" width="410" height="167" style="height:1.6rem"></li>
+        <li><img src="assets/logos/harman.svg" alt="HARMAN" width="210" height="121" style="height:2rem"></li>
+        <li><img src="assets/logos/tesco.svg" alt="Tesco" width="101" height="27" style="height:.96rem"></li>
+        </ul>
       </div>
     </div>
     <div class="wrap base"><div class="row">
-      <ul class="cos" aria-label="Where I’ve worked">
-        <li><img src="assets/logos/liquidity.svg" alt="LIQUiDITY" width="182" height="32" style="height:.95rem"></li>
-        <li><img src="assets/logos/skyhigh.png" alt="Skyhigh Security" width="994" height="311" style="height:1.75rem"></li>
-        <li><img src="assets/logos/akamai.svg" alt="Akamai" width="410" height="167" style="height:2rem"></li>
-        <li><img src="assets/logos/harman.svg" alt="HARMAN" width="210" height="121" style="height:2.5rem"></li>
-        <li><img src="assets/logos/tesco.svg" alt="Tesco" width="101" height="27" style="height:1.2rem"></li>
-      </ul>
       <p class="hint"><a href="#ai">Designing AI, building with AI</a></p>
     </div></div>
   </div>
@@ -267,7 +283,7 @@ html.lenis,html.lenis body{height:auto}
             </a>
           </li>
           <li>
-            <a class="card" href="https://chetanshridhar.in/project/swg_rulebuilder">
+            <a class="card" href="case-studies/rule-builder.html">
               <div class="thumb"><img src="assets/img/rule-builder-detail.jpg" width="640" height="480" alt="Detail of the rule builder: nested rulesets with IF and AND conditions"></div>
               <div class="txt">
                 <h3><span>Web Security Rule Builder</span></h3>
@@ -356,14 +372,16 @@ html.lenis,html.lenis body{height:auto}
     <div class="wrap"><div class="row">
       <h2 class="lab" id="words-h">From colleagues</h2>
       <div class="body">
-        <blockquote>
-          <p>“You are an expert in UX and have the ability to listen and transform technical details into high fidelity UX screens and guidance for your engineering counterparts.”</p>
-          <footer class="meta">Senior Director, Product Management</footer>
-        </blockquote>
-        <blockquote>
-          <p>“You are now a pillar of the team.”</p>
-          <footer class="meta">Director, User Experience</footer>
-        </blockquote>
+        <ul class="says">
+          <li><figure class="say">
+            <blockquote><p>“You are an expert in UX and have the ability to listen and transform technical details into high fidelity UX screens and guidance for your engineering counterparts.”</p></blockquote>
+            <figcaption><span class="face" aria-hidden="true"></span><span><b>[Replace: name]</b><span class="meta">Senior Director, Product Management, Skyhigh Security</span></span></figcaption>
+          </figure></li>
+          <li><figure class="say">
+            <blockquote><p>“You are now a pillar of the team.”</p></blockquote>
+            <figcaption><span class="face" aria-hidden="true"></span><span><b>[Replace: name]</b><span class="meta">Director, User Experience, Skyhigh Security</span></span></figcaption>
+          </figure></li>
+        </ul>
       </div>
     </div></div>
   </section>
