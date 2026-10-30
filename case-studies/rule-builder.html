@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Web Security Rule Builder | Chetan Shridhar</title>
-<meta name="description" content="Case study: a rule builder that lets web security administrators write complex rules in the interface instead of code, at Skyhigh Security.">
+<meta name="description" content="Web Policy rule builder: a rule-based, web-gateway-security configuration app for Web Security Administrators.">
 <meta name="color-scheme" content="light">
 <meta property="og:title" content="Web Security Rule Builder | Chetan Shridhar">
 <meta property="og:description" content="Complex web security rules, written in a usable interface instead of code.">
@@ -59,12 +59,12 @@ main:focus{outline:none}
 .cover{margin-top:clamp(3rem,6vw,5rem)}
 /* The opening screen sits in a plain laptop drawn in CSS: dark lid, camera
    dot, thin base with a thumb notch. Flat, no gradients or shadows */
-.device{padding:clamp(1.75rem,6%,5rem) clamp(1.25rem,9%,8rem) clamp(1.5rem,5%,4.5rem)}
-.mac{max-width:58rem;margin:0 auto}
-.lid{position:relative;padding:2.4% 2.4% 2.8%;background:#1c1c1e;border-radius:clamp(.625rem,1.4vw,1.25rem) clamp(.625rem,1.4vw,1.25rem) .25rem .25rem}
+.device{padding:0 clamp(1rem,7%,6rem)}
+.mac{max-width:62rem;margin:0 auto}
+.lid{position:relative;padding:2.4% 2.4% 2.8%;background:#1c1c1e;border:1px solid #4a4a4e;border-radius:clamp(.625rem,1.4vw,1.25rem) clamp(.625rem,1.4vw,1.25rem) .25rem .25rem}
 .lid::before{content:"";position:absolute;top:1%;left:50%;width:.5%;aspect-ratio:1;border-radius:50%;background:#3a3a3c;transform:translateX(-50%)}
-.lid img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:left top;border-radius:2px}
-.base{position:relative;height:clamp(.5rem,1.3vw,1.125rem);margin:0 -6.5%;background:#d6d6da;border-radius:0 0 clamp(.5rem,1.2vw,1rem) clamp(.5rem,1.2vw,1rem)}
+.lid img{width:100%;border-radius:2px}
+.base{position:relative;height:clamp(.625rem,1.4vw,1.25rem);margin:0 -6.5%;background:#dcdce0;border-bottom:clamp(2px,.3vw,4px) solid #b3b3b9;border-radius:0 0 clamp(.5rem,1.2vw,1rem) clamp(.5rem,1.2vw,1rem)}
 .base::before{content:"";position:absolute;top:0;left:50%;width:15%;height:42%;background:#c0c0c5;border-radius:0 0 .5rem .5rem;transform:translateX(-50%)}
 
 /* Sections: title on the left, content on the right */
@@ -72,6 +72,8 @@ section{padding-top:clamp(4rem,8vw,7rem)}
 section .row{border-top:1px solid var(--line);padding-top:1.5rem}
 .lab{grid-column:1/4;align-self:start;position:sticky;top:5.5rem;padding-left:.625rem;font-size:1.375rem;font-weight:300;line-height:1.3;letter-spacing:-.01em}
 .body{grid-column:4/13}
+.lab{overflow-wrap:break-word}
+#views-h~.body .fig{margin-top:1.5rem}
 .lead{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:34ch;margin-bottom:2rem}
 .prose p{max-width:40rem}
 .prose p+p{margin-top:1.25rem}
@@ -81,9 +83,56 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 .mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
 .fig{margin:2.5rem 0 0}
 .fig figcaption{margin-top:.75rem}
+/* Screenshots: no mat, a thin warm-grey rounded frame */
+.shot{overflow:hidden;border:clamp(2px,.3vw,4px) solid #5c5a56;border-radius:clamp(6px,.9vw,12px);background:#5c5a56}
+.shot img{width:100%}
+/* Key views: one screen at a time; swipe, scroll sideways or use the buttons */
+.track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;align-items:start}
+.track::-webkit-scrollbar{display:none}
+.track:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.slide{flex:0 0 100%;margin:0;scroll-snap-align:start}
+.cnav{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;margin-top:1rem}
+.cnav .pn{display:flex;gap:1.5rem}
+.dots{display:flex;gap:.25rem}
+.dots button{width:1.5rem;height:1.5rem;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.dots button::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:#d6d1c8;transition:background .2s}
+.dots button[aria-current="true"]::before{background:var(--ink)}
+.dots button:hover::before{background:var(--muted)}
+.dots button:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:50%}
+.cnav .pn button{font:inherit;font-size:.9375rem;font-weight:400;color:var(--ink);background:none;border:0;padding:.2rem 0;border-bottom:1px solid transparent;cursor:pointer}
+.cnav .pn button:hover{border-color:var(--accent)}
+.cnav .pn button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.cnav .pn button:disabled{color:#b5b0a8;cursor:default;border-color:transparent}
+@media (max-width:48rem){.slide{flex-basis:88%}}
 .step{border-top:1px solid var(--line);padding-top:1.75rem;margin-top:3rem}
 .step p{max-width:40rem;margin-top:.375rem}
 .note{margin-top:3rem}
+.list{margin:1rem 0 0;padding-left:1.25rem}
+.list li+li{margin-top:.375rem}
+.prose .list+p,.prose p+.list{margin-top:1rem}
+.step.first{border-top:0;padding-top:0;margin-top:0}
+.tri .ill{max-width:24rem;margin:0 auto}
+.tri text{fill:var(--ink)}
+/* Information design diagrams: a step larger so their labels read easily */
+#info-h~.body .mat.pan{padding:clamp(.75rem,3%,2rem)}
+#info-h~.body .ill text{font-size:12.5px}
+#info-h~.body .ill .h{font-size:13.5px}
+#info-h~.body .ill .s{font-size:12px}
+#info-h~.body .ill .tg{font-size:9.5px}
+#info-h~.body .ill .big{font-size:15px}
+/* Approach evaluation: a calm, Balsamiq-like sketch of the verification wireframe */
+.bq text{font-size:13px;fill:#2b2b2b}
+.bq .wn{font-weight:400;fill:#1c1b19}
+.bq .wm{fill:#5c5c5c}
+.bq .wl{fill:#2a5db0;text-decoration:underline}
+.bq .wi{font-style:italic;fill:#444}
+.bq .wk{fill:#b0189e;font-size:12px}
+.bq .fill{fill:#3b3b3b}
+#discovery-h~.body .mat.pan.bq{padding:clamp(.75rem,2.5%,1.75rem)}
+@media (max-width:48rem){.mat.pan.bq .ill{min-width:820px}}
+.prose>.meta{margin-top:.75rem}
+.prose .says{margin-top:2.5rem}
+.prose .lead+.step{margin-top:2rem}
 
 /* Text rows: label left, value right */
 .rows{list-style:none;margin:0;padding:0}
@@ -131,7 +180,7 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
   .mat.pan .ill{min-width:640px}
 }
 .swipe{display:none}
-@media (max-width:48rem){.swipe{display:inline}}
+@media (max-width:48rem){.swipe{display:block}}
 
 /* Quotes */
 /* Colleague quotes: white cards like the work cards, with who said it at
@@ -143,6 +192,7 @@ h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
 .say figcaption{display:flex;align-items:center;gap:.875rem;line-height:1.4}
 .face{flex:none;width:3rem;height:3rem;border-radius:50%;background:var(--tile);object-fit:cover;filter:grayscale(1)}
 .say b{display:block;font-weight:400;color:var(--ink);font-size:.9375rem}
+.say .meta{display:block}
 @media (max-width:48rem){.says{grid-template-columns:1fr;gap:1.5rem}.say{padding:1.5rem}}
 
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;margin-top:clamp(5rem,10vw,8rem);padding-bottom:3rem}
@@ -198,87 +248,101 @@ html.lenis,html.lenis body{height:auto}
     <div class="row">
       <h1>Web Security Rule Builder</h1>
       <p class="who"><b>Skyhigh Security</b>2021–22</p>
-      <p class="sum">Legacy on-premise policies moved to a cloud gateway, built as rules in the interface instead of code.</p>
+      <p class="sum">The Web Policy rule builder is a rule-based web gateway security configuration app. Web Security Administrators (InfoSec teams) configure rules to control and monitor web traffic between an enterprise boundary and the internet. These rules control and filter web traffic originating from users accessing the web and block or allow, for example, downloads from the web. This ensures protection against web threats such as viruses and other malware, data exfiltration, etc., which can arise from uncontrolled web access.</p>
     </div>
   </div>
   <figure class="wrap cover">
-    <div class="mat device"><div class="mac"><div class="lid"><img src="../assets/img/rule-builder-policy.jpg" width="1164" height="738" alt="Web Policy screen: rulesets listed on the left, and a top-level ruleset with nested child and grandchild rulesets, each rule a row of criteria, operator, value and action"></div><div class="base" aria-hidden="true"></div></div></div>
+    <div class="device"><div class="mac"><div class="lid"><img src="../assets/img/rule-builder-cover.jpg" width="1800" height="1224" alt="Web Policy in focused view: a Web Filtering ruleset with nested Category, Reputation and Geo and Category and Domain Coaching rulesets, each holding rules to skip, block or coach traffic by lists, countries, categories, media types and site reputation"></div><div class="base" aria-hidden="true"></div></div></div>
   </figure>
-
-  <section aria-labelledby="glance-h">
-    <div class="wrap"><div class="row">
-      <h2 class="lab" id="glance-h">At a glance</h2>
-      <div class="body">
-        <ul class="rows">
-          <li><span class="k">Product</span><span class="v">Web Policy, the rule builder in a cloud Secure Web Gateway</span></li>
-          <li><span class="k">Users</span><span class="v">Web security administrators in InfoSec teams</span></li>
-          <li><span class="k">My role</span><span class="v">UX Architect, leading UX for the product</span></li>
-          <li><span class="k">Team</span><span class="v">Product manager, engineering lead, UX researcher and design system lead</span></li>
-          <li><span class="k">Research</span><span class="v">7 customers, around 23 participants</span></li>
-          <li><span class="k">UX work</span><span class="v">7–8 months, including customer validation</span></li>
-          <li><span class="k">Outcome</span><span class="v">[Replace: one line on what shipped and when]</span></li>
-        </ul>
-      </div>
-    </div></div>
-  </section>
 
   <section aria-labelledby="problem-h">
     <div class="wrap"><div class="row">
       <h2 class="lab" id="problem-h">The problem</h2>
       <div class="body prose">
-        <p class="lead">Administrators set web policy with switches. Anything more complex meant learning the product’s own code language, or paying for professional services hours.</p>
-        <p>Web Policy controls traffic between a company’s network and the internet: what people can reach and download, and protection against malware and data leaving through uncontrolled web access.</p>
-        <p>[Replace: how moving legacy on-premise policies to the cloud gateway shaped the problem, and what was at stake for customers and the business]</p>
+        <p>The Web Security Administrators are currently provided with a configuration UI that is mostly switch-based (on/off or enable/disable).</p>
+        <ul class="list">
+          <li>Limited control via the user interface (mostly switches)</li>
+          <li>For complex rules, customers need to learn the product’s proprietary code language OR spend money on PS (professional services) hours.</li>
+        </ul>
       </div>
     </div></div>
   </section>
 
-  <section aria-labelledby="idea-h">
+  <section aria-labelledby="proposal-h">
     <div class="wrap"><div class="row">
-      <h2 class="lab" id="idea-h">The idea</h2>
+      <h2 class="lab" id="proposal-h">Proposal</h2>
       <div class="body prose">
-        <p class="lead">A standard view between switches and code: complex rules, written in a usable interface.</p>
-        <p>The simple settings already worked well out of the box, so we kept them. Code stayed for the most complex cases. The rule builder filled the space between, as a table of rules.</p>
+        <p>To build a tabular rule-builder that enables Security Administrators to write complex rules via the user interface, without letting go of:</p>
+        <ul class="list">
+          <li>The existing simple UI, which works very well for simple use cases and is an easy out-of-the-box (plug-configure-play) solution.</li>
+          <li>Complex code insertion for complex use cases.</li>
+        </ul>
+        <p>The idea was to create a “<b>Standard</b>” interface where users can write complex rules in the comfort of a usable UI.</p>
       </div>
     </div></div>
   </section>
 
-  <section aria-labelledby="role-h">
+  <section aria-labelledby="trifecta-h">
     <div class="wrap"><div class="row">
-      <h2 class="lab" id="role-h">My role</h2>
+      <h2 class="lab" id="trifecta-h">The trifecta</h2>
       <div class="body prose">
-        <p class="lead">We worked as a trifecta of product, engineering and UX. I led UX.</p>
-        <p>Within UX, a researcher ran the research sessions and documented findings with me, and I worked with the design system lead to decide which components to reuse and which new ones the builder needed.</p>
-        <p>[Replace: two or three calls that were mine, not the team’s]</p>
+        <p class="lead">We worked as a trifecta consisting of UX, PM, and Engineering.</p>
+        <p>Within the UX team, we had an internal trifecta consisting of a UX Researcher, a UX Designer (Interaction Designer), and the Design System lead. Although I led the UX efforts for this product, I took timely help from UX researchers to conduct research sessions and document findings. My collaboration with the Design System lead helped us work on new component requirements, assessing and reusing existing components.</p>
+        <figure class="fig"><div class="mat tri"><svg class="ill" viewBox="40 28 330 330" role="img" aria-labelledby="d0t d0d">
+          <title id="d0t">The trifecta</title>
+          <desc id="d0d">The trifecta: UX Designer (me), Product Manager and Engineering Lead. Within UX, the UX Researcher and the Design System lead work with me, as satellites.</desc>
+          <g stroke="#c9c6c0" stroke-width="1"><line x1="120" y1="81" x2="198" y2="165"/><line x1="277" y1="81" x2="198" y2="165"/><line x1="198" y1="165" x2="114" y2="298"/><line x1="198" y1="165" x2="290" y2="298"/><line x1="114" y1="298" x2="290" y2="298"/></g>
+          <circle cx="120" cy="81" r="35" fill="#f1faf2" stroke="#bfe3c6"/><text x="120" y="78" text-anchor="middle" font-size="11.5">UX</text><text x="120" y="92" text-anchor="middle" font-size="11.5">Researcher</text>
+          <circle cx="277" cy="81" r="35" fill="#f1faf2" stroke="#bfe3c6"/><text x="277" y="70" text-anchor="middle" font-size="11.5">Design</text><text x="277" y="84" text-anchor="middle" font-size="11.5">System</text><text x="277" y="98" text-anchor="middle" font-size="11.5">Lead</text>
+          <circle cx="198" cy="165" r="57" fill="#c9eed2"/><text class="h" x="198" y="161" text-anchor="middle" font-size="14">UX Designer</text><text class="h" x="198" y="179" text-anchor="middle" font-size="14">(Me)</text>
+          <circle cx="114" cy="298" r="57" fill="#d9e3fa"/><text class="h" x="114" y="294" text-anchor="middle" font-size="14">Product</text><text class="h" x="114" y="312" text-anchor="middle" font-size="14">Manager</text>
+          <circle cx="290" cy="298" r="57" fill="#f4efc6"/><text class="h" x="290" y="294" text-anchor="middle" font-size="14">Engineering</text><text class="h" x="290" y="312" text-anchor="middle" font-size="14">Lead</text>
+          <text class="h" x="202" y="254" text-anchor="middle" font-size="12" letter-spacing=".04em">Trifecta</text>
+        </svg></div></figure>
       </div>
     </div></div>
   </section>
 
-  <section aria-labelledby="research-h">
+  <section aria-labelledby="discovery-h">
     <div class="wrap"><div class="row">
-      <h2 class="lab" id="research-h">Research</h2>
+      <h2 class="lab" id="discovery-h">Discovery</h2>
       <div class="body prose">
-        <p class="lead">Before the detail, we tested the direction with customers.</p>
-        <p>We built a high-level wireframe and ran separate sessions with 7 customers, around 23 participants, to get feedback on the proposal, find the key pain points and prioritise features. Product management and UX chose the first-release features from what we heard.</p>
-        <p>[Replace: the top pain points, and one finding that changed the design]</p>
-        <figure class="fig">
-          <div class="mat"><img src="../assets/img/rule-builder-research-wireframe.jpg" width="969" height="418" alt="Research wireframe: an HTTPS scanning ruleset with certificate verification rules, each a row of IF, AND and OR conditions ending in a block or skip action" loading="lazy"></div>
-          <figcaption class="meta">The research wireframe: each rule a row of conditions, its action on the right.</figcaption>
-        </figure>
-      </div>
-    </div></div>
-  </section>
-
-  <section aria-labelledby="structure-h">
-    <div class="wrap"><div class="row">
-      <h2 class="lab" id="structure-h">Structure first</h2>
-      <div class="body">
-        <p class="lead">Before the screens, I mapped the structure underneath them.</p>
+        <div class="step first">
+          <h3>Approach evaluation</h3>
+          <p>We built a high-level wireframe to conduct user research sessions, to understand whether this direction was apt for users and which key issues they would like the solution to address.</p>
+          <figure class="fig"><div class="mat pan bq"><svg class="ill" viewBox="0 0 904 774" role="img" aria-labelledby="wft wfd">
+            <title id="wft">Wireframe used to verify the approach</title>
+            <desc id="wfd">A Balsamiq-style wireframe of Web Policy. A policy tree on the left. On the right, a top-level ruleset holds a library ruleset with preset rules in sections, hooks to add custom rules via the rule builder or policy code, a custom rule with configurable criteria and action, a custom policy code row, and a nested ruleset. A second top-level ruleset holds its own rules and a copy of the nested ruleset.</desc>
+            <defs><filter id="sk" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter></defs>
+            <rect x="2" y="2" width="900" height="770" rx="4" fill="#fff" stroke="#3b3b3b" stroke-width="1.6" filter="url(#sk)"/>
+            <g fill="none" stroke="#3b3b3b" stroke-width="1.2" stroke-linecap="round" filter="url(#sk)"><line x1="198" y1="16" x2="198" y2="758"/><circle cx="24" cy="66" r="4" fill="#bbb"/><path d="M30 78 V94 H38" stroke-dasharray="2 2"/><path d="M46 106 V122 H54" stroke-dasharray="2 2"/><circle cx="24" cy="158" r="4" fill="#bbb"/><path d="M30 170 V186 H38" stroke-dasharray="2 2"/><rect x="214" y="16" width="676" height="34" fill="#e2e2e2"/><rect x="234" y="53" width="656" height="34" fill="#e2e2e2"/><path d="M222 39 V70.0 H232" stroke-dasharray="3 2" stroke="#2a5db0"/><rect x="234" y="90" width="656" height="30" fill="#e3e9ee"/><rect x="234" y="123" width="656" height="30" fill="#e3e9ee"/><rect x="334" y="131" width="13" height="13" fill="#fff"/><rect x="424" y="131" width="13" height="13" fill="#fff"/><rect x="234" y="156" width="656" height="30" fill="#e3e9ee"/><rect x="334" y="164" width="13" height="13" fill="#fff"/><rect x="424" y="164" width="13" height="13" fill="#fff"/><rect x="234" y="189" width="656" height="32" fill="#ececec"/><rect x="234" y="224" width="656" height="30" fill="#e3e9ee"/><rect x="334" y="232" width="13" height="13" fill="#fff"/><rect x="424" y="232" width="13" height="13" fill="#fff"/><rect x="234" y="257" width="656" height="30" fill="#e3e9ee"/><rect x="334" y="265" width="13" height="13" fill="#fff"/><rect x="424" y="265" width="13" height="13" fill="#fff"/><rect x="234" y="290" width="656" height="36" fill="#efefef"/><line x1="400" y1="290" x2="400" y2="326"/><line x1="720" y1="290" x2="720" y2="326"/><line x1="790" y1="290" x2="790" y2="326"/><line x1="842" y1="290" x2="842" y2="326"/><rect x="234" y="329" width="656" height="34" fill="#efefef"/><line x1="400" y1="329" x2="400" y2="363"/><line x1="842" y1="329" x2="842" y2="363"/><rect x="234" y="366" width="656" height="32" fill="#ececec"/><rect x="254" y="401" width="636" height="34" fill="#e2e2e2"/><path d="M242 387 V418.0 H252" stroke-dasharray="3 2" stroke="#2a5db0"/><rect x="254" y="438" width="636" height="36" fill="#efefef"/><line x1="400" y1="438" x2="400" y2="474"/><line x1="720" y1="438" x2="720" y2="474"/><line x1="790" y1="438" x2="790" y2="474"/><line x1="842" y1="438" x2="842" y2="474"/><rect x="254" y="477" width="636" height="34" fill="#efefef"/><line x1="400" y1="477" x2="400" y2="511"/><line x1="842" y1="477" x2="842" y2="511"/><rect x="214" y="534" width="676" height="34" fill="#e2e2e2"/><rect x="214" y="571" width="676" height="36" fill="#efefef"/><line x1="400" y1="571" x2="400" y2="607"/><line x1="720" y1="571" x2="720" y2="607"/><line x1="790" y1="571" x2="790" y2="607"/><line x1="842" y1="571" x2="842" y2="607"/><rect x="214" y="610" width="676" height="34" fill="#efefef"/><line x1="400" y1="610" x2="400" y2="644"/><line x1="842" y1="610" x2="842" y2="644"/><rect x="234" y="647" width="656" height="34" fill="#e2e2e2"/><path d="M222 633 V664.0 H232" stroke-dasharray="3 2" stroke="#2a5db0"/><rect x="234" y="684" width="656" height="36" fill="#efefef"/><line x1="400" y1="684" x2="400" y2="720"/><line x1="720" y1="684" x2="720" y2="720"/><line x1="790" y1="684" x2="790" y2="720"/><line x1="842" y1="684" x2="842" y2="720"/><rect x="234" y="723" width="656" height="34" fill="#efefef"/><line x1="400" y1="723" x2="400" y2="757"/><line x1="842" y1="723" x2="842" y2="757"/></g>
+            <rect x="404" y="293" width="140" height="30" rx="2" fill="#bcd3ee"/><rect x="723" y="293" width="64" height="30" rx="2" fill="#bcd3ee"/>
+            <text x="22" y="40" style="font-size:21px;font-weight:300">Web Policy</text>
+            <g><text x="32" y="70" class="wn">Toplevel Ruleset</text><text x="48" y="98" class="">Library Ruleset</text><text x="64" y="126" class="">Adam’s Ruleset</text><text x="32" y="162" class="wn">Toplevel Eve’s Ruleset</text><text x="48" y="190" class="">Copy of Adam’s Ruleset</text><text class="wn" x="226" y="37.0">Top level Ruleset Eg. Global Block</text><text class="wm" x="580" y="37.0">Entry Criteria/Scope</text><text class="wn" x="878" y="37.0" text-anchor="end">Cycles</text><text class="wn" x="246" y="74.0">Library Ruleset Eg. Global Block List</text><text class="wm" x="580" y="74.0">Entry Criteria/Scope</text><text class="wn" x="878" y="74.0" text-anchor="end">Cycles</text><text class="wn" x="246" y="109.0">Preset Rules (Simple View)</text><text class="wm" x="246" y="142.0">Section 1</text><text x="354" y="142.0">Rule 1</text><text x="444" y="142.0">Rule 2</text><text class="wm" x="246" y="175.0">Section 2</text><text x="354" y="175.0">Rule 1</text><text x="444" y="175.0">Rule 2</text><text class="wl" x="246" y="209.0">Add Custom Rule via Rule Builder</text><text class="wl" x="484" y="209.0">Add Custom Rule via Policy Code</text><text class="wk" x="880" y="209.0" text-anchor="end">Hook present between Section 2 & 3</text><text class="wm" x="246" y="243.0">Section 3</text><text x="354" y="243.0">Rule 1</text><text x="444" y="243.0">Rule 2</text><text class="wm" x="246" y="276.0">Section 4</text><text x="354" y="276.0">Rule 1</text><text x="444" y="276.0">Rule 2</text><text class="wn" x="246" y="312.0">CustomRule1</text><text x="410" y="312.0">IF Criteria {param}</text><text x="566" y="312.0">matches</text><text x="654" y="312.0">value</text><text x="728" y="305.0">Action</text><text x="728" y="320.0">{Config}</text><text x="798" y="312.0">Event</text><text x="850" y="312.0">On/Off</text><text class="wn" x="246" y="350.0">CustomPolicyCode1</text><text class="wi" x="410" y="350.0">Policy code Description</text><text x="850" y="350.0">On/Off</text><text class="wl" x="246" y="386.0">Add Custom Rule via Rule Builder</text><text class="wl" x="484" y="386.0">Add Custom Rule via Policy Code</text><text class="wk" x="880" y="386.0" text-anchor="end">Hook present after section 4</text><text class="wn" x="266" y="422.0">Adam’s Ruleset</text><text class="wm" x="580" y="422.0">Entry Criteria/Scope</text><text class="wn" x="878" y="422.0" text-anchor="end">Cycles</text><text class="wn" x="266" y="460.0">Jay</text><text x="410" y="460.0">IF Criteria</text><text x="566" y="460.0">matches</text><text x="654" y="460.0">value</text><text x="728" y="460.0">Action</text><text x="798" y="460.0">Event</text><text x="850" y="460.0">On/Off</text><text class="wn" x="266" y="498.0">Adam’s PolicyCode</text><text class="wi" x="410" y="498.0">Policy code Description</text><text x="850" y="498.0">On/Off</text><text class="wn" x="226" y="555.0">Top level Eve’s Ruleset</text><text class="wm" x="580" y="555.0">Entry Criteria/Scope</text><text class="wn" x="878" y="555.0" text-anchor="end">Cycles</text><text class="wn" x="226" y="593.0">Kale</text><text x="410" y="593.0">IF Criteria</text><text x="566" y="593.0">matches</text><text x="654" y="593.0">value</text><text x="728" y="593.0">Action</text><text x="798" y="593.0">Event</text><text x="850" y="593.0">On/Off</text><text class="wn" x="226" y="631.0">Eve’s PolicyCode</text><text class="wi" x="410" y="631.0">Policy code Description</text><text x="850" y="631.0">On/Off</text><text class="wn" x="246" y="668.0">Copy of Adam’s Ruleset</text><text class="wm" x="580" y="668.0">Entry Criteria/Scope</text><text class="wn" x="878" y="668.0" text-anchor="end">Cycles</text><text class="wn" x="246" y="706.0">Jay</text><text x="410" y="706.0">IF Criteria</text><text x="566" y="706.0">matches</text><text x="654" y="706.0">value</text><text x="728" y="706.0">Action</text><text x="798" y="706.0">Event</text><text x="850" y="706.0">On/Off</text><text class="wn" x="246" y="744.0">Adam’s PolicyCode</text><text class="wi" x="410" y="744.0">Policy code Description</text><text x="850" y="744.0">On/Off</text></g>
+          </svg></div><figcaption class="meta swipe">Swipe to see all of it.</figcaption></figure>
+        </div>
         <div class="step">
-          <h3>Dependencies</h3>
-          <p>Web Policy sits in a suite of security apps on one platform. Its rules use configurations, such as SAML and HTTPS settings, and lists of URLs, IPs and certificate authorities, all maintained elsewhere. I first had to understand how both are built.</p>
-          <figure class="fig">
-            <div class="mat pan"><svg class="ill" viewBox="0 0 760 280" role="img" aria-labelledby="d1t d1d">
+          <h3>Research</h3>
+          <p>Separate research sessions with 7 customers (around 23 participants) were conducted with the following goals:</p>
+          <ul class="list">
+            <li>Feedback on the proposal</li>
+            <li>Identifying key pain points</li>
+            <li>Prioritizing features</li>
+          </ul>
+          <p>Based on the outcome of the research sessions, Product Management and UX together identified the features for the MVP.</p>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="info-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="info-h">Information design</h2>
+      <div class="body prose">
+        <div class="step first">
+          <h3>Dependency</h3>
+          <p>Security Policy (application) is positioned within a suite of other security applications under one platform. It depends on the Configurations and Lists repositories, so I first needed to understand how they work and how they are built.</p>
+          <figure class="fig"><div class="mat pan"><svg class="ill" viewBox="0 0 760 280" role="img" aria-labelledby="d1t d1d">
               <title id="d1t">Where a rule’s parts come from</title>
               <desc id="d1d">Configurations and lists are kept outside Web Policy. Certificate Verification checks Domains/Hosts against the Certificate Bypass List and skips. Custom Rule checks User Agent against UA_list and blocks, showing the default template from the notification pages.</desc>
               <text class="s" x="16" y="30">Defined and maintained elsewhere,</text><text class="s" x="16" y="44">then used in rules.</text>
@@ -311,30 +375,32 @@ html.lenis,html.lenis body{height:auto}
               <circle class="skip" cx="500" cy="80" r="5"/><text x="510" y="84">Skip</text>
               <rect class="chip" rx="2" x="232" y="98" width="24" height="18"/><text class="tg" x="244" y="110">IF</text>
               <text class="lk" x="264" y="111">Domains/Hosts is in</text>
-              <rect class="at" x="378" y="97" width="140" height="20" rx="3"/><text class="ai" x="386" y="111">Certificate Bypass List</text>
+              <rect class="at" x="382" y="97" width="154" height="20" rx="3"/><text class="ai" x="390" y="111">Certificate Bypass List</text>
               <line class="hair" x1="217" y1="134" x2="546" y2="134"/>
               <text class="h" x="232" y="158">Custom Rule</text>
               <circle class="bad" cx="500" cy="154" r="5"/><text x="510" y="158">Block</text>
               <rect class="chip" rx="2" x="232" y="172" width="24" height="18"/><text class="tg" x="244" y="184">IF</text>
               <text class="lk" x="264" y="185">User Agent is not in</text>
-              <rect class="at" x="384" y="171" width="58" height="20" rx="3"/><text class="ai" x="392" y="185">UA_list</text>
+              <rect class="at" x="388" y="171" width="62" height="20" rx="3"/><text class="ai" x="396" y="185">UA_list</text>
               <rect class="gt" x="232" y="202" width="112" height="20" rx="3"/><text class="gi" x="240" y="216">Default template</text>
               <text class="s" x="352" y="216">shown when blocked</text>
-              <path class="wire as" d="M584 109 C556 109 548 107 518 107"/>
-              <path class="wire as" d="M584 185 C520 185 480 181 442 181"/>
+              <path class="wire as" d="M584 109 C562 109 556 107 536 107"/>
+              <path class="wire as" d="M584 185 C524 185 486 181 450 181"/>
               <path class="wire gs" d="M176 185 C200 185 205 212 232 212"/>
-              <circle class="ad" cx="584" cy="109" r="3.5"/><circle class="ad" cx="518" cy="107" r="3"/>
-              <circle class="ad" cx="584" cy="185" r="3.5"/><circle class="ad" cx="442" cy="181" r="3"/>
+              <circle class="ad" cx="584" cy="109" r="3.5"/><circle class="ad" cx="536" cy="107" r="3"/>
+              <circle class="ad" cx="584" cy="185" r="3.5"/><circle class="ad" cx="450" cy="181" r="3"/>
               <circle class="gd" cx="176" cy="185" r="3.5"/><circle class="gd" cx="232" cy="212" r="3"/>
-            </svg></div>
-            <figcaption class="meta">Rules draw on settings kept outside the policy: green from configurations, amber from lists. <span class="swipe">Swipe to see all of it.</span></figcaption>
-          </figure>
+            </svg></div><figcaption class="meta swipe">Swipe to see all of it.</figcaption></figure>
         </div>
         <div class="step">
-          <h3>Hierarchy</h3>
-          <p>The hierarchy decides where information, actions and messages belong. A ruleset filters traffic, and only that traffic reaches its rules; the rest moves on to the next ruleset. Each rule joins IF conditions with AND or OR and ends in one action.</p>
-          <figure class="fig">
-            <div class="mat pan"><svg class="ill" viewBox="0 0 760 400" role="img" aria-labelledby="d2t d2d">
+          <h3>Structure/<wbr>hierarchy</h3>
+          <p>Irrespective of whether we are building a product from scratch or adding features to an existing app, it is important to understand the information design so that we cater to the contextual placement of:</p>
+          <ul class="list">
+            <li>Information</li>
+            <li>Actions</li>
+            <li>Indicators (/messaging)</li>
+          </ul>
+          <figure class="fig"><div class="mat pan"><svg class="ill" viewBox="0 0 760 400" role="img" aria-labelledby="d2t d2d">
               <title id="d2t">How traffic moves through the policy tree</title>
               <desc id="d2d">The policy tree holds rulesets. Web traffic reaches a ruleset’s scope; traffic in scope goes on to its rules and to its child, a nested ruleset with its own scope, and the rest moves on to the next ruleset. A rule joins IF conditions with AND or OR and ends in one action, such as allow or block. A condition matches a criteria to a value and returns true or false.</desc>
               <defs>
@@ -379,43 +445,40 @@ html.lenis,html.lenis body{height:auto}
                 <line class="lead" x1="494" y1="218" x2="550" y2="218"/><text class="h" x="556" y="216">Nested ruleset</text><text class="s" x="556" y="231">A child of the ruleset. It sees only</text><text class="s" x="556" y="245">the traffic its parent let in.</text>
                 <line class="lead" x1="510" y1="352" x2="550" y2="352"/><text class="h" x="556" y="350">Next ruleset</text><text class="s" x="556" y="365">The traffic left over moves here</text><text class="s" x="556" y="379">for evaluation.</text>
               </g>
-            </svg></div>
-            <figcaption class="meta">Traffic in a ruleset’s scope reaches its rules and its nested ruleset; the rest moves on to the next ruleset. <span class="swipe">Swipe to see all of it.</span></figcaption>
-          </figure>
+            </svg></div><figcaption class="meta swipe">Swipe to see all of it.</figcaption></figure>
         </div>
         <div class="step">
           <h3>Anatomy of a condition</h3>
-          <p>A condition is the smallest unit of a rule: a criteria, an operator and a value, each depending on the one before. Mapping every combination laid out the interactions underneath.</p>
-          <figure class="fig">
-            <div class="mat pan"><svg class="ill" viewBox="0 0 760 330" role="img" aria-labelledby="d3t d3d">
+          <p>In this app, a condition is the basic unit that constructs a rule, so defining all the combinations that make up a condition unfolds the underlying interactions.</p>
+          <figure class="fig"><div class="mat pan"><svg class="ill" viewBox="0 0 760 330" role="img" aria-labelledby="d3t d3d">
               <title id="d3t">Anatomy of a condition</title>
               <desc id="d3d">A condition reads: IF User Agent is not in UA_list, then Block. Logical operators are AND and OR. Criteria come with or without parameters. Operators depend on the criteria: is, is not; is in, is not in; matches, does not match; is greater than, is lesser than, is in range. Values depend on the operator: a value such as location, IP or URL; lists; regular expressions; numerical values and ranges. A rule ends in one action: allow, coach, isolate, block or skip.</desc>
               <defs><marker id="aht" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#3a9a8d"/></marker>
               <marker id="ahm" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#9a948b"/></marker></defs>
               <text class="h" x="20" y="24">Logical operator</text><text class="s" x="20" y="40">joins conditions</text>
               <text class="h" x="134" y="24">Criteria</text><text class="s" x="134" y="40">what is checked</text>
-              <text class="h" x="288" y="24">Operator</text><text class="s" x="288" y="40">depends on the criteria</text>
+              <text class="h" x="282" y="24">Operator</text><text class="s" x="282" y="40">depends on the criteria</text>
               <text class="h" x="452" y="24">Value</text><text class="s" x="452" y="40">depends on the operator</text>
               <text class="h" x="630" y="24">Action</text><text class="s" x="630" y="40">one per rule</text>
               <rect class="lt" x="20" y="56" width="100" height="44" rx="6"/><text class="big li" x="70" y="83" text-anchor="middle">IF</text>
-              <rect class="bt" x="134" y="56" width="140" height="44" rx="6"/><text class="big lk" x="204" y="83" text-anchor="middle">User Agent</text>
-              <rect class="tt" x="288" y="56" width="150" height="44" rx="6"/><text class="big ti" x="363" y="83" text-anchor="middle">is not in</text>
+              <rect class="bt" x="134" y="56" width="136" height="44" rx="6"/><text class="big lk" x="199" y="83" text-anchor="middle">User Agent</text>
+              <rect class="tt" x="282" y="56" width="156" height="44" rx="6"/><text class="big ti" x="358" y="83" text-anchor="middle">is not in</text>
               <rect class="at" x="452" y="56" width="150" height="44" rx="6"/><text class="big ai" x="527" y="83" text-anchor="middle">UA_list</text>
               <path d="M604 78 H626" fill="none" stroke="#9a948b" stroke-width="1.25" marker-end="url(#ahm)"/>
               <rect class="rt" x="630" y="56" width="110" height="44" rx="6"/><circle class="bad" cx="664" cy="78" r="6"/><text class="big ri" x="678" y="83">Block</text>
-              <path class="dep" d="M204 104 Q283 134 359 106" marker-end="url(#aht)"/>
-              <path class="dep" d="M363 104 Q445 134 523 106" marker-end="url(#aht)"/>
-              <text class="s" x="283" y="140" text-anchor="middle">sets the options</text>
+              <path class="dep" d="M199 104 Q278 134 354 106" marker-end="url(#aht)"/>
+              <path class="dep" d="M358 104 Q442 134 523 106" marker-end="url(#aht)"/>
+              <text class="s" x="278" y="140" text-anchor="middle">sets the options</text>
               <text class="s" x="445" y="140" text-anchor="middle">sets the options</text>
               <g>
                 <rect class="card" x="20" y="162" width="100" height="26" rx="4"/><rect class="lb" x="20" y="167" width="3" height="16" rx="1.5"/><text x="32" y="179">AND</text>
                 <rect class="card" x="20" y="194" width="100" height="26" rx="4"/><rect class="lb" x="20" y="199" width="3" height="16" rx="1.5"/><text x="32" y="211">OR</text>
-                <rect class="card" x="134" y="162" width="140" height="26" rx="4"/><rect class="blue" x="134" y="167" width="3" height="16" rx="1.5"/><text x="146" y="179">With parameters</text>
-                <rect class="card" x="134" y="194" width="140" height="26" rx="4"/><rect class="blue" x="134" y="199" width="3" height="16" rx="1.5"/><text x="146" y="211">Without parameters</text>
-                <rect class="card" x="288" y="162" width="150" height="26" rx="4"/><rect class="tb" x="288" y="167" width="3" height="16" rx="1.5"/><text x="300" y="179">is, is not</text>
-                <rect class="card" x="288" y="194" width="150" height="26" rx="4"/><rect class="tb" x="288" y="199" width="3" height="16" rx="1.5"/><text x="300" y="211">is in, is not in</text>
-                <rect class="card" x="288" y="226" width="150" height="26" rx="4"/><rect class="tb" x="288" y="231" width="3" height="16" rx="1.5"/><text x="300" y="243">matches, does not match</text>
-                <rect class="card" x="288" y="258" width="150" height="56" rx="4"/><rect class="tb" x="288" y="263" width="3" height="46" rx="1.5"/><text x="300" y="275">is greater than,</text><text x="300" y="290">is lesser than,</text><text x="300" y="305">is in range</text>
+                <rect class="card" x="134" y="162" width="136" height="26" rx="4"/><rect class="blue" x="134" y="167" width="3" height="16" rx="1.5"/><text x="146" y="179">With parameters</text>
+                <rect class="card" x="134" y="194" width="136" height="26" rx="4"/><rect class="blue" x="134" y="199" width="3" height="16" rx="1.5"/><text x="146" y="211">Without parameters</text>
+                <rect class="card" x="282" y="162" width="156" height="26" rx="4"/><rect class="tb" x="282" y="167" width="3" height="16" rx="1.5"/><text x="294" y="179">is, is not</text>
+                <rect class="card" x="282" y="194" width="156" height="26" rx="4"/><rect class="tb" x="282" y="199" width="3" height="16" rx="1.5"/><text x="294" y="211">is in, is not in</text>
+                <rect class="card" x="282" y="226" width="156" height="26" rx="4"/><rect class="tb" x="282" y="231" width="3" height="16" rx="1.5"/><text x="294" y="243">matches, does not match</text>
+                <rect class="card" x="282" y="258" width="156" height="56" rx="4"/><rect class="tb" x="282" y="263" width="3" height="46" rx="1.5"/><text x="294" y="275">is greater than,</text><text x="294" y="290">is lesser than,</text><text x="294" y="305">is in range</text>
                 <rect class="card" x="452" y="162" width="150" height="26" rx="4"/><rect class="ad" x="452" y="167" width="3" height="16" rx="1.5"/><text x="464" y="179">Location, IP, URL</text>
                 <rect class="card" x="452" y="194" width="150" height="26" rx="4"/><rect class="ad" x="452" y="199" width="3" height="16" rx="1.5"/><text x="464" y="211">Lists</text>
                 <rect class="card" x="452" y="226" width="150" height="26" rx="4"/><rect class="ad" x="452" y="231" width="3" height="16" rx="1.5"/><text x="464" y="243">Regular expressions</text>
@@ -426,52 +489,52 @@ html.lenis,html.lenis body{height:auto}
                 <rect class="card" x="630" y="258" width="110" height="26" rx="4"/><circle class="bad" cx="644" cy="271" r="5"/><text x="656" y="275">Block</text>
                 <rect class="card" x="630" y="290" width="110" height="26" rx="4"/><circle class="skip" cx="644" cy="303" r="5"/><text x="656" y="307">Skip</text>
               </g>
-            </svg></div>
-            <figcaption class="meta">One condition taken apart: each part, what it depends on, and its options. <span class="swipe">Swipe to see all of it.</span></figcaption>
-          </figure>
+            </svg></div><figcaption class="meta swipe">Swipe to see all of it.</figcaption></figure>
         </div>
       </div>
     </div></div>
   </section>
 
-  <section aria-labelledby="build-h">
+  <section aria-labelledby="flows-h">
     <div class="wrap"><div class="row">
-      <h2 class="lab" id="build-h">Building a rule</h2>
-      <div class="body">
-        <p class="lead">Complex rules meant stitching several interactions together, carefully.</p>
+      <h2 class="lab" id="flows-h">Workflows/<wbr>interactions</h2>
+      <div class="body prose">
+        <p class="lead">Due to the complex nature of this application, we had to carefully stitch multiple interactions to help users (security administrators) build rules.</p>
         <div class="step">
-          <h3>A library of ready rules</h3>
-          <p>The old app had predefined rules administrators could configure. We kept them in a library, to import into a policy alongside custom rules.</p>
-          <figure class="fig">
-            <div class="mat"><img src="../assets/img/rule-builder-library.jpg" width="1064" height="570" alt="Web Policy with a side panel for adding a ruleset from the library, listing rulesets such as SAML authentication, global bypass and web filtering" loading="lazy"></div>
-            <figcaption class="meta">Adding a ruleset from the library.</figcaption>
-          </figure>
+          <h3>Rule library</h3>
+          <p>Since the existing app had predefined rules that could be configured, we planned to provide these rules in a library, from which they could be imported into the policy along with custom-created rules.</p>
+          <figure class="fig"><div class="shot"><img src="../assets/img/rule-builder-library.jpg" width="1440" height="720" alt="Web Policy with the Add ruleset from library panel open: Skyhigh curated rulesets such as SAML Authentication, Global Bypass, Web Filtering and Threat Protection, each with a checkbox to import" loading="lazy"></div></figure>
         </div>
         <div class="step">
-          <h3>Three ways to add a rule</h3>
-          <p>From the library, custom in the interface, or custom in code for the most complex cases.</p>
-          <figure class="fig">
-            <div class="mat"><img src="../assets/img/rule-builder-add-rule.jpg" width="1068" height="703" alt="A SAML authentication ruleset with preset rules, a custom rule built in the interface, and a block of custom policy code" loading="lazy"></div>
-            <figcaption class="meta">Preset rules, a custom rule and custom policy code in one ruleset.</figcaption>
-          </figure>
+          <h3>Adding rules</h3>
+          <p>We defined three types of rules:</p>
+          <ul class="list">
+            <li>Library Rules</li>
+            <li>Custom Rules – via UI</li>
+            <li>Custom Rules – via Code</li>
+          </ul>
+          <figure class="fig"><div class="shot"><img src="../assets/img/rule-builder-add-rule.jpg" width="1600" height="1044" alt="A SAML Authentication ruleset with preset rules to skip by lists, a custom rule built in the interface, and custom policy code open in a code editor" loading="lazy"></div></figure>
         </div>
         <div class="step">
           <h3>Nested rulesets</h3>
-          <p>The policy works by filtering web requests and responses, so rulesets can nest inside each other.</p>
-          <figure class="fig">
-            <div class="mat"><img src="../assets/img/rule-builder-nested.jpg" width="1069" height="569" alt="A top-level ruleset containing a child ruleset and a grandchild ruleset, each indented one level further" loading="lazy"></div>
-            <figcaption class="meta">A top-level ruleset with a child and a grandchild.</figcaption>
-          </figure>
+          <p>Since the entire security policy works on the basis of filtering/scoping web requests and responses, an interaction to add nested rulesets was prepared.</p>
+          <figure class="fig"><div class="shot"><img src="../assets/img/rule-builder-nested.jpg" width="1069" height="569" alt="A top-level ruleset containing a child ruleset and a grandchild ruleset, each indented one level further" loading="lazy"></div></figure>
         </div>
         <div class="step">
-          <h3>Scoping</h3>
-          <p>Rules can be scoped by source and destination ports, user groups, location and many more criteria.</p>
-          <figure class="fig">
-            <div class="mat"><img src="../assets/img/rule-builder-scoping.jpg" width="1066" height="565" alt="Criteria picker listing client port, destination IP, destination port, IP protocol, HTML attribute and user group, with settings for the selected HTML attribute" loading="lazy"></div>
-            <figcaption class="meta">Choosing a criteria and setting its value.</figcaption>
-          </figure>
+          <h3>Scoping rules</h3>
+          <p>Scoping was based on numerous factors, such as source and destination ports, user groups, location and many more.</p>
+          <figure class="fig"><div class="shot"><img src="../assets/img/rule-builder-scoping.jpg" width="1066" height="565" alt="Criteria picker listing client port, destination IP, destination port, IP protocol, HTML attribute and user group, with settings for the selected HTML attribute" loading="lazy"></div></figure>
         </div>
-        <p class="note meta">Many more workflows went into the first release than this page shows.</p>
+        <p class="note meta">Many more workflows were created as part of the MVP to make the app functional; they are not documented in this case study.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="protos-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="protos-h">Prototypes</h2>
+      <div class="body prose">
+        <p>Multiple prototypes were created to communicate the interaction flows. They helped explain the flows in customer validation sessions and to the front-end dev team, SMEs, etc.</p>
       </div>
     </div></div>
   </section>
@@ -479,74 +542,53 @@ html.lenis,html.lenis body{height:auto}
   <section aria-labelledby="views-h">
     <div class="wrap"><div class="row">
       <h2 class="lab" id="views-h">Key views</h2>
-      <div class="body">
-        <figure class="fig">
-          <div class="mat"><img src="../assets/img/rule-builder-empty-policy.jpg" width="1162" height="681" alt="The root of the web policy, offering three starting points: add a top-level ruleset, write custom policy code, or view policy code" loading="lazy"></div>
-          <figcaption class="meta">The policy root: add a ruleset, or write or view policy code.</figcaption>
-        </figure>
-        <figure class="fig">
-          <div class="mat"><img src="../assets/img/rule-builder-bypass-lists.jpg" width="1164" height="739" alt="Global bypass ruleset with preset bypass rules for domains, IPs, user groups and processes, and an update server bypass for Windows Update traffic" loading="lazy"></div>
-          <figcaption class="meta">Global bypass: preset rules for traffic that skips scanning.</figcaption>
-        </figure>
-        <figure class="fig">
-          <div class="mat"><img src="../assets/img/rule-builder-block-settings.jpg" width="1164" height="738" alt="Settings for a block action: a list of notification templates, and the chosen template’s language, collection and block reason" loading="lazy"></div>
-          <figcaption class="meta">Settings for a block action: the notification people see, and the reason given.</figcaption>
-        </figure>
-        <figure class="fig">
-          <div class="mat"><img src="../assets/img/rule-builder-notification-pages.jpg" width="1163" height="737" alt="End user notification pages: customisation fields on the left and a list of preset pages to preview on the right" loading="lazy"></div>
-          <figcaption class="meta">End user notification pages, preset and custom.</figcaption>
-        </figure>
-      </div>
-    </div></div>
-  </section>
-
-  <section aria-labelledby="tradeoff-h">
-    <div class="wrap"><div class="row">
-      <h2 class="lab" id="tradeoff-h">The trade-off</h2>
       <div class="body prose">
-        <p class="lead">[Replace: one call where business or engineering needs won over a UX principle]</p>
-        <p>[Replace: what it cost users, and how I flagged the caveat]</p>
+        <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Key views">
+          <div class="track" tabindex="0">
+            <figure class="slide" aria-label="1 of 4: Policy root"><div class="shot"><img src="../assets/img/rule-builder-empty-policy.jpg" width="1162" height="681" alt="The root of the web policy, offering three starting points: add a top-level ruleset, write custom policy code, or view policy code" loading="lazy"></div></figure>
+            <figure class="slide" aria-label="2 of 4: Global bypass"><div class="shot"><img src="../assets/img/rule-builder-bypass-lists.jpg" width="1164" height="739" alt="Global bypass ruleset with preset bypass rules for domains, IPs, user groups and processes, and an update server bypass for Windows Update traffic" loading="lazy"></div></figure>
+            <figure class="slide" aria-label="3 of 4: Block settings"><div class="shot"><img src="../assets/img/rule-builder-block-settings.jpg" width="1164" height="738" alt="Settings for a block action: a list of notification templates, and the chosen template’s language, collection and block reason" loading="lazy"></div></figure>
+            <figure class="slide" aria-label="4 of 4: Notification pages"><div class="shot"><img src="../assets/img/rule-builder-notification-pages.jpg" width="1163" height="737" alt="End user notification pages: customisation fields on the left and a list of preset pages to preview on the right" loading="lazy"></div></figure>
+          </div>
+          <div class="cnav"><div class="dots"><button type="button" aria-label="Show view 1 of 4"></button><button type="button" aria-label="Show view 2 of 4"></button><button type="button" aria-label="Show view 3 of 4"></button><button type="button" aria-label="Show view 4 of 4"></button></div><span class="pn"><button type="button" class="prev" aria-label="Previous view">Previous</button><button type="button" class="next" aria-label="Next view">Next</button></span></div>
+        </div>
       </div>
     </div></div>
   </section>
 
-  <section aria-labelledby="outcome-h">
+  <section aria-labelledby="thanks2-h">
     <div class="wrap"><div class="row">
-      <h2 class="lab" id="outcome-h">Outcome</h2>
-      <div class="body">
-        <ul class="rows">
-          <li><span class="k">Shipped</span><span class="v">[Replace: what shipped and when]</span></li>
-          <li><span class="k">Validated</span><span class="v">Prototypes took customers, front-end engineers and subject-matter experts through the flows. [Replace: what changed after the validation sessions]</span></li>
-          <li><span class="k">Judged by</span><span class="v">[Replace: how success was judged]</span></li>
-        </ul>
+      <h2 class="lab" id="thanks2-h">Appreciation</h2>
+      <div class="body prose">
+        <p class="lead">Some of the team members I collaborated with voluntarily sent me appreciation for the approach and ownership I showed on this project.</p>
+        <p class="meta">Note: The comments below are backed by emails sent to me.</p>
         <ul class="says">
           <li><figure class="say">
             <blockquote><p>“Appreciate the efforts you have put in collaborating with stakeholders, research, organizing tasks and designing the Std View wireframes.”</p></blockquote>
-            <figcaption><span class="face" aria-hidden="true"></span><span><b>[Replace: name]</b><span class="meta">UI Engineering Lead, Skyhigh Security</span></span></figcaption>
+            <figcaption><span class="face" aria-hidden="true"></span><span><b>Swetha Thandava Murthy</b><span class="meta">UI Engineering Lead · Bravo! award, March 2022</span></span></figcaption>
           </figure></li>
           <li><figure class="say">
             <blockquote><p>“Thanks for coordinating and working with the team on all UX activities for UCE and providing information in a timely manner.”</p></blockquote>
-            <figcaption><span class="face" aria-hidden="true"></span><span><b>[Replace: name]</b><span class="meta">Director, Engineering, Skyhigh Security</span></span></figcaption>
+            <figcaption><img class="face" src="../assets/img/people/sumithra-dhandayuthapani.jpg" width="96" height="96" alt="" loading="lazy"><span><b>Sumithra Dhandayuthapani</b><span class="meta">Director, Engineering · Bravo! award, March 2022</span></span></figcaption>
+          </figure></li>
+          <li><figure class="say">
+            <blockquote><p>“Chetan, I’d like to thank you for your relentless support, guidance, expertise and work. You are an expert in UX and have the ability to listen and transform technical details into high fidelity UX screens and guidance for your engineering counterparts. I do very much appreciate you and all you are doing. Your work, diligence, support and your friendly, calm and professional attitude in our day 2 day interaction but also in difficult situations make a difference - for us as team and for us as business. You are a valued member of our team. Your work makes it is possible for us to advance and growing sky high...and beyond.”</p></blockquote>
+            <figcaption><img class="face" src="../assets/img/people/michael-schneider.jpg" width="96" height="96" alt="" loading="lazy"><span><b>Michael Schneider</b><span class="meta">Sr. Director, Product Management · Bravo! award, June 2022</span></span></figcaption>
+          </figure></li>
+          <li><figure class="say">
+            <blockquote><p>“You are now a pillar of the team”</p></blockquote>
+            <figcaption><img class="face" src="../assets/img/people/jim-beno.jpg" width="96" height="96" alt="" loading="lazy"><span><b>Jim Beno</b><span class="meta">Director, User Experience · June 2022</span><span class="meta">This comment is special to me, as it came from my reporting manager.</span></span></figcaption>
           </figure></li>
         </ul>
       </div>
     </div></div>
   </section>
 
-  <section aria-labelledby="back-h">
+  <section aria-labelledby="thanks-h">
     <div class="wrap"><div class="row">
-      <h2 class="lab" id="back-h">Looking back</h2>
+      <h2 class="lab" id="thanks-h">Thanks for your time</h2>
       <div class="body prose">
-        <p>[Replace: what I’d do differently now]</p>
-      </div>
-    </div></div>
-  </section>
-
-  <section aria-labelledby="more-h">
-    <div class="wrap"><div class="row">
-      <h2 class="lab" id="more-h">The full story</h2>
-      <div class="body">
-        <p class="lead">There is more to it than one page. I’m glad to walk you through the whole process on a call.</p>
+        <p class="lead">This rule builder is pretty complex in nature, and the UX effort ran for 7–8 months, including all the customer validation sessions. I couldn’t explain everything here, but we could set up a call, and I’d be glad to walk you through the entire process.</p>
         <ul class="rows">
           <li><span class="k">Email</span><a class="v u" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request%3A%20Web%20Security%20Rule%20Builder">chetanshridhar@gmail.com</a></li>
           <li><span class="k">More work</span><a class="v u" href="../#work">Selected work</a></li>
@@ -591,6 +633,25 @@ if (window.Lenis && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   addEventListener("scroll", update, { passive: true });
   update();
 })();
+// Key views carousel: the buttons move one screen and dim at either end;
+// the dots show which screen is in view and jump to one.
+document.querySelectorAll(".carousel").forEach(c => {
+  const t = c.querySelector(".track"), prev = c.querySelector(".prev"), next = c.querySelector(".next");
+  const step = d => t.scrollBy({ left: d * t.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  const slides = [...t.children], dots = [...c.querySelectorAll(".dots button")];
+  const sync = () => {
+    prev.disabled = t.scrollLeft < 4; next.disabled = t.scrollLeft + t.clientWidth > t.scrollWidth - 4;
+    const i = next.disabled ? slides.length - 1 : Math.round(t.scrollLeft / (slides[1].offsetLeft - slides[0].offsetLeft));
+    dots.forEach((d, k) => d.setAttribute("aria-current", k === i));
+  };
+  dots.forEach((d, k) => d.addEventListener("click", () => t.scrollTo({ left: slides[k].offsetLeft - slides[0].offsetLeft, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })));
+  prev.addEventListener("click", () => step(-1));
+  next.addEventListener("click", () => step(1));
+  t.addEventListener("keydown", e => { if (e.key === "ArrowLeft") step(-1); if (e.key === "ArrowRight") step(1); });
+  t.addEventListener("scroll", sync, { passive: true });
+  addEventListener("resize", sync);
+  sync();
+});
 </script>
 </body>
 </html>
