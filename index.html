@@ -57,16 +57,15 @@ main:focus{outline:none}
 .hero{flex:1;display:grid;align-content:center;padding-top:2rem;padding-bottom:3rem}
 .base{padding-bottom:2rem}
 .base .row{align-items:end}
-.hint{grid-column:1/4;font-size:.9375rem;font-weight:400}
-/* Logos sit well under the summary with their own small title, apart from
-   the scroll hint, so they don't read as a caption for it */
-.cos-h{grid-column:4/10;margin-top:6rem}
-.cos{grid-column:4/10;list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem 2rem}
+.hint{grid-column:1/4;grid-row:1;font-size:.9375rem;font-weight:400}
+/* Logos share the bottom line with the scroll hint, under the summary's
+   column; their small title keeps them from reading as a caption for it */
+.co-set{grid-column:4/10;grid-row:1}
+.cos{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem 2rem}
 /* Company logos in their own colours; height is set per logo so they weigh the same */
 .cos img{width:auto}
-.hint a{display:inline-block;color:var(--muted)}
-.hint a::before{content:"";display:block;width:1px;height:3.5rem;background:var(--muted);margin-bottom:.875rem}
-.hint a:hover{color:var(--ink)}
+.hint a{color:var(--muted);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.3em}
+.hint a:hover{color:var(--ink);text-decoration-color:var(--accent)}
 .hero h1{grid-column:1/11;font-weight:200;font-size:clamp(2.25rem,5.2vw,4.5rem);line-height:1.08;letter-spacing:-.03em}
 .hero .who{grid-column:1/4;margin-top:3rem;font-size:.9375rem;line-height:1.6}
 .hero .who b{display:block;font-weight:400;color:var(--ink)}
@@ -197,7 +196,7 @@ html.lenis,html.lenis body{height:auto}
   .grp dl{grid-template-columns:1fr;gap:1.5rem}
   .cards{grid-template-columns:1fr;gap:2.5rem}
   .older{grid-template-columns:1fr 1fr;gap:1.5rem 1rem}
-  .cos-h{margin-top:3.5rem}
+  .co-set{margin-bottom:2.5rem}
   .cos{justify-content:flex-start;gap:1.5rem 2rem;margin-top:.875rem}
   .xp>li,.roles li{display:block}
   .xp .co{display:block;margin-bottom:.5rem}
@@ -226,7 +225,11 @@ html.lenis,html.lenis body{height:auto}
         <h1>I design complex enterprise products, and increasingly, I&nbsp;build them with&nbsp;AI.</h1>
         <p class="who"><b>Principal UX Designer</b>LIQUiDITY, Abu Dhabi</p>
         <p class="sum">Twenty years of making expert tools usable, from mixing consoles and CDN configuration to cloud security policy. Today I work on private credit, where analysts and investment managers make lending decisions with AI.</p>
-        <p class="cos-h meta" id="cos-h">Worked for</p>
+      </div>
+    </div>
+    <div class="wrap base"><div class="row">
+      <div class="co-set">
+        <p class="meta" id="cos-h">Worked for</p>
         <ul class="cos" aria-labelledby="cos-h">
         <li><img src="assets/logos/liquidity.svg" alt="LIQUiDITY" width="182" height="32" style="height:.76rem"></li>
         <li><img src="assets/logos/skyhigh.png" alt="Skyhigh Security" width="994" height="311" style="height:1.4rem"></li>
@@ -235,9 +238,7 @@ html.lenis,html.lenis body{height:auto}
         <li><img src="assets/logos/tesco.svg" alt="Tesco" width="101" height="27" style="height:.96rem"></li>
         </ul>
       </div>
-    </div>
-    <div class="wrap base"><div class="row">
-      <p class="hint"><a href="#ai">Designing AI, building with AI</a></p>
+      <p class="hint"><a href="#ai">Designing AI,<br>building with AI</a></p>
     </div></div>
   </div>
 
