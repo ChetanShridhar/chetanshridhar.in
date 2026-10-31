@@ -16,13 +16,18 @@ follow it.
   and keyboard scrolling stay native; the menu and scroll hint glide via
   `lenis.scrollTo`, the name glides to the top; the skip link keeps its
   native jump. The inline script also runs the header (below) with plain
-  scroll events. The page must work fully if Lenis fails to load.
+  scroll events and, on case studies, the Key views carousel (Previous/Next
+  buttons, dots, arrow keys). The page must work fully if Lenis fails to load.
+  On case study pages the menu links go to the home page, so Lenis doesn't
+  intercept them.
 - **Header**: scrolls away with the intro. Past it, the header gets a soft
   fade, `--bg` behind the name and menu dissolving to transparent below, with
   no border or hard edge (`.is-stuck`). It hides while scrolling
   down and slides back when scrolling up (`.is-hidden`), and returns to
-  transparent at the very top. On phones the stuck bar is the logo mark and
-  the menu on one line. Sticky section titles sit below it (`top:5.5rem`).
+  transparent at the very top. On phones the header is always one line: logo
+  mark (1.5rem), name and menu, set a touch smaller, never wrapping. Nav links
+  carry equal top and bottom padding so their text lines up with the name.
+  Sticky section titles sit below it (`top:5.5rem`).
 - Albert Sans (weights 200, 300, 400) loads from the Google Fonts CDN, with
   `display=swap` and a system sans-serif fallback.
 - Ask before adding any library, other web font, script or framework.
@@ -30,8 +35,10 @@ follow it.
 ## Files
 
     index.html                  Home: intro, designing AI / building with AI, selected work, how I work, earlier work, experience, quotes, contact
+    case-studies/rule-builder.html  Web Security Rule Builder (Skyhigh Security): Chetan's own copy, verbatim apart from light grammar fixes
     case-studies/_template.html Copy for each new case study (not yet restyled to match the home page)
-    assets/img/                 Screenshots; JPEG, ~1200px wide, under ~300 KB each
+    assets/img/                 Screenshots; JPEG, ~1200px wide (covers up to ~1800px), under ~300 KB each
+    assets/img/people/          Colleague photos for quote cards; square, 192px
 
 ## Preview
 
@@ -46,13 +53,15 @@ terminal:
 
 - **Light, calm and classy.** Warm off-white page, near-black headings, warm
   grey text, hairline rules. Light mode only. No dark mode, gradients, glows,
-  shadows, badges, pills, counters or marquees. The only rounded corners are
-  the work cards (6px).
+  shadows, badges, pills, counters or marquees. Rounded corners only on the
+  work and quote cards (6px), case study screenshot frames and diagram shapes
+  (4–6px).
 - **Motion on scroll, CSS only.** Scroll-driven animations
   (`animation-timeline`) inside `@supports` and
   `prefers-reduced-motion:no-preference`: the scroll hint fades out, the
-  intro drifts slower than the page and fades, and screenshots pan gently
-  inside their mats. Keep it slow and subtle; no reveal-on-scroll tropes.
+  intro drifts slower than the page and fades, and screenshots on mats pan
+  gently. Framed and laptop screenshots stay still. Keep it slow and subtle;
+  no reveal-on-scroll tropes.
 - **Accent `#FF7722`, very sparingly.** Small marks only: Chetan's logo mark
   before his name in the header, the dot after the current role, link and nav
   hover underlines, the text selection tint. Never as a text colour (about
@@ -65,10 +74,27 @@ terminal:
 - **References are inspiration, not templates.** Never reuse another site's
   layout, sentence pattern or signature technique (for example
   philipsamarets.com's intro line, accordion list or ASCII portrait).
-- **No illustrations.** Typography, the grid, white space and Chetan's real
-  screenshots carry the design. Each screenshot sits on a soft `--tile` mat
-  (`.mat`) with no border or shadow. Do not draw or invent interface art,
-  icons or decorative SVG.
+- **No decoration.** Typography, the grid, white space and Chetan's real
+  screenshots carry the design. No invented interface art, icons or
+  decorative SVG. On the home page each screenshot sits on a soft `--tile`
+  mat (`.mat`) with no border or shadow.
+- **Case study visuals**:
+  - Cover: the main screen in a flat CSS laptop (`.device`: dark lid with a
+    thin rim and camera dot, light base with a front lip and thumb notch), no
+    mat behind it.
+  - Screenshots: no mat, full width in a thin warm-grey rounded frame
+    (`.shot`, `#5c5a56`). Blurred customer logos may be replaced with the
+    company's real logo.
+  - Diagrams: Chetan's own diagrams redrawn as inline SVG on a `--tile` mat,
+    wording taken from his originals. They may use colour as a key (blue the
+    product, green configurations, amber lists and values, the product's own
+    action colours) and the product's parts (IF/AND tags, toggles). Wireframes
+    are a calm Balsamiq-style sketch (`.bq`, light displacement filter, no
+    extra font). Wide diagrams scroll sideways on phones with a "Swipe to see
+    all of it" hint.
+  - Several screens of one kind (Key views): a carousel (`.carousel`), one
+    screen at a time, dots on the left, plain "Previous"/"Next" text buttons
+    on the right.
 - **Selected work** is cards, two per row (one on phones). Each card is
   white with 6px corners and no border: the stone image area runs to its
   edges, the text sits inside below it (`.txt`), and a 1px `--line` outline
@@ -89,18 +115,26 @@ terminal:
   brand colours as plain `<img>`. Each gets an inline `height` set by eye so
   they weigh the same. HARMAN's "A Samsung Company" line is removed (Samsung
   bought it after Chetan left). Five logos (LIQUiDITY, Skyhigh Security,
-  Akamai, HARMAN, Tesco) sit small at the bottom of the first screen, with no
-  captions. Logos appear only there, not in Experience.
+  Akamai, HARMAN, Tesco) sit small under the intro summary, apart from the
+  scroll hint, under a small grey "Worked for" title. Logos appear only there,
+  not in Experience.
 - **Experience**: one row per tenure with the company name on the right, in
   regular body weight (300) on desktop and phones. Titles
   held within the same tenure are nested in that row (current title first,
   earlier ones lighter); a return to a company later is its own row.
+- **Colleague quotes**: white cards (6px), two per row, one on phones. The
+  quote on top; at the bottom a small round greyscale photo, the name, then
+  role and company (or role and date on a case study). An empty `--tile`
+  circle stands in until a photo arrives.
+- **No doubled rules**: a list of rows that opens a section drops its first
+  top border, because the section's hairline is already there.
 - **Contact**: one inviting lead line, then text rows (label left, link
   right) for email, LinkedIn, Dribbble, Medium, résumé and location. No phone
   number, no icon row, no oversized email address.
 - **Layout**: `.wrap` (max 80rem) holds a 12-column `.row`. Each section has
   a hairline on top, its title (`.lab`) in columns 1–3, sticky on desktop,
-  and content (`.body`) in columns 4–12. Below 48rem everything stacks.
+  and content (`.body`) in columns 4–12. Below 48rem everything stacks. A
+  long one-word title gets a `<wbr>` after its slash so it wraps.
 - **Type**: Albert Sans. Weight 200 for the headline; 300 for section titles,
   lead text, quotes and body; 400 for the name, nav, item titles and roles. Headline
   tracking −0.03em. Sentence case everywhere; hang opening quote marks.
@@ -114,7 +148,11 @@ terminal:
 ## Content rules
 
 - **Copy**: less is more. First person, one line per idea, no filler. Use
-  curly quotes and the `&copy;` entity. Quote colleagues verbatim.
+  curly quotes and the `&copy;` entity. Quote colleagues verbatim (only fix
+  missing spaces).
+- **Case study copy is Chetan's own.** Keep his text and section order; fix
+  grammar lightly, never rewrite or add copy of your own. List any wording
+  change that touches meaning for him to confirm.
 - **Placeholders** are always written as `[Replace: ...]` so they stay
   greppable: `grep -rn "Replace:" .` Never invent copy, metrics, dates, roles
   or outcomes to fill one; leave it and tell me.
