@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Regression Web Testing | Chetan Shridhar</title>
+<meta name="description" content="Case study: a web app where engineers test configuration changes on staging before they reach production, at Akamai Technologies.">
+<meta name="color-scheme" content="light">
+<meta property="og:title" content="Regression Web Testing | Chetan Shridhar">
+<meta property="og:description" content="Engineers test configuration changes on staging before they reach production.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&display=swap">
+<style>
+:root{
+  --bg:#faf9f7; --ink:#1c1b19; --text:#4a4741; --muted:#736e66; --line:#e3dfd8; --tile:#f0ede8; --accent:#ff7722;
+  --sans:"Albert Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:300 1.0625rem/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+::selection{background:#ffe2cf;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{color:var(--ink);margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+main:focus{outline:none}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--bg);padding:.5rem;z-index:20}
+.wrap{max-width:80rem;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:2rem}
+.u{text-decoration:underline;text-decoration-color:#cdc7bd;text-decoration-thickness:1px;text-underline-offset:.3em}
+.u:hover{text-decoration-color:var(--accent)}
+.meta{color:var(--muted);font-size:.875rem}
+
+/* Header: same as the home page */
+.top{position:absolute;top:0;left:0;right:0;z-index:10;pointer-events:none;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.top a{pointer-events:auto}
+.top.is-stuck{position:fixed;background:linear-gradient(var(--bg) 58%,rgba(250,249,247,.75) 78%,rgba(250,249,247,0))}
+.top.is-hidden{transform:translateY(-101%)}
+.top.no-anim{transition:none}
+.top:focus-within{transform:none}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
+.is-stuck .bar{padding-top:1rem;padding-bottom:2.5rem}
+.top .name{display:inline-flex;align-items:center;gap:.625rem;font-weight:400;color:var(--ink)}
+.mark{width:2rem;height:auto;flex:none}
+.mark path{fill:var(--accent);stroke:var(--accent)}
+.top nav{display:flex;flex-wrap:wrap;gap:.25rem 2rem;font-size:.9375rem;font-weight:400}
+.top nav a{padding:.2rem 0;border-bottom:1px solid transparent}
+.top nav a:hover{color:var(--ink);border-color:var(--accent)}
+
+/* Opening: title, one line, then the main screen large */
+.intro{padding-top:clamp(9rem,18vh,12rem)}
+.intro h1{grid-column:1/11;font-weight:200;font-size:clamp(2.25rem,5vw,4.25rem);line-height:1.08;letter-spacing:-.03em}
+.intro .who{grid-column:1/4;margin-top:2.5rem;font-size:.9375rem;line-height:1.6}
+.intro .who b{display:block;font-weight:400;color:var(--ink)}
+.intro .sum{grid-column:4/10;margin-top:2.5rem;font-size:1.1875rem;line-height:1.6}
+.cover{margin-top:clamp(3rem,6vw,5rem)}
+/* The opening screen sits in a plain laptop drawn in CSS: dark lid, camera
+   dot, thin base with a thumb notch. Flat, no gradients or shadows */
+.device{padding:clamp(1.75rem,6%,5rem) clamp(1.25rem,9%,8rem) clamp(1.5rem,5%,4.5rem)}
+.mac{max-width:58rem;margin:0 auto}
+.lid{position:relative;padding:2.4% 2.4% 2.8%;background:#1c1c1e;border-radius:clamp(.625rem,1.4vw,1.25rem) clamp(.625rem,1.4vw,1.25rem) .25rem .25rem}
+.lid::before{content:"";position:absolute;top:1%;left:50%;width:.5%;aspect-ratio:1;border-radius:50%;background:#3a3a3c;transform:translateX(-50%)}
+.lid img{width:100%;border-radius:2px}
+.base{position:relative;height:clamp(.5rem,1.3vw,1.125rem);margin:0 -6.5%;background:#d6d6da;border-radius:0 0 clamp(.5rem,1.2vw,1rem) clamp(.5rem,1.2vw,1rem)}
+.base::before{content:"";position:absolute;top:0;left:50%;width:15%;height:42%;background:#c0c0c5;border-radius:0 0 .5rem .5rem;transform:translateX(-50%)}
+
+/* Sections: title on the left, content on the right */
+section{padding-top:clamp(4rem,8vw,7rem)}
+section .row{border-top:1px solid var(--line);padding-top:1.5rem}
+.lab{grid-column:1/4;align-self:start;position:sticky;top:5.5rem;padding-left:.625rem;font-size:1.375rem;font-weight:300;line-height:1.3;letter-spacing:-.01em}
+.body{grid-column:4/13}
+.lead{font-size:clamp(1.25rem,2.2vw,1.625rem);line-height:1.45;color:var(--ink);max-width:34ch;margin-bottom:2rem}
+.prose p{max-width:40rem}
+.prose p+p{margin-top:1.25rem}
+.prose .rows{margin:2rem 0}
+h3{font-size:1.0625rem;font-weight:400;line-height:1.4}
+
+/* Screenshots and diagrams on soft mats, captions below */
+.mat{background:var(--tile);padding:clamp(1rem,5%,3.5rem)}
+.fig{margin:2.5rem 0 0}
+.fig figcaption{margin-top:.75rem}
+.step{border-top:1px solid var(--line);padding-top:1.75rem;margin-top:3rem}
+.step p{max-width:40rem;margin-top:.375rem}
+.note{margin-top:3rem}
+
+/* Text rows: label left, value right */
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:2rem;border-top:1px solid var(--line);padding:.875rem 0}
+.rows li:last-child{border-bottom:1px solid var(--line)}
+/* A list that opens a section already sits under its hairline */
+.body>.rows:first-child>li:first-child{border-top:0;padding-top:0}
+.rows .k{grid-column:1/3;color:var(--muted)}
+.rows .v{grid-column:3/10;color:var(--ink)}
+
+/* Diagrams: drawn as SVG from the originals. Blue is the customer side,
+   green the global template set, teal the test cases shared by both */
+.ill{display:block;width:100%;height:auto;overflow:visible}
+.ill text{font-family:var(--sans);font-size:11.5px;font-weight:300;fill:#4a4e57}
+.ill .h{font-size:12.5px;font-weight:400;fill:var(--ink)}
+.ill .s{font-size:11px;fill:var(--muted)}
+.ill .c{text-anchor:middle}
+.ill .lk{fill:#3a6cb5}
+.ill .card{fill:#fff}
+.ill .lead{fill:none;stroke:#cdc7bd;stroke-width:1}
+.ill .bt{fill:#eaf1fa}
+.ill .gt{fill:#e1f0da}.ill .gi{fill:#3c7a2a}
+.ill .at{fill:#fbeed0}.ill .ai{fill:#8f5f00}
+.ill .tt{fill:#dcefec}.ill .ti{fill:#23776c}
+.ill .flow{fill:none;stroke:#3a6cb5;stroke-width:1.5}
+.ill .rest{fill:none;stroke:#9a948b;stroke-width:1.5;stroke-dasharray:4 3}
+.ill .dep{fill:none;stroke:#3a9a8d;stroke-width:1.25;stroke-dasharray:3 3}
+/* On phones the drawings keep a readable size and scroll sideways */
+@media (max-width:48rem){
+  .mat.pan{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .mat.pan .ill{min-width:640px}
+}
+.swipe{display:none}
+@media (max-width:48rem){.swipe{display:inline}}
+
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;margin-top:clamp(5rem,10vw,8rem);padding-bottom:3rem}
+.foot::before{content:"";flex-basis:100%;border-top:1px solid var(--line);margin-bottom:1rem}
+
+/* Scroll effects: screenshots pan gently inside their mats */
+@supports (animation-timeline:scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .mat{overflow:hidden}
+    .mat img{animation:pan linear both;animation-timeline:view();animation-range:cover}
+    .device img{animation:none}
+  }
+}
+/* Lenis smooth scrolling (from lenis/dist/lenis.css) */
+html.lenis,html.lenis body{height:auto}
+.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}
+.lenis.lenis-smooth iframe{pointer-events:none}
+
+@keyframes pan{from{transform:translateY(3%)}to{transform:translateY(-3%)}}
+@media (prefers-reduced-motion:reduce){.top{transition:none}}
+
+@media (max-width:48rem){
+  body{font-size:1rem}
+  /* Phones: logo mark, name and menu on one line, a touch smaller */
+  .top .name{gap:.5rem;white-space:nowrap}
+  .mark{width:1.5rem}
+  .top .name span{font-size:.9375rem}
+  .top nav{flex-wrap:nowrap;gap:.875rem;font-size:.875rem}
+  @media (max-width:24rem){.top .name span{font-size:.875rem}.top nav{gap:.625rem}}
+  .intro{padding-top:7rem}
+  .row,.rows li{display:block}
+  .intro .who,.intro .sum{margin-top:2rem}
+  .rows .k{display:block;font-size:.875rem}
+  .lab{position:static;padding-left:0;margin-bottom:1.75rem}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top"><div class="wrap bar">
+  <a class="name" href="../" aria-label="Chetan Shridhar, home"><svg class="mark" viewBox="0 0 38 33" width="28" height="24" aria-hidden="true" focusable="false"><path stroke-width=".5" stroke-linecap="round" d="M19.7984 0.944883C17.4227 0.370471 14.6253 1.04308 12.6835 3.27116C12.4842 3.49978 12.2951 3.74348 12.117 4.0024C9.47406 2.93708 6.74912 3.24919 4.6137 4.96925C2.42131 6.73518 0.990217 9.86878 0.766364 14.1221C0.53495 18.5192 2.78032 23.4814 6.01759 27.049C9.23608 30.5959 13.711 33.0455 18.0568 31.8333C20.1434 31.2513 21.8311 30.0782 23.1684 28.6021C25.7495 29.1923 28.9007 28.9605 31.5933 27.0908C35.0905 24.6626 37.5496 19.6653 37.2205 10.9047C37.2019 10.4101 36.7859 10.0242 36.2913 10.0427C35.7967 10.0613 35.4108 10.4773 35.4294 10.9719C35.7464 19.4124 33.3668 23.6774 30.5711 25.6185C28.6458 26.9553 26.3988 27.2814 24.4088 27.0092C24.6337 26.674 24.845 26.3302 25.0429 25.9802C26.5406 23.3327 27.3157 20.2727 27.54 17.6932C27.763 15.1293 27.5995 11.4415 26.5365 8.16305C25.4779 4.89804 23.447 1.82705 19.7984 0.944883ZM12.4519 14.0127C11.8721 10.7448 12.125 8.30078 12.8029 6.53901C14.2071 7.74579 14.6584 9.28949 14.5524 10.8787C14.5195 11.3725 14.8931 11.7996 15.387 11.8325C15.8809 11.8654 16.3079 11.4918 16.3408 10.9979C16.488 8.7905 15.7718 6.5591 13.6593 4.92516C13.7798 4.75599 13.9052 4.59731 14.0347 4.44878C15.5112 2.75459 17.6119 2.26025 19.3772 2.68706C22.1422 3.35559 23.8562 5.70781 24.8315 8.71586C25.8026 11.711 25.9622 15.1477 25.7544 17.5379C25.5479 19.9126 24.8312 22.7143 23.4829 25.0977C23.1943 25.6078 22.8785 26.096 22.5345 26.5554C22.2974 26.471 22.0691 26.3782 21.8511 26.2783C20.6169 25.7126 18.5422 24.2857 16.6275 22.1493C14.7195 20.0203 13.0261 17.2487 12.4519 14.0127ZM5.73805 6.36511C7.26703 5.13354 9.21913 4.83427 11.2527 5.58949C10.333 7.76261 10.0367 10.6599 10.6871 14.3258C11.3359 17.9825 13.2338 21.0481 15.2927 23.3455C17.3449 25.6354 19.6128 27.2241 21.1043 27.9077C21.1591 27.9328 21.2144 27.9575 21.2703 27.9819C20.2338 28.9619 19.0085 29.7071 17.5752 30.1069C14.1984 31.0488 10.3805 29.1898 7.34495 25.8446C4.3278 22.5196 2.35689 18.0044 2.55626 14.2163C2.76317 10.2848 4.06794 7.71036 5.73805 6.36511Z"/></svg><span>Chetan Shridhar</span></a>
+  <nav aria-label="Primary">
+    <a href="../#ai">AI</a>
+    <a href="../#work">Work</a>
+    <a href="../#about">About</a>
+    <a href="../#contact">Contact</a>
+  </nav>
+</div></header>
+
+<main id="main" tabindex="-1">
+  <div class="wrap intro">
+    <div class="row">
+      <h1>Regression Web Testing</h1>
+      <p class="who"><b>Akamai Technologies</b>[Replace: years]</p>
+      <p class="sum">Engineers test configuration changes on staging before they reach production.</p>
+    </div>
+  </div>
+  <figure class="wrap cover">
+    <div class="mat device"><div class="mac"><div class="lid"><img src="../assets/img/regression-testing-landing.jpg" width="1200" height="681" alt="ACT landing page: a search bar, news, a configuration check and Jira tickets, with recent test suites marked running, passed and failed in a panel on the right"></div><div class="base" aria-hidden="true"></div></div></div>
+  </figure>
+
+  <section aria-labelledby="glance-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="glance-h">At a glance</h2>
+      <div class="body">
+        <ul class="rows">
+          <li><span class="k">Product</span><span class="v">ACT, an internal web app for regression testing configuration changes</span></li>
+          <li><span class="k">Users</span><span class="v">Solutions Engineers, expert users who test changes to customers’ configurations</span></li>
+          <li><span class="k">My role</span><span class="v">[Replace: your title, and what you led]</span></li>
+          <li><span class="k">Team</span><span class="v">[Replace: who you worked with]</span></li>
+          <li><span class="k">Research</span><span class="v">Questionnaire and feature-ranking survey with 37 prospective users</span></li>
+          <li><span class="k">Visual design</span><span class="v">A new theme for a standalone app, specced for engineers in InVision</span></li>
+          <li><span class="k">Outcome</span><span class="v">[Replace: one line on what shipped and when]</span></li>
+        </ul>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="problem-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="problem-h">The problem</h2>
+      <div class="body prose">
+        <p class="lead">An untested configuration change could slow a customer’s website, or take it down.</p>
+        <p>Customers have thousands of configuration files between them. Before a change reaches the production network, Solutions Engineers test it on staging. The tool they had made that hard.</p>
+        <ul class="rows">
+          <li><span class="k">Test cases</span><span class="v">Finding and managing the test cases for a configuration was very difficult.</span></li>
+          <li><span class="k">Variables</span><span class="v">Single and grouped variables were hard to manage and use correctly.</span></li>
+          <li><span class="k">Versions</span><span class="v">Test suites could not be versioned.</span></li>
+          <li><span class="k">Reports</span><span class="v">Weak test reports led to customer incidents.</span></li>
+        </ul>
+        <p>Engineers knew the old tool well. The new one had to do much more without a steep learning curve, and bring their test cases across without loss.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="role-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="role-h">My role</h2>
+      <div class="body prose">
+        <p class="lead">[Replace: one line on your role and who you worked with]</p>
+        <p>[Replace: two or three calls that were mine, not the team’s]</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="research-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="research-h">Research</h2>
+      <div class="body prose">
+        <p class="lead">We started from the product owners’ spec, then asked the people who would use the tool.</p>
+        <p>Brainstorming sessions with product owners and closed user groups set the goals and pain points. A questionnaire asked prospective users what was wrong with the existing tool, and how they expected its information to be organised.</p>
+        <p>The list of wanted features was long. So 37 prospective users, nominated by the product owners and the user groups, ranked each one on a scale from must-have to not necessary.</p>
+        <p>[Replace: the features that ranked highest, and one finding that changed the design]</p>
+        <figure class="fig">
+          <div class="mat"><img src="../assets/img/regression-testing-whiteboard.jpg" width="1200" height="788" alt="Whiteboard sketch of four views in a row: landing page, search result, test suite page with a run button, and test result with pass and fail marks. Below, notes on searching by config name, account and contract, and on what the test suite needs" loading="lazy"></div>
+          <figcaption class="meta">An early session with stakeholders: the four key views, and what each had to hold.</figcaption>
+        </figure>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="structure-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="structure-h">Structure first</h2>
+      <div class="body">
+        <p class="lead">Before the screens, I mapped how the app’s information fits together.</p>
+        <div class="prose"><p>Closed user groups and subject-matter experts checked that the structure matched how they think about the work. The database team checked it could be built from the data sources they had.</p></div>
+        <div class="step">
+          <h3>App structure</h3>
+          <p>Accounts, contracts and configurations follow the structure engineers already knew from other systems in the company, such as Salesforce. Every configuration has its own test suite. A global template set holds test cases for each product feature, so ACT can suggest test cases for a configuration.</p>
+          <figure class="fig">
+            <div class="mat pan"><svg class="ill" viewBox="0 0 760 360" role="img" aria-labelledby="d1t d1d">
+              <title id="d1t">The app’s structure</title>
+              <desc id="d1d">On the customer side, an account holds contracts, and a contract holds configurations. A configuration is an XML file with staging and production versions, and has one test suite. Under it are hostnames and CP codes read from the file, test cases and test results. The global template set holds products, each product has features, each feature has a test case, and each test case has test conditions. ACT reads the product a configuration uses and suggests its test cases.</desc>
+              <defs><marker id="aht" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#3a9a8d"/></marker></defs>
+              <rect class="card" x="16" y="16" width="350" height="328" rx="4"/>
+              <path class="bt" d="M16 50V20Q16 16 20 16H362Q366 16 366 20V50Z"/>
+              <text class="h lk" x="30" y="38">Customer side</text>
+              <rect class="card" x="394" y="16" width="350" height="328" rx="4"/>
+              <path class="gt" d="M394 50V20Q394 16 398 16H740Q744 16 744 20V50Z"/>
+              <text class="h gi" x="408" y="38">Global template set</text>
+              <path class="lead" d="M40 90V118H52M62 130V158H74M84 170V314M84 206H96M84 242H96M84 278H96M84 314H96"/>
+              <rect class="bt" x="30" y="66" width="76" height="24" rx="3"/><text class="lk" x="38" y="82">Account</text>
+              <rect class="bt" x="52" y="106" width="78" height="24" rx="3"/><text class="lk" x="60" y="122">Contract</text>
+              <rect class="bt" x="74" y="146" width="104" height="24" rx="3"/><text class="lk" x="82" y="162">Configuration</text>
+              <text class="s" x="188" y="156">XML, in staging and production</text><text class="s" x="188" y="170">versions; one test suite each</text>
+              <rect class="bt" x="96" y="194" width="84" height="24" rx="3"/><text class="lk" x="104" y="210">Hostnames</text>
+              <text class="s" x="190" y="210">read from the file</text>
+              <rect class="bt" x="96" y="230" width="84" height="24" rx="3"/><text class="lk" x="104" y="246">CP codes</text>
+              <text class="s" x="190" y="246">read from the file</text>
+              <rect class="tt" x="96" y="266" width="84" height="24" rx="3"/><text class="ti" x="104" y="282">Test cases</text>
+              <rect class="at" x="96" y="302" width="84" height="24" rx="3"/><text class="ai" x="104" y="318">Test results</text>
+              <path class="lead" d="M418 90V118H430M440 130V158H452M462 170V198H474"/>
+              <rect class="gt" x="408" y="66" width="70" height="24" rx="3"/><text class="gi" x="416" y="82">Product</text>
+              <text class="s" x="488" y="82">each with preset features</text>
+              <rect class="gt" x="430" y="106" width="70" height="24" rx="3"/><text class="gi" x="438" y="122">Feature</text>
+              <text class="s" x="510" y="122">each with its own test case</text>
+              <rect class="tt" x="452" y="146" width="76" height="24" rx="3"/><text class="ti" x="460" y="162">Test case</text>
+              <rect class="tt" x="474" y="186" width="104" height="24" rx="3"/><text class="ti" x="482" y="202">Test conditions</text>
+              <path class="dep" d="M452 158H426Q420 158 420 164V272Q420 278 414 278H186" marker-end="url(#aht)"/>
+              <text class="s" x="434" y="244">ACT reads the product a configuration</text>
+              <text class="s" x="434" y="258">uses, and suggests its test cases</text>
+            </svg></div>
+            <figcaption class="meta">Blue comes from the customer’s contracts, green from the template set; teal test cases connect the two. <span class="swipe">Swipe to see all of it.</span></figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <h3>Basic workflow</h3>
+          <p>Find a configuration, manage its test cases, run a test every time the configuration changes, then read the results.</p>
+          <figure class="fig">
+            <div class="mat pan"><svg class="ill" viewBox="0 0 760 210" role="img" aria-labelledby="d2t d2d">
+              <title id="d2t">The basic workflow</title>
+              <desc id="d2d">From the landing page, an engineer searches for a configuration. Search results match it by name, account or contract. In the test suite the engineer writes and manages test cases, then runs the test. The test result shows a pass or fail for each test case and condition. From the result, the engineer edits the test suite and runs it again.</desc>
+              <defs>
+                <marker id="ahb" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#3a6cb5"/></marker>
+                <marker id="ahg" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#9a948b"/></marker>
+              </defs>
+              <text class="h" x="16" y="28">Landing</text>
+              <text class="h" x="208" y="28">Search results</text>
+              <text class="h" x="400" y="28">Test suite</text>
+              <text class="h" x="592" y="28">Test result</text>
+              <rect class="card" x="16" y="40" width="136" height="92" rx="4"/>
+              <rect class="card" x="208" y="40" width="136" height="92" rx="4"/>
+              <rect class="card" x="400" y="40" width="136" height="92" rx="4"/>
+              <rect class="card" x="592" y="40" width="136" height="92" rx="4"/>
+              <text class="c" x="84" y="82">Search for a</text><text class="c" x="84" y="98">configuration</text>
+              <text class="c" x="276" y="82">Match by name,</text><text class="c" x="276" y="98">account or contract</text>
+              <text class="c" x="468" y="82">Write and manage</text><text class="c" x="468" y="98">test cases</text>
+              <text class="c" x="660" y="82">Pass or fail for each</text><text class="c" x="660" y="98">case and condition</text>
+              <path class="flow" d="M156 86H202" marker-end="url(#ahb)"/>
+              <path class="flow" d="M348 86H394" marker-end="url(#ahb)"/>
+              <path class="flow" d="M540 86H586" marker-end="url(#ahb)"/>
+              <text class="s c" x="563" y="76">Run</text>
+              <path class="rest" d="M660 136V176H468V142" marker-end="url(#ahg)"/>
+              <text class="s c" x="564" y="196">Edit the suite and run again</text>
+            </svg></div>
+            <figcaption class="meta">The loop engineers repeat for every change to a configuration. <span class="swipe">Swipe to see all of it.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="views-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="views-h">Key views</h2>
+      <div class="body">
+        <p class="lead">The workflow set four key views. Each was wireframed and reviewed with stakeholders before the visual design.</p>
+        <div class="step">
+          <h3>Landing</h3>
+          <p>A search bar, recently run test suites with their status, and favourites.</p>
+          <figure class="fig">
+            <div class="mat"><img src="../assets/img/regression-testing-landing-wireframe.jpg" width="1200" height="813" alt="Landing page wireframe: the ACT logo above a search bar, and a list of recent tests on the right, each with staging and production versions, product, account and a pass or fail mark" loading="lazy"></div>
+            <figcaption class="meta">The landing page wireframe. The finished screen opens this page.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <h3>Search results</h3>
+          <p>Configurations matched by name, account or contract and grouped by contract, with filters, drill-downs and breadcrumbs.</p>
+          <figure class="fig">
+            <div class="mat"><img src="../assets/img/regression-testing-search.jpg" width="1200" height="681" alt="Search results for an account with six contracts, each contract a card listing four of its twelve configuration files with a view all button" loading="lazy"></div>
+            <figcaption class="meta">Results for an account, grouped by its contracts. Customer names are blurred.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <h3>Test suite</h3>
+          <p>The workspace where engineers spend most of their time, writing test cases and their conditions. Reviews with stakeholders ranked the information into primary, secondary and tertiary levels, and the layout follows that order.</p>
+          <figure class="fig">
+            <div class="mat"><img src="../assets/img/regression-testing-suite.jpg" width="1200" height="681" alt="Test suite workspace: test cases listed on the left, the selected test case’s hostname, URL, request headers and lettered test conditions in the middle, joined by a logical operation, and host name variables on the right" loading="lazy"></div>
+            <figcaption class="meta">A test case with three conditions, joined by a logical operation. Variables sit on the right.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <h3>Test result</h3>
+          <p>The same structure as the test suite, with logs and a pass or fail for each condition, so engineers can trace a failure to its cause.</p>
+          <figure class="fig">
+            <div class="mat"><img src="../assets/img/regression-testing-result.jpg" width="1200" height="681" alt="Test result view: counts of running, passed, warning and failed test cases, each test condition marked pass or fail, and the DNS and HTTP request and response logs on the right" loading="lazy"></div>
+            <figcaption class="meta">A failed test case: which condition failed, and the logs beside it.</figcaption>
+          </figure>
+        </div>
+        <p class="note meta">Many more workflows went into the app than this page shows, such as test cases that apply to every test suite.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="vars-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="vars-h">Grouped variables</h2>
+      <div class="body prose">
+        <p class="lead">Test cases in a suite reuse values, so engineers can save them as variables.</p>
+        <p>Some values belong together, such as hostnames and their paths. A grouped variable holds them as a table: a key, then any number of values. A test case that uses a grouped variable runs once for each value in it.</p>
+        <p>Adding many keys and values to a two-dimensional structure had to stay easy. The wireframes walk through adding hosts, adding a path key, setting a value as a variable, and deleting a key.</p>
+        <figure class="fig">
+          <div class="mat"><img src="../assets/img/regression-testing-grouped-variables.jpg" width="1200" height="981" alt="Six wireframes of an Add Variable Group dialog: a host key with one value, then four host values, a path key added beside them, a value being set as a variable, the path key being deleted, and the host column on its own" loading="lazy"></div>
+          <figcaption class="meta">Wireframes of the grouped variable interaction.</figcaption>
+        </figure>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="tradeoff-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="tradeoff-h">The trade-off</h2>
+      <div class="body prose">
+        <p class="lead">[Replace: one call where business or engineering needs won over a UX principle]</p>
+        <p>[Replace: what it cost users, and how I flagged the caveat]</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="outcome-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="outcome-h">Outcome</h2>
+      <div class="body">
+        <ul class="rows">
+          <li><span class="k">Shipped</span><span class="v">[Replace: what shipped and when]</span></li>
+          <li><span class="k">Validated</span><span class="v">[Replace: how the design was tested with engineers]</span></li>
+          <li><span class="k">Judged by</span><span class="v">[Replace: how success was judged]</span></li>
+        </ul>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="back-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="back-h">Looking back</h2>
+      <div class="body prose">
+        <p>[Replace: what I’d do differently now]</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="more-h">
+    <div class="wrap"><div class="row">
+      <h2 class="lab" id="more-h">The full story</h2>
+      <div class="body">
+        <p class="lead">There is more to it than one page. I’m glad to walk you through the whole process on a call.</p>
+        <ul class="rows">
+          <li><span class="k">Email</span><a class="v u" href="mailto:chetanshridhar@gmail.com?subject=Walkthrough%20request%3A%20Regression%20Web%20Testing">chetanshridhar@gmail.com</a></li>
+          <li><span class="k">More work</span><a class="v u" href="../#work">Selected work</a></li>
+        </ul>
+      </div>
+    </div></div>
+  </section>
+</main>
+
+<footer class="wrap foot meta">
+  <p>&copy; 2026 Chetan Shridhar</p>
+  <p>Written by me. Structure and flow shaped with AI. Built with Claude Code.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js" integrity="sha384-iiCtod6ZId6zT42Bar9EFXNKZh8X4VliWYWFOuY3/t1AxCvLejXExXcbluoc57CJ" crossorigin="anonymous"></script>
+<script>
+// Smooth, inertia scrolling for mouse wheels and trackpads. Touch and
+// keyboard scrolling stay native; skipped when motion is reduced. The menu
+// links go to the home page, so they keep their normal behaviour.
+if (window.Lenis && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  new Lenis({ autoRaf: true, lerp: 0.104 });
+}
+
+// Header: once past it, it becomes a solid bar that hides while scrolling
+// down and returns when scrolling up. Works with or without Lenis.
+(() => {
+  const top = document.querySelector(".top");
+  let last = scrollY, stuck = false;
+  const update = () => {
+    const y = scrollY;
+    if (!stuck && y > top.offsetHeight + 40) {
+      stuck = true;
+      top.classList.add("is-stuck", "is-hidden", "no-anim");
+      requestAnimationFrame(() => requestAnimationFrame(() => top.classList.remove("no-anim")));
+    } else if (stuck && y <= 0) {
+      stuck = false;
+      top.classList.remove("is-stuck", "is-hidden");
+    }
+    if (stuck && Math.abs(y - last) > 4) top.classList.toggle("is-hidden", y > last);
+    if (Math.abs(y - last) > 4 || y <= 0) last = y;
+  };
+  addEventListener("scroll", update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>
